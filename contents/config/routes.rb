@@ -1,4 +1,6 @@
 Openshot::Application.routes.draw do
+  resources :pictures
+
   get "home/index"
 
   # The priority is based upon order of creation:

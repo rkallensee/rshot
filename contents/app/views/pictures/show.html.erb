@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+    <!--<%= image_tag @picture.photo.url %>-->
+    <%= image_tag @picture.photo.url(:small) %>
+</p>
+
+<p>
   <b>Title:</b>
   <%= @picture.title %>
 </p>

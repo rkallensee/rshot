@@ -21,6 +21,11 @@
     <%= f.text_field :title %>
   </div>
   
+  <div class="field">
+    <%= f.label :album %><br />
+    <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

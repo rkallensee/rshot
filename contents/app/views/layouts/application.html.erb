@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Openshot</title>
+  <title>OpenShot</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
@@ -9,6 +9,9 @@
 <body>
 
 <%= yield %>
+
+<br /><br />
+<%= link_to 'Back', :controller => :home %>
 
 </body>
 </html>

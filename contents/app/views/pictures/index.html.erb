@@ -4,6 +4,7 @@
   <tr>
     <th></th>
     <th>Title</th>
+    <th>Album</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +14,11 @@
   <tr>
     <td><%= image_tag picture.photo.url(:thumb) %></td>
     <td><%= picture.title %></td>
+    <td>
+      <% unless picture.album.nil? %>
+        <%= link_to picture.album.title, picture.album %>
+      <% end %>
+    </td>
     <td><%= link_to 'Show', picture %></td>
     <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
     <td><%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete %></td>

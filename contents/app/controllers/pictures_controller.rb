@@ -25,6 +25,7 @@ class PicturesController < ApplicationController
   # GET /pictures/new.xml
   def new
     @picture = Picture.new
+    @albums = Album.find(:all, :order => "title")
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1/edit
   def edit
     @picture = Picture.find(params[:id])
+    @albums = Album.find(:all, :order => "title")
   end
 
   # POST /pictures

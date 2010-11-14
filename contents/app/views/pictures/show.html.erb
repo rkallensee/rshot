@@ -10,6 +10,13 @@
   <%= @picture.title %>
 </p>
 
+<p>
+  <b>Album:</b>
+  <% unless @picture.album.nil? %>
+    <%= link_to @picture.album.title, @picture.album %>
+  <% end %>
+</p>
+
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>

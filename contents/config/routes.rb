@@ -1,4 +1,6 @@
 Openshot::Application.routes.draw do
+  resources :albums
+
   resources :pictures
 
   get "home/index"

@@ -8,7 +8,7 @@
 <p>
   <b><%= @album.pictures.size %> pictures:</b>
   <% for picture in @album.pictures %>
-    <%= link_to image_tag(picture.photo.url(:thumb)), picture %>
+    <%= link_to image_tag(picture.photo.url(:thumb)), album_picture_path(@album, picture) %>
   <% end %>
 </p>
 

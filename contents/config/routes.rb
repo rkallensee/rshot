@@ -1,5 +1,7 @@
 Openshot::Application.routes.draw do
-  resources :albums
+  resources :albums do
+    resources :pictures
+  end
 
   resources :pictures
 

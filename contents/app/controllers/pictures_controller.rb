@@ -1,8 +1,10 @@
 class PicturesController < ApplicationController
+  before_filter :determine_scope
+  
   # GET /pictures
   # GET /pictures.xml
   def index
-    @pictures = Picture.all
+    @pictures = @scope.find(:all, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +16,14 @@ class PicturesController < ApplicationController
   # GET /pictures/1.xml
   def show
     @picture = Picture.find(params[:id])
+    
+    if params[:album_id]
+      @prev_link = album_picture_path(Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
+      @next_link = album_picture_path(Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+    else
+      @prev_link = @scope.previous(@picture.id).first
+      @next_link = @scope.next(@picture.id).first
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -82,4 +92,15 @@ class PicturesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+
+    # get scope - since picture resource is also nested in album resource
+    def determine_scope
+      @scope = if params[:album_id]
+        Album.find(params[:album_id]).pictures
+      else
+        Picture
+      end
+    end
 end

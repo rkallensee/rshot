@@ -13,10 +13,10 @@ class Picture < ActiveRecord::Base
       :small   => ["230x230>", :jpg],
       :medium  => ["640x640>", :jpg] }
       
-  # named scopes
-  named_scope :same_album, lambda { |att| {:conditions => ["album_id = ?", att]} }
-  named_scope :next,       lambda { |att| {:conditions => ["id > ?", att], :limit => 1, :order => "id"} }
-  named_scope :previous,   lambda { |att| {:conditions => ["id < ?", att], :limit => 1, :order => "id DESC"} }
+  # scopes
+  scope :same_album, lambda { |att| {:conditions => ["album_id = ?", att]} }
+  scope :next,       lambda { |att| {:conditions => ["id > ?", att], :limit => 1, :order => "id"} }
+  scope :previous,   lambda { |att| {:conditions => ["id < ?", att], :limit => 1, :order => "id DESC"} }
       
   def album_name
     unless album.nil?

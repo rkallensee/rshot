@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <b><%= @album.pictures.size %> pictures:</b>
+  <b><%= pluralize(@album.pictures.count, 'picture') %></b>
   <% for picture in @album.pictures %>
     <%= link_to image_tag(picture.photo.url(:thumb)), album_picture_path(@album, picture) %>
   <% end %>

@@ -1,4 +1,6 @@
 Openshot::Application.routes.draw do
+  devise_for :users
+
   resources :albums do
     resources :pictures
   end

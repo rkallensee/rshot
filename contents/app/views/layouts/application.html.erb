@@ -12,13 +12,6 @@
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
 
-<% unless notice.nil? %>
-    <p class="notice"><%= notice %></p>
-<% end %>
-<% unless alert.nil? %>
-    <p class="alert"><%= alert %></p>
-<% end %>
-
 <div id="user_nav">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?

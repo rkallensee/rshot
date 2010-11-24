@@ -22,6 +22,7 @@
 
 <p>
   <b>From:</b>
+  <%= link_to image_tag(@picture.user.profile.avatar.url(:tiny)), @picture.user.profile %>
   <%= @picture.user.profile.nick %>
 </p>
 

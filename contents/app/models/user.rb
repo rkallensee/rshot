@@ -11,4 +11,11 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :pictures
   has_many :albums
+  
+  # automatically create (empty) profile
+  after_create :create_empty_profile
+  
+  def create_empty_profile
+     Profile.create(:user_id => self.id)
+  end
 end

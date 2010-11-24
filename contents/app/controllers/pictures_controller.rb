@@ -36,7 +36,7 @@ class PicturesController < ApplicationController
   # GET /pictures/new.xml
   def new
     @picture = Picture.new
-    @albums = Album.find(:all, :order => "title")
+    @albums = Album.where("user_id" => current_user.id).order("title ASC")
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,13 +47,14 @@ class PicturesController < ApplicationController
   # GET /pictures/1/edit
   def edit
     @picture = Picture.find(params[:id])
-    @albums = Album.find(:all, :order => "title")
+    @albums = Album.where("user_id" => current_user.id).order("title ASC")
   end
 
   # POST /pictures
   # POST /pictures.xml
   def create
     @picture = Picture.new(params[:picture])
+    @picture.user_id = current_user.id
 
     respond_to do |format|
       if @picture.save
@@ -70,6 +71,7 @@ class PicturesController < ApplicationController
   # PUT /pictures/1.xml
   def update
     @picture = Picture.find(params[:id])
+    @picture.user_id = current_user.id
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])

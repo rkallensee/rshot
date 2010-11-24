@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101123211310) do
+ActiveRecord::Schema.define(:version => 20101124211733) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(:version => 20101123211310) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.integer  "album_id"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.string   "nick"
+    t.string   "forename"
+    t.string   "surname"
+    t.string   "bio"
+    t.string   "location"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -47,12 +62,6 @@ ActiveRecord::Schema.define(:version => 20101123211310) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.string   "nick"
-    t.string   "forename"
-    t.string   "surname"
-    t.string   "bio"
-    t.string   "location"
-    t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

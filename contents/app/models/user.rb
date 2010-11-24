@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :token_authenticatable, :confirmable, :lockable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :nick, :forename, :surname, :bio, :location, :website
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+                  
+  # attach profile
+  has_one :profile
 end

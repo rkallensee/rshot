@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nick:</b>
+  <%= @profile.nick %>
+</p>
+
+<p>
+  <b>Forename:</b>
+  <%= @profile.forename %>
+</p>
+
+<p>
+  <b>Surname:</b>
+  <%= @profile.surname %>
+</p>
+
+<p>
+  <b>Bio:</b>
+  <%= @profile.bio %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @profile.location %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%= @profile.website %>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

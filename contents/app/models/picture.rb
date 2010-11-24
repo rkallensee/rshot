@@ -1,5 +1,6 @@
 class Picture < ActiveRecord::Base
   belongs_to :album
+  belongs_to :user
   
   # validation
   validates :title, :presence => true, :length => { :minimum => 3 }

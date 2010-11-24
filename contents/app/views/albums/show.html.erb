@@ -12,6 +12,11 @@
   <% end %>
 </p>
 
+<p>
+  <b>From:</b>
+  <%= @album.user.profile.nick %>
+</p>
+
 
 <%= link_to 'Edit', edit_album_path(@album) %> |
 <%= link_to 'Back', albums_path %>

@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
                   
   # attach profile
   has_one :profile
+  has_many :pictures
+  has_many :albums
 end

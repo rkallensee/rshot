@@ -17,6 +17,7 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     @pictures = Picture.find_all_by_user_id(@profile.user_id)
+    @albums = Album.find_all_by_user_id(@profile.user_id)
 
     respond_to do |format|
       format.html # show.html.erb

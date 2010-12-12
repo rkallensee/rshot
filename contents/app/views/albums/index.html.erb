@@ -19,7 +19,7 @@
       <% end %>
     </td>
     <td><%= album.title %></td>
-    <td><%= album.user.profile.nick %></td>
+    <td><%= link_to album.user.profile.nick, album.user.profile %></td>
     <td><%= album.pictures.size %>
     <td><%= link_to 'Show', album %></td>
     <td><%= link_to 'Edit', edit_album_path(album) %></td>

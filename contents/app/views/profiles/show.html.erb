@@ -35,8 +35,16 @@
 </p>
 
 <p>
+  <b><%= pluralize(@albums.count, 'album') %>:</b><br />
+  <% for album in @albums %>
+    <%= link_to image_tag(album.pictures.first.photo.url(:thumb)), profile_album_path(@profile, album) %>
+  <% end %>
+</p>
+
+<p>
+  <b><%= pluralize(@pictures.count, 'picture') %>:</b><br />
   <% for picture in @pictures %>
-    <%= link_to image_tag(picture.photo.url(:thumb)), picture %>
+    <%= link_to image_tag(picture.photo.url(:thumb)), profile_picture_path(@profile, picture) %>
   <% end %>
 </p>
 

@@ -24,4 +24,9 @@ class Picture < ActiveRecord::Base
       album.title
     end
   end
+  
+  def self.random
+    offset = rand(self.count)
+    rand_record = self.first(:offset => offset)
+  end
 end

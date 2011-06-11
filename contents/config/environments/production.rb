@@ -36,7 +36,7 @@ Openshot::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  
+
   # Set host for action mailer (a Devise requirement)
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
@@ -49,4 +49,8 @@ Openshot::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Compress both stylesheets and JavaScripts
+  config.assets.js_compressor  = :uglifier
+  config.assets.css_compressor = :scss
 end

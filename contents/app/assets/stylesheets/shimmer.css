@@ -1,0 +1,59 @@
+header {
+    background-color: #F2E770;
+    padding-top: 10px;
+}
+
+header .container,
+#main .container {
+    width: 990px;
+    margin: 0px auto;
+    position: relative;
+}
+
+header h1 {
+    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 44px;
+    color: #FFFFFF;
+}
+
+header nav ul {
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    list-style-type: none;
+    display: inline;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0px 20px 0px 0px;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+header nav ul li a:link,
+header nav ul li a:visited,
+header nav ul li a:hover,
+header nav ul li a:active {
+    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: transparent;
+    padding: 6px 9px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #F2E770;
+    background-color: #FFFFFF;
+}
+
+#main .container {
+    padding-top: 20px;
+}

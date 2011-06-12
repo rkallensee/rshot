@@ -1,7 +1,7 @@
-<h1>OpenShot image sharing</h1>
+<h2>OpenShot image sharing</h2>
 
 <p>
-  <%= link_to image_tag(@picture.photo.url(:medium)), @picture %>
+  <%= link_to image_tag(@picture.photo.url(:medium)), @picture if @picture %>
 </p>
 
 <%= link_to "Show albums", albums_path %><br />

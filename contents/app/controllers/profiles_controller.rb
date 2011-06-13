@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
-  
+
   # GET /profiles
   # GET /profiles.xml
   def index
@@ -16,8 +16,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.xml
   def show
     @profile = Profile.find(params[:id])
-    @pictures = Picture.find_all_by_user_id(@profile.user_id)
-    @albums = Album.find_all_by_user_id(@profile.user_id)
+    @pictures = Picture.find_all_by_profile_id(@profile.id)
+    @albums = Album.find_all_by_profile_id(@profile.id)
 
     respond_to do |format|
       format.html # show.html.erb

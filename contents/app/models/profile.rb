@@ -5,7 +5,9 @@ class Profile < ActiveRecord::Base
       :tiny   => ["48x48#", :jpg],
       :medium => ["75x75#", :jpg],
       :big    => ["120x120>", :jpg] }
-      
+
   # relationship
   belongs_to :user
+  has_many :pictures
+  has_many :albums
 end

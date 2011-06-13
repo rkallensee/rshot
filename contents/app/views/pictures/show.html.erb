@@ -16,14 +16,14 @@
 <p>
   <b>Album:</b>
   <% unless @picture.album.nil? %>
-    <%= link_to @picture.album.title, @picture.album %>
+    <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
   <% end %>
 </p>
 
 <p>
   <b>From:</b>
-  <%= link_to image_tag(@picture.user.profile.avatar.url(:tiny)), @picture.user.profile %>
-  <%= @picture.user.profile.nick %>
+  <%= link_to image_tag(@picture.profile.avatar.url(:tiny)), @picture.profile %>
+  <%= @picture.profile.nick %>
 </p>
 
 <% if gps = @picture.gps %>
@@ -32,20 +32,20 @@
   <script>
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
- 
+
     var lonLat = new OpenLayers.LonLat( <%= gps[1] %>, <%= gps[0] %> )
           .transform(
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection
           );
- 
+
     var zoom=16;
- 
+
     var markers = new OpenLayers.Layer.Markers( "Markers" );
     map.addLayer(markers);
- 
+
     markers.addMarker(new OpenLayers.Marker(lonLat));
- 
+
     map.setCenter (lonLat, zoom);
   </script>
 <% end %>

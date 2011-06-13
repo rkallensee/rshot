@@ -1,10 +1,16 @@
 class AlbumsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
-  
+
+  before_filter :get_profile
+
+  def get_profile
+    @profile = Profile.find(params[:profile_id])
+  end
+
   # GET /albums
   # GET /albums.xml
   def index
-    @albums = Album.all
+    @albums = @profile.albums.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +21,7 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.xml
   def show
-    @album = Album.find(params[:id])
+    @album = @profile.albums.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +32,7 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   # GET /albums/new.xml
   def new
-    @album = Album.new
+    @album = @profile.albums.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,14 +42,15 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1/edit
   def edit
-    @album = Album.find(params[:id])
+    @album = @profile.albums.find(params[:id])
   end
 
   # POST /albums
   # POST /albums.xml
   def create
-    @album = Album.new(params[:album])
-    @album.user_id = current_user.id
+    @album = @profile.albums.new(params[:album])
+    @album.profile_id = current_user.profile.id
+    # think about security / permissions!
 
     respond_to do |format|
       if @album.save
@@ -59,8 +66,8 @@ class AlbumsController < ApplicationController
   # PUT /albums/1
   # PUT /albums/1.xml
   def update
-    @album = Album.find(params[:id])
-    @album.user_id = current_user.id
+    @album = current_user.profile.find(params[:id])
+    @album.profile_id = current_user.id ## problematic! check profile_id instead of overwriting it.
 
     respond_to do |format|
       if @album.update_attributes(params[:album])
@@ -76,7 +83,7 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.xml
   def destroy
-    @album = Album.find(params[:id])
+    @album = current_user.profile.find(params[:id])
     @album.destroy
 
     respond_to do |format|
@@ -84,4 +91,5 @@ class AlbumsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

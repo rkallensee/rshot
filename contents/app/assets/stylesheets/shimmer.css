@@ -10,12 +10,23 @@ header .container,
     position: relative;
 }
 
-header h1 {
+header h1,
+header h1 a:link,
+header h1 a:visited,
+header h1 a:hover,
+header h1 a:active {
     font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
     font-weight: 700;
     font-size: 44px;
+    text-decoration: none;
     line-height: 44px;
     color: #FFFFFF;
+}
+
+header h1 a:hover,
+header h1 a.active {
+    color: #F2E770;
+    background-color: #FFFFFF;
 }
 
 header nav ul {
@@ -52,6 +63,13 @@ header nav ul li a:hover,
 header nav ul li a.active {
     color: #F2E770;
     background-color: #FFFFFF;
+}
+
+header .current-user {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
 }
 
 #main .container {

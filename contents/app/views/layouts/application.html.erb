@@ -27,7 +27,7 @@
     <div id="container">
         <header>
             <div class="container">
-                <h1>shimmer</h1>
+                <h1><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h1>
 
                 <nav>
                     <ul>
@@ -38,10 +38,16 @@
                             <li><%= link_to "Sign out", destroy_user_session_path %></li>
                         <% else %>
                             <li><%= link_to "Sign up", new_user_registration_path %></li>
-                            <li><%= link_to "sign in", new_user_session_path %></li>
+                            <li><%= link_to "Sign in", new_user_session_path %></li>
                         <% end %>
                     </ul>
                 </nav>
+
+                <div class="current-user">
+                    <% if user_signed_in? %>
+                        Signed in as <%= current_user.email %>, Nick <%= current_user.profile.nick %>
+                    <% end %>
+                </div>
             </div>
         </header>
         <div id="main" role="main">
@@ -49,16 +55,6 @@
                 <% flash.each do |name, msg| %>
                     <%= content_tag :div, msg, :id => "flash_#{name}" %>
                 <% end %>
-
-                <% if user_signed_in? %>
-                    Signed in as <%= current_user.email %>, Nick <%= current_user.profile.nick %>
-                    <%= link_to 'Account', edit_user_registration_path %> |
-                    <%= link_to 'Profile', current_user.profile %> |
-                    <%= link_to "Sign out", destroy_user_session_path %>
-                <% else %>
-                    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-                <% end %>
-
 
                 <%= yield %>
             </div>

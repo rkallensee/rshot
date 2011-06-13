@@ -2,6 +2,8 @@ class Picture < ActiveRecord::Base
   belongs_to :album
   belongs_to :profile
 
+  acts_as_commentable
+
   # Paperclip attachment
   has_attached_file :photo,
     :styles => {

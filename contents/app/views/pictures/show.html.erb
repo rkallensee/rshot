@@ -26,6 +26,18 @@
   <%= @picture.profile.nick %>
 </p>
 
+<p>
+  <b>Comments:</b>
+  <% @comments.each do |comment| %>
+    <%= comment.user.profile.nick %> said: <strong><%= comment.comment %></strong><br /><br />
+  <% end %>
+
+  <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
+    <%= f.text_area :comment, :cols => 20, :rows => 2 %>
+    <div><%= f.submit %></div>
+  <% end %>
+</p>
+
 <% if gps = @picture.gps %>
   <div id="mapdiv" style="width: 500px; height: 200px;"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>

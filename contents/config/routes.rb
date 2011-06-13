@@ -4,12 +4,20 @@ Openshot::Application.routes.draw do
 
   resources :profiles do
     resources :albums do
-      resources :pictures
+      resources :pictures do
+        member do
+          post :create_comment
+        end
+      end
     end
     resources :pictures
   end
 
-  resources :pictures
+  resources :pictures do
+    member do
+      post :create_comment
+    end
+  end
 
   get "home/index"
 

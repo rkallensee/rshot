@@ -29,6 +29,9 @@ class PicturesController < ApplicationController
       @next_link = @scope.next(@picture.id).first
     end
 
+    @comments = @picture.comments.recent.limit(10).all
+    @comment = @picture.comments.new
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @picture }
@@ -97,6 +100,22 @@ class PicturesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(pictures_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def create_comment
+    commentable = Picture.find(params[:id])
+    comment = commentable.comments.new(params[:comment])
+    comment.user_id = current_user.id
+
+    respond_to do |format|
+      if comment.save
+        format.html { redirect_to(commentable, :notice => 'Comment was successfully created.') }
+        format.xml  { render :xml => comment, :status => :created, :location => comment }
+      else
+        format.html { render :action => "show" }
+        format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
+      end
     end
   end
 

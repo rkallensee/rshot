@@ -1,0 +1,9 @@
+<h3>Picture details</h3>
+
+<p>This picture was taken with a <%= picture.exifdetails[:model] %> on <%= picture.exifdetails[:date_time] %>.</p>
+
+<p>Exposure time was <%= picture.exifdetails[:exposure_time] %>s, focal length <%= picture.exifdetails[:focal_length] %>mm,
+aperture f/<%= picture.exifdetails[:aperture] %>, ISO <%= picture.exifdetails[:iso] %>.</p>
+
+<p>The original dimensions are <%= picture.exifdetails[:width] %>x<%= picture.exifdetails[:height] %>.</p>
+

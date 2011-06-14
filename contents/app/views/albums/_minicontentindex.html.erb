@@ -1,0 +1,11 @@
+<div class="shimmer-album-minicontent">
+    <h3>There are <%= pluralize(album.pictures.count, 'picture') %> in this album:</h3>
+    <ul>
+    <% album.pictures.each do |picture| %>
+        <li>
+            <%= link_to image_tag(picture.photo.url(:thumb)), profile_album_picture_path(album.profile, album, picture) %>
+        </li>
+    <% end %>
+    </ul>
+    <div class="clearfix"></div>
+</div>

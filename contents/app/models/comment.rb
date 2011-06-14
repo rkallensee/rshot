@@ -6,6 +6,8 @@ class Comment < ActiveRecord::Base
 
   default_scope :order => 'created_at ASC'
 
+  validates :comment, :presence => true, :length => { :minimum => 3 }
+
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
   #acts_as_voteable

@@ -39,12 +39,34 @@ class Picture < ActiveRecord::Base
     #[imgexif.gps_latitude, imgexif.gps_longitude]
 
     # https://github.com/picuous/exifr/blob/master/lib/jpeg.rb
-    if imgexif.gps_latitude.nil? or imgexif.gps_latitude.length < 2 or imgexif.gps_longitude.nil? or imgexif.gps_longitude.length < 2
+    if !imgexif.exif? or imgexif.gps_latitude.nil? or imgexif.gps_latitude.length < 2 or imgexif.gps_longitude.nil? or imgexif.gps_longitude.length < 2
       nil
     else
       lat = imgexif.gps_latitude[0].to_f+imgexif.gps_latitude[1].to_f/60+imgexif.gps_latitude[2].to_f/3600
       lon = imgexif.gps_longitude[0].to_f+imgexif.gps_longitude[1].to_f/60+imgexif.gps_longitude[2].to_f/3600
       [lat, lon]
     end
+  end
+
+  def exifdetails
+    imgexif = EXIFR::JPEG.new(photo.path)
+
+    exifdata = {}
+
+    if imgexif.exif?
+        exifdata[:model] = imgexif.make + " " + imgexif.model
+        exifdata[:date_time] = imgexif.date_time_original
+        exifdata[:exposure_time] = imgexif.exposure_time.to_s
+        exifdata[:focal_length] = imgexif.focal_length.to_i
+        exifdata[:focal_length] = imgexif.focal_length_in_35mm_film.to_i unless imgexif.focal_length_in_35mm_film.nil?
+        exifdata[:aperture] = imgexif.f_number.to_f
+        exifdata[:iso] = imgexif.iso_speed_ratings
+        exifdata[:width] = imgexif.width
+        exifdata[:height] = imgexif.height
+        exifdata[:date_time] = imgexif.date_time
+        exifdata[:exif] = imgexif.exif # debug
+    end
+
+    exifdata
   end
 end

@@ -50,3 +50,9 @@
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>
+
+    <%= render :partial => "albums/miniuserindex", :locals => { :albums => @albums } %>
+<% end %>

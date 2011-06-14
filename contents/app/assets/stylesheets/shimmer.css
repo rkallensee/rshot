@@ -3,8 +3,7 @@ header {
     padding-top: 10px;
 }
 
-header .container,
-#main .container {
+.container {
     width: 990px;
     margin: 0px auto;
     position: relative;
@@ -72,6 +71,24 @@ header .current-user {
     width: 300px;
 }
 
-#main .container {
-    padding-top: 20px;
+#main {
+    padding-right: 320px;
+}
+
+aside {
+    width: 300px;
+    background-color: #EEEEEE;
+    float: right;
+}
+
+aside .shimmer-album-minicontent ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside .shimmer-album-minicontent ul li {
+    float: left;
+    margin: 0 5px 5px 0;
+    padding: 0;
 }

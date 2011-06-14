@@ -18,16 +18,7 @@ class PicturesController < ApplicationController
   def show
     @picture = Picture.find(params[:id])
 
-    if params[:album_id]
-      @prev_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-      @next_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
-    elsif params[:profile_id]
-      @prev_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-      @next_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
-    else
-      @prev_link = @scope.previous(@picture.id).first
-      @next_link = @scope.next(@picture.id).first
-    end
+    set_prev_next_links
 
     @comments = @picture.comments.recent.limit(10).all
     @comment = @picture.comments.new
@@ -104,15 +95,20 @@ class PicturesController < ApplicationController
   end
 
   def create_comment
-    commentable = Picture.find(params[:id])
-    comment = commentable.comments.new(params[:comment])
-    comment.user_id = current_user.id
+    @picture = Picture.find(params[:id])
+    @comment = @picture.comments.new(params[:comment])
+    @comment.user_id = current_user.id
 
     respond_to do |format|
-      if comment.save
-        format.html { redirect_to(commentable, :notice => 'Comment was successfully created.') }
-        format.xml  { render :xml => comment, :status => :created, :location => comment }
+      if @comment.save
+        format.html { redirect_to(@picture, :notice => 'Comment was successfully created.') }
+        format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
+        @picture = Picture.find(params[:id])
+        set_prev_next_links
+        @comments = @picture.comments.recent.limit(10).all
+        # todo: DRY! three lines on top!
+        flash[:error] = 'Please actually type in a comment!'
         format.html { render :action => "show" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
       end
@@ -129,6 +125,20 @@ class PicturesController < ApplicationController
         Profile.find(params[:profile_id]).pictures
       else
         Picture
+      end
+    end
+
+    # set links to previous and next image as instance variables
+    def set_prev_next_links
+      if params[:album_id]
+        @prev_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
+        @next_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+      elsif params[:profile_id]
+        @prev_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
+        @next_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+      else
+        @prev_link = @scope.previous(@picture.id).first
+        @next_link = @scope.next(@picture.id).first
       end
     end
 end

@@ -21,15 +21,21 @@
 </p>
 
 <p>
-  <b>From:</b>
-  <%= link_to image_tag(@picture.profile.avatar.url(:tiny)), @picture.profile %>
-  <%= @picture.profile.nick %>
-</p>
-
-<p>
   <b>Comments:</b>
   <% @comments.each do |comment| %>
     <%= comment.user.profile.nick %> said: <strong><%= comment.comment %></strong><br /><br />
+  <% end %>
+
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
@@ -64,3 +70,15 @@
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>
+    <%= render :partial => "minidetails", :locals => { :picture => @picture } %>
+
+    <% if @picture.album %>
+        <%= render :partial => "albums/minicontentindex", :locals => { :album => @picture.album } %>
+    <% end %>
+
+    <%= render :partial => "albums/miniuserindex", :locals => { :albums => @picture.profile.albums } %>
+<% end %>

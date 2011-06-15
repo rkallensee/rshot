@@ -71,7 +71,6 @@
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>
 
-
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>
     <%= render :partial => "minidetails", :locals => { :picture => @picture } %>

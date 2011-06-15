@@ -61,6 +61,9 @@ class Picture < ActiveRecord::Base
         exifdata[:focal_length] = imgexif.focal_length_in_35mm_film.to_i unless imgexif.focal_length_in_35mm_film.nil?
         exifdata[:aperture] = imgexif.f_number.to_f
         exifdata[:iso] = imgexif.iso_speed_ratings
+        exifdata[:exposure_bias_value] = imgexif.exposure_bias_value.to_f
+        exifdata[:white_balance] = imgexif.white_balance
+        exifdata[:exposure_program] = imgexif.exposure_program
         exifdata[:width] = imgexif.width
         exifdata[:height] = imgexif.height
         exifdata[:date_time] = imgexif.date_time

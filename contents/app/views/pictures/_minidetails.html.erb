@@ -5,5 +5,8 @@
 <p>Exposure time was <%= picture.exifdetails[:exposure_time] %>s, focal length <%= picture.exifdetails[:focal_length] %>mm,
 aperture f/<%= picture.exifdetails[:aperture] %>, ISO <%= picture.exifdetails[:iso] %>.</p>
 
+<p>Exposure bias value: <%= picture.exifdetails[:exposure_bias_value] %> EF, white balance: <%= picture.exifdetails[:white_balance] %>,
+exposure program: <%= picture.exifdetails[:exposure_program] %>.
+
 <p>The original dimensions are <%= picture.exifdetails[:width] %>x<%= picture.exifdetails[:height] %>.</p>
 

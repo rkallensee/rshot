@@ -64,6 +64,7 @@ class Picture < ActiveRecord::Base
         exifdata[:exposure_bias_value] = imgexif.exposure_bias_value.to_f
         exifdata[:white_balance] = imgexif.white_balance
         exifdata[:exposure_program] = imgexif.exposure_program
+        exifdata[:flash] = imgexif.flash
         exifdata[:width] = imgexif.width
         exifdata[:height] = imgexif.height
         exifdata[:date_time] = imgexif.date_time

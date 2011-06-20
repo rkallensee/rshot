@@ -1,0 +1,9 @@
+<div class="shimmer-album-miniteaser">
+    <h3><%= album.title %> (<%= pluralize(album.pictures.count, 'picture') %>)</h3>
+    <ul>
+        <li>
+            <%= link_to image_tag(album.pictures.first.photo.url(:thumb)), profile_album_picture_path(album.profile, album, album.pictures.first) %>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>

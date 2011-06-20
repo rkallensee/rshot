@@ -73,11 +73,18 @@
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>
-    <%= render :partial => "minidetails", :locals => { :picture => @picture } %>
+    <hr />
 
-    <% if @picture.album %>
+    <%= render :partial => "minidetails", :locals => { :picture => @picture } %>
+    <hr />
+
+    <% if @viewscope == 'album' %>
         <%= render :partial => "albums/minicontentindex", :locals => { :album => @picture.album } %>
+    <% else %>
+        This picture appears in the album:<br />
+        <%= render :partial => "albums/miniteaser", :locals => { :album => @picture.album } %>
     <% end %>
+    <hr />
 
     <%= render :partial => "albums/miniuserindex", :locals => { :albums => @picture.profile.albums } %>
 <% end %>

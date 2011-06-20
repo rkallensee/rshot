@@ -25,6 +25,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'paperclip', '~> 2.3'
 gem 'exifr'
+gem 'kaminari'
 gem 'acts_as_commentable'
 
 # Use unicorn as the web server

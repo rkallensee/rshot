@@ -5,7 +5,7 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.xml
   def index
-    @pictures = @scope.find(:all, :order => "created_at DESC")
+    @pictures = @scope.order('created_at DESC').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb

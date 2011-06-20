@@ -1,5 +1,7 @@
 <h1>Listing <%= pluralize(@pictures.count, 'picture') %></h1>
 
+<%= paginate @pictures %>
+
 <table>
   <tr>
     <th></th>
@@ -27,6 +29,8 @@
   </tr>
 <% end %>
 </table>
+
+<%= paginate @pictures %>
 
 <br />
 

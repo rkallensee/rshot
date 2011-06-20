@@ -10,4 +10,8 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :pictures
   has_many :albums
+
+  #def to_param
+  #  nick
+  #end
 end

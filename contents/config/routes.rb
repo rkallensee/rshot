@@ -2,6 +2,7 @@ Openshot::Application.routes.draw do
 
   devise_for :users, :path_names => { :sign_up => "register", :sign_in => "login", :sign_out => "logout" }
 
+  #scope ":nick", :as => "profile" do
   resources :profiles do
     resources :albums do
       resources :pictures do

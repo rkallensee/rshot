@@ -119,15 +119,15 @@ class PicturesController < ApplicationController
 
     # get scope - since picture resource is also nested in album resource
     def determine_scope
-      @scope = if params[:album_id]
+      @scope = Picture.scoped
+      @viewscope = 'all'
+
+      if params[:album_id]
         @viewscope = 'album'
-        Album.find(params[:album_id]).pictures
+        @scope = @scope.by_album(params[:album_id])
       elsif params[:profile_id]
         @viewscope = 'profile'
-        Profile.find(params[:profile_id]).pictures
-      else
-        @viewscope = 'all'
-        Picture
+        @scope = @scope.by_profile(params[:profile_id])
       end
     end
 

@@ -18,9 +18,12 @@ class Picture < ActiveRecord::Base
   validates_attachment_size :photo, :less_than => 10.megabytes
 
   # scopes
-  scope :same_album, lambda { |att| {:conditions => ["album_id = ?", att]} }
-  scope :next,       lambda { |att| {:conditions => ["id > ?", att], :limit => 1, :order => "id"} }
-  scope :previous,   lambda { |att| {:conditions => ["id < ?", att], :limit => 1, :order => "id DESC"} }
+  scope :same_album, lambda { |att| where("album_id = ?", att) }
+  scope :next,       lambda { |att| where("id > ?", att).limit(1).order("id") }
+  scope :previous,   lambda { |att| where("id < ?", att).limit(1).order("id DESC") }
+
+  scope :by_profile, lambda { |att| where("profile_id = ?", att) }
+  scope :by_album,   lambda { |att| where("album_id = ?", att) }
 
   def album_name
     unless album.nil?

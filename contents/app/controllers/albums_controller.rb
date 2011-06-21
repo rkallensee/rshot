@@ -4,7 +4,7 @@ class AlbumsController < ApplicationController
   before_filter :get_profile
 
   def get_profile
-    @profile = Profile.find(params[:profile_id])
+    @profile = Profile.find_by_nick(params[:profile_id])
   end
 
   # GET /albums
@@ -54,7 +54,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to(@album, :notice => 'Album was successfully created.') }
+        format.html { redirect_to([@profile, @album], :notice => 'Album was successfully created.') }
         format.xml  { render :xml => @album, :status => :created, :location => @album }
       else
         format.html { render :action => "new" }
@@ -66,12 +66,12 @@ class AlbumsController < ApplicationController
   # PUT /albums/1
   # PUT /albums/1.xml
   def update
-    @album = current_user.profile.find(params[:id])
+    @album = current_user.profile.albums.find(params[:id])
     @album.profile_id = current_user.id ## problematic! check profile_id instead of overwriting it.
 
     respond_to do |format|
       if @album.update_attributes(params[:album])
-        format.html { redirect_to(@album, :notice => 'Album was successfully updated.') }
+        format.html { redirect_to([@album.profile, @album], :notice => 'Album was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,11 +83,13 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.xml
   def destroy
-    @album = current_user.profile.find(params[:id])
+    @album = current_user.profile.albums.find(params[:id])
     @album.destroy
 
+    # todo: only destroy albums without pictures. or at least remove references to albums.
+
     respond_to do |format|
-      format.html { redirect_to(albums_url) }
+      format.html { redirect_to(profile_albums_url(@profile)) }
       format.xml  { head :ok }
     end
   end

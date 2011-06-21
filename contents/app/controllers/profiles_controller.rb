@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.xml
   def show
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by_nick(params[:id])
     @pictures = Picture.find_all_by_profile_id(@profile.id)
     @albums = Album.find_all_by_profile_id(@profile.id)
 
@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by_nick(params[:id])
   end
 
   # POST /profiles
@@ -60,7 +60,7 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1
   # PUT /profiles/1.xml
   def update
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by_nick(params[:id])
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])

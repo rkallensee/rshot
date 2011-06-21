@@ -127,18 +127,18 @@ class PicturesController < ApplicationController
         @scope = @scope.by_album(params[:album_id])
       elsif params[:profile_id]
         @viewscope = 'profile'
-        @scope = @scope.by_profile(params[:profile_id])
+        @scope = @scope.by_profile(Profile.find_by_nick(params[:profile_id]))
       end
     end
 
     # set links to previous and next image as instance variables
     def set_prev_next_links
       if params[:album_id]
-        @prev_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-        @next_link = profile_album_picture_path(Profile.find(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
+        @next_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
       elsif params[:profile_id]
-        @prev_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-        @next_link = profile_picture_path(Profile.find(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
+        @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
       else
         @prev_link = @scope.previous(@picture.id).first
         @next_link = @scope.next(@picture.id).first

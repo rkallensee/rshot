@@ -11,7 +11,7 @@ class Profile < ActiveRecord::Base
   has_many :pictures
   has_many :albums
 
-  #def to_param
-  #  nick
-  #end
+  def to_param
+    nick
+  end
 end

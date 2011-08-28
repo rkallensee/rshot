@@ -4,7 +4,7 @@
 <% albums.each do |album| %>
     <li>
         <% unless album.pictures.empty? %>
-            <%= link_to image_tag(album.pictures.first.photo.url(:thumb)), profile_album_path(album.profile, album) %>
+            <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'), profile_album_path(album.profile, album) %>
         <% end %>
         <h4><%= album.title %></h4>
     </li>

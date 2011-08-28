@@ -1,5 +1,10 @@
+body {
+    background: -moz-radial-gradient(#FFFFFF, #F9F9F9) repeat scroll 0 0 transparent;
+}
+
 header {
-    background-color: #F2E770;
+    background-color: #D0D0D0;
+    box-shadow: 0 5px 5px 1px #AAAAAA;
     padding-top: 10px;
 }
 
@@ -7,6 +12,11 @@ header {
     width: 990px;
     margin: 0px auto;
     position: relative;
+}
+
+#mainContainer {
+    margin-bottom: 10px;
+    width: 1030px;
 }
 
 header h1,
@@ -24,7 +34,7 @@ header h1 a:active {
 
 header h1 a:hover,
 header h1 a.active {
-    color: #F2E770;
+    color: #AAAAAA;
     background-color: #FFFFFF;
 }
 
@@ -60,7 +70,7 @@ header nav ul li a:active {
 
 header nav ul li a:hover,
 header nav ul li a.active {
-    color: #F2E770;
+    color: #AAAAAA;
     background-color: #FFFFFF;
 }
 
@@ -72,13 +82,23 @@ header .current-user {
 }
 
 #main {
-    padding-right: 320px;
+    padding: 20px 320px 20px 20px;
+}
+
+#main img.detail-image {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4)
+}
+
+img.mini-image,
+img.profile-image,
+#mapdiv {
+    box-shadow: 0 0 3px 1px #CCCCCC;
 }
 
 aside {
     width: 300px;
-    background-color: #EEEEEE;
     float: right;
+    padding: 20px 0px;
 }
 
 aside .shimmer-album-minicontent ul {

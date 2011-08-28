@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= link_to 'Edit', edit_picture_path(@picture) %> | <%= link_to 'Back', pictures_path %> |
   <%= link_to 'Prev', @prev_link unless @prev_link.nil? %> | <%= link_to 'Next', @next_link unless @next_link.nil? %>
 </p>
 
 <p>
-  <%= link_to image_tag(@picture.photo.url(:medium)), @picture.photo.url %>
+  <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url %>
 </p>
 
 <p>
@@ -20,10 +21,11 @@
   <% end %>
 </p>
 
-<p>
-  <b>Comments:</b>
+<div class="picture-comments">
+  <h3>Comments:</h3>
   <% @comments.each do |comment| %>
-    <%= comment.user.profile.nick %> said: <strong><%= comment.comment %></strong><br /><br />
+    <%= link_to image_tag(comment.user.profile.avatar.url(:tiny), :class => 'profile-image'), comment.user.profile %>
+    <%= comment.user.profile.nick %> said <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span>: <strong><%= comment.comment %></strong><br /><br />
   <% end %>
 
   <% if @comment.errors.any? %>
@@ -42,9 +44,10 @@
     <%= f.text_area :comment, :cols => 20, :rows => 2 %>
     <div><%= f.submit %></div>
   <% end %>
-</p>
+</div>
 
 <% if gps = @picture.gps %>
+  <h3>Location of the image:</h3>
   <div id="mapdiv" style="width: 500px; height: 200px;"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
   <script>
@@ -67,9 +70,6 @@
     map.setCenter (lonLat, zoom);
   </script>
 <% end %>
-
-<%= link_to 'Edit', edit_picture_path(@picture) %> |
-<%= link_to 'Back', pictures_path %>
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>

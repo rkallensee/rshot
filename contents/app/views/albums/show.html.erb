@@ -15,7 +15,7 @@
 <p>
   <b>From:</b>
   <%= link_to image_tag(@album.profile.avatar.url(:tiny)), @album.profile %>
-  <%= @album.profile.nick %>
+  <%= link_to @album.profile.nick, @album.profile %>
 </p>
 
 

@@ -1,5 +1,5 @@
 <p>
   <b>From:</b>
   <%= link_to image_tag(profile.avatar.url(:tiny), :class => 'profile-image'), profile %>
-  <%= profile.nick %> (<%= profile.forename %> <%= profile.surname %>)
+  <%= link_to profile.nick, profile %> (<%= profile.forename %> <%= profile.surname %>)
 </p>

@@ -1,14 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.0.rc'
-
-gem "therubyracer", :require => 'v8'
+gem 'rails', '~> 3.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# database
 gem 'sqlite3-ruby', :require => 'sqlite3'
-
 gem 'mysql2'
 
 # Rails 3.1 - Asset Pipeline
@@ -16,12 +14,12 @@ gem 'json'
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
+gem 'therubyracer', :require => 'v8'
 
 # Rails 3.1 - JavaScript
 gem 'jquery-rails'
 
 # openshot specific gems
-
 gem 'devise'
 gem 'paperclip', '~> 2.3'
 gem 'exifr'

@@ -32,11 +32,11 @@
                 <nav>
                     <ul>
                         <% if user_signed_in? %>
-                            <li><%= link_to 'Account', edit_user_registration_path %></li>
                             <li><%= link_to 'Profile', current_user.profile %></li>
                             <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
                             <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
                             <li><%= link_to 'Upload picture', new_picture_path %></li>
+                            <li><%= link_to 'Account', edit_user_registration_path %></li>
                             <li><%= link_to "Sign out", destroy_user_session_path %></li>
                         <% else %>
                             <li><%= link_to "Sign up", new_user_registration_path %></li>
@@ -47,6 +47,7 @@
 
                 <div class="current-user">
                     <% if user_signed_in? %>
+                        <%= image_tag current_user.profile.avatar.url(:micro), :class => 'profile-image' %>
                         Signed in as <%= current_user.email %>, Nick <%= current_user.profile.nick %>
                     <% end %>
                 </div>

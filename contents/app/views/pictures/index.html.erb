@@ -1,37 +1,11 @@
-<h1>Listing <%= pluralize(@pictures.count, 'picture') %></h1>
+<h2>Listing <%= pluralize(@pictures.count, 'picture') %></h2>
 
 <%= paginate @pictures %>
-
-<table>
-  <tr>
-    <th></th>
-    <th>Title</th>
-    <th>Album</th>
-    <th>From</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @pictures.each do |picture| %>
-  <tr>
-    <td><%= link_to image_tag(picture.photo.url(:thumb)), picture %></td>
-    <td><%= picture.title %></td>
-    <td>
-      <% unless picture.album.nil? %>
-        <%= link_to picture.album.title, [picture.profile, picture.album] %>
-      <% end %>
-    </td>
-    <td><%= picture.profile.nick %></td>
-    <td><%= link_to 'Show', picture %></td>
-    <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-    <td><%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture } %>
 <% end %>
-</table>
+
+<div class="clearfix"></div>
 
 <%= paginate @pictures %>
-
-<br />
-
-<%= link_to 'New Picture', new_picture_path %>

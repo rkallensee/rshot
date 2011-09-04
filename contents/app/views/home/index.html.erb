@@ -1,7 +1,10 @@
 <h2>OpenShot image sharing</h2>
 
 <p>
-  <%= link_to image_tag(@picture.photo.url(:medium)), profile_picture_path(@picture.profile, @picture) if @picture %>
+  <% if @picture %>
+    <%= link_to image_tag(@picture.photo.url(:medium)), profile_picture_path(@picture.profile, @picture) %>
+    <div>by <%= link_to @picture.profile.nick, @picture.profile %></div>
+  <% end %>
 </p>
 
 <%= link_to "Show pictures", pictures_path %>

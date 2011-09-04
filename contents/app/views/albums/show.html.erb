@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @album.title %>
-</p>
+<h2><%= @album.title %></h2>
 
 <p>
   <b><%= pluralize(@album.pictures.count, 'picture') %></b>

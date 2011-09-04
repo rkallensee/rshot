@@ -1,0 +1,20 @@
+<div class="mediumview-album">
+  <% unless album.pictures.empty? %>
+    <% if album.pictures.count > 1 %>
+      <div class="medium-image-stack">
+        <%= link_to image_tag(album.pictures.first.photo.url(:small), :class => 'medium-image'), profile_album_path(album.profile, album), :class => 'image-stacked image-stacked-first' %>
+        <%= link_to image_tag(album.pictures.second.photo.url(:small), :class => 'medium-image'), profile_album_path(album.profile, album), :class => 'image-stacked image-stacked-second' %>
+      </div>
+    <% else %>
+      <%= link_to image_tag(album.pictures.first.photo.url(:small), :class => 'medium-image'), profile_album_path(album.profile, album) %>
+    <% end %>
+  <% end %>
+  <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
+  (<%= pluralize(album.pictures.count, 'picture') %>)
+  by <%= link_to album.profile.nick, album.profile %>
+
+  <div class="edit">
+    <%= link_to 'Edit', edit_profile_album_path(album.profile, album) %>,
+    <%= link_to 'Destroy', profile_album_path(album.profile, album), :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+</div>

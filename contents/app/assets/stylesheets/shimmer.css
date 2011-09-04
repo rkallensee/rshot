@@ -30,12 +30,16 @@ header h1 a:active {
     text-decoration: none;
     line-height: 44px;
     color: #FFFFFF;
+    text-shadow: 1px 1px 1px #777777;
+    filter: dropshadow(color=#777777, offx=1, offy=1);
 }
 
 header h1 a:hover,
 header h1 a.active {
-    color: #AAAAAA;
-    background-color: #FFFFFF;
+    color: #333333;
+    background-color: transparent;
+    text-shadow: 1px 1px 1px #DDDDDD;
+    filter: dropshadow(color=#DDDDDD, offx=1, offy=1);
 }
 
 header nav ul {
@@ -66,12 +70,16 @@ header nav ul li a:active {
     padding: 6px 9px;
     vertical-align: middle;
     display: inline-block;
+    text-shadow: 1px 1px 1px #999999;
+    filter: dropshadow(color=#999999, offx=1, offy=1);
 }
 
 header nav ul li a:hover,
 header nav ul li a.active {
     color: #AAAAAA;
     background-color: #FFFFFF;
+    text-shadow: 1px 1px 1px #DDDDDD;
+    filter: dropshadow(color=#DDDDDD, offx=1, offy=1);
 }
 
 header .current-user {
@@ -81,12 +89,65 @@ header .current-user {
     width: 300px;
 }
 
+header .current-user img.profile-image {
+    float: right;
+}
+
 #main {
     padding: 20px 320px 20px 20px;
 }
 
+#main h2 {
+    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
+    font-size: 1.9em;
+    font-weight: 400;
+    color: #555555;
+    padding: 10px 0px;
+    text-shadow: 1px 1px 1px #CCCCCC;
+    filter: dropshadow(color=#CCCCCC, offx=1, offy=1);
+}
+
+#main img.medium-image {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4)
+}
+
+#main .medium-image-stack {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+#main .medium-image-stack a.image-stacked {
+    padding: 10px;
+    background-color: #EEEEEE;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+#main .medium-image-stack a.image-stacked-first {
+    -moz-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+    z-index: 2;
+}
+
+#main .medium-image-stack a.image-stacked img.medium-image {
+    box-shadow: none;
+}
+
 #main img.detail-image {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4)
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.mediumview-picture,
+.mediumview-album {
+    width: 320px;
+    float: left;
+    padding-bottom: 20px;
 }
 
 img.mini-image,

@@ -9,10 +9,7 @@
   <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url %>
 </p>
 
-<p>
-  <b>Title:</b>
-  <%= @picture.title %>
-</p>
+<h2><%= @picture.title %></h2>
 
 <p>
   <b>Album:</b>
@@ -21,16 +18,19 @@
   <% end %>
 </p>
 
-<div class="picture-comments">
+<div id="picture-comments">
   <h3>Comments:</h3>
   <% @comments.each do |comment| %>
     <%= link_to image_tag(comment.user.profile.avatar.url(:tiny), :class => 'profile-image'), comment.user.profile %>
     <%= comment.user.profile.nick %> said <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span>: <strong><%= comment.comment %></strong><br /><br />
   <% end %>
+  <% if @comments.empty? %>
+    <em>There are no comments at the moment.</em>
+  <% end %>
 
   <% if @comment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
 
       <ul>
       <% @comment.errors.full_messages.each do |msg| %>
@@ -40,9 +40,13 @@
     </div>
   <% end %>
 
-  <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
-    <%= f.text_area :comment, :cols => 20, :rows => 2 %>
-    <div><%= f.submit %></div>
+  <% if user_signed_in? %>
+    <h4>Add a comment</h4>
+    <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
+      <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
+      <%= f.text_area :comment, :cols => 20, :rows => 2 %>
+      <div><%= f.submit %></div>
+    <% end %>
   <% end %>
 </div>
 
@@ -80,11 +84,12 @@
 
     <% if @viewscope == 'album' %>
         <%= render :partial => "albums/minicontentindex", :locals => { :album => @picture.album } %>
-    <% else %>
+        <hr />
+    <% elsif !@picture.album.nil? %>
         This picture appears in the album:<br />
         <%= render :partial => "albums/miniteaser", :locals => { :album => @picture.album } %>
+        <hr />
     <% end %>
-    <hr />
 
     <%= render :partial => "albums/miniuserindex", :locals => { :albums => @picture.profile.albums } %>
 <% end %>

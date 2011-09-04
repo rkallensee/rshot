@@ -8,7 +8,7 @@ class Picture < ActiveRecord::Base
   has_attached_file :photo,
     :styles => {
       :thumb   => ["75x75#", :jpg],
-      :small   => ["230x230>", :jpg],
+      :small   => ["250x250>", :jpg],
       :medium  => ["640x640>", :jpg] },
     :convert_options => { :all => '-auto-orient' }
 
@@ -37,12 +37,16 @@ class Picture < ActiveRecord::Base
   end
 
   def gps
-    imgexif = EXIFR::JPEG.new(photo.path)
+    begin
+      imgexif = EXIFR::JPEG.new(photo.path)
+    rescue EXIFR::MalformedJPEG
+      return nil
+    end
     #imgexif.gps if imgexif.gps?
     #[imgexif.gps_latitude, imgexif.gps_longitude]
 
     # https://github.com/picuous/exifr/blob/master/lib/jpeg.rb
-    if !imgexif.exif? or imgexif.gps_latitude.nil? or imgexif.gps_latitude.length < 2 or imgexif.gps_longitude.nil? or imgexif.gps_longitude.length < 2
+    if imgexif.nil? or !imgexif.exif? or imgexif.gps_latitude.nil? or imgexif.gps_latitude.length < 2 or imgexif.gps_longitude.nil? or imgexif.gps_longitude.length < 2
       nil
     else
       lat = imgexif.gps_latitude[0].to_f+imgexif.gps_latitude[1].to_f/60+imgexif.gps_latitude[2].to_f/3600
@@ -52,9 +56,13 @@ class Picture < ActiveRecord::Base
   end
 
   def exifdetails
-    imgexif = EXIFR::JPEG.new(photo.path)
-
     exifdata = {}
+
+    begin
+      imgexif = EXIFR::JPEG.new(photo.path)
+    rescue EXIFR::MalformedJPEG
+      return exifdata
+    end
 
     if imgexif.exif?
         exifdata[:model] = imgexif.make + " " + imgexif.model

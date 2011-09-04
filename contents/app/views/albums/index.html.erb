@@ -1,37 +1,14 @@
-<h1>Listing <%= pluralize(@albums.count, 'album') %></h1>
-
-<%= paginate @albums %>
-
-<table>
-  <tr>
-    <th></th>
-    <th>Title</th>
-    <th>From</th>
-    <th>Pictures</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @albums.each do |album| %>
-  <tr>
-    <td>
-      <% unless album.pictures.empty? %>
-        <%= link_to image_tag(album.pictures.first.photo.url(:thumb)), profile_album_path(album.profile, album) %>
-      <% end %>
-    </td>
-    <td><%= album.title %></td>
-    <td><%= link_to album.profile.nick, album.profile %></td>
-    <td><%= album.pictures.size %>
-    <td><%= link_to 'Show', profile_album_path(album.profile, album) %></td>
-    <td><%= link_to 'Edit', edit_profile_album_path(album.profile, album) %></td>
-    <td><%= link_to 'Destroy', profile_album_path(album.profile, album), :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= paginate @albums %>
+<h2>Listing <%= pluralize(@albums.count, 'album') %></h2>
+<%= link_to 'New Album', new_profile_album_path %>
 
 <br />
 
-<%= link_to 'New Album', new_profile_album_path %>
+<%= paginate @albums %>
+
+<% @albums.each do |album| %>
+  <%= render :partial => "albums/mediumview", :locals => { :album => album } %>
+<% end %>
+
+<div class="clearfix"></div>
+
+<%= paginate @albums %>

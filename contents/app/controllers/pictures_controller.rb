@@ -101,7 +101,7 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to(@picture, :notice => 'Comment was successfully created.') }
+        format.html { redirect_to(picture_scope_path, :notice => 'Comment was successfully created.') }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         @picture = Picture.find(params[:id])
@@ -142,6 +142,17 @@ class PicturesController < ApplicationController
       else
         @prev_link = @scope.previous(@picture.id).first
         @next_link = @scope.next(@picture.id).first
+      end
+    end
+
+    # get redirect path to picture (after comment creation)
+    def picture_scope_path
+      if params[:album_id]
+        profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), Picture.find(params[:id]))
+      elsif params[:profile_id]
+        profile_picture_path(Profile.find_by_nick(params[:profile_id]), Picture.find(params[:id]))
+      else
+        picture_path(Picture.find(params[:id]))
       end
     end
 end

@@ -4,7 +4,7 @@ Openshot::Application.routes.draw do
 
   #match ":nick" => 'profiles#show', :as => "profile"
   #scope ":nick", :as => "profile" do
-  resources :profiles do
+  resources :profiles, :only => [:show, :edit, :update] do
     resources :albums do
       resources :pictures do
         member do

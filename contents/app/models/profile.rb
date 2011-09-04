@@ -2,6 +2,7 @@ class Profile < ActiveRecord::Base
   # Paperclip attachment
   has_attached_file :avatar,
     :styles => {
+      :micro  => ["25x25#", :jpg],
       :tiny   => ["48x48#", :jpg],
       :medium => ["75x75#", :jpg],
       :big    => ["120x120>", :jpg] }

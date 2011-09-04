@@ -1,0 +1,10 @@
+<div class="mediumview-picture">
+  <%= link_to image_tag(picture.photo.url(:small), :class => 'medium-image'), profile_picture_path(picture.profile, picture) %>
+  <h3><%= link_to picture.title, profile_picture_path(picture.profile, picture) %></h3>
+  <%= link_to pluralize(picture.comments.count, 'comment'), profile_picture_path(picture.profile, picture, :anchor => 'picture-comments') %>
+
+  <div class="edit">
+    <%= link_to 'Edit', edit_picture_path(picture) %>,
+    <%= link_to 'Destroy', profile_picture_path(picture.profile, picture), :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+</div>

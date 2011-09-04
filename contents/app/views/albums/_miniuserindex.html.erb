@@ -1,7 +1,7 @@
 <h3>This user has <%= pluralize(albums.count, 'album') %>:</h3>
 
 <ul>
-<% albums.each do |album| %>
+<% albums[0..4].each do |album| %>
     <li>
         <% unless album.pictures.empty? %>
             <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'), profile_album_path(album.profile, album) %>
@@ -10,3 +10,5 @@
     </li>
 <% end %>
 </ul>
+
+<%= link_to 'more albums', profile_albums_path(albums.first.profile) %>

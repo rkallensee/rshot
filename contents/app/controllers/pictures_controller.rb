@@ -127,7 +127,8 @@ class PicturesController < ApplicationController
         @scope = @scope.by_album(params[:album_id])
       elsif params[:profile_id]
         @viewscope = 'profile'
-        @scope = @scope.by_profile(Profile.find_by_nick(params[:profile_id]))
+        @profile = Profile.find_by_nick(params[:profile_id])
+        @scope = @scope.by_profile(@profile)
       end
     end
 

@@ -9,3 +9,11 @@
 <div class="clearfix"></div>
 
 <%= paginate @pictures %>
+
+<% content_for :sidebar do %>
+    <% unless @profile.nil? %>
+      <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>
+      <hr />
+      <%= render :partial => "albums/miniuserindex", :locals => { :albums => @profile.albums } %>
+    <% end %>
+<% end %>

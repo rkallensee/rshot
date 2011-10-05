@@ -12,3 +12,8 @@
 <div class="clearfix"></div>
 
 <%= paginate @albums %>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>
+    <hr />
+<% end %>

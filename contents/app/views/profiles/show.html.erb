@@ -54,6 +54,6 @@
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>
-
+    <hr />
     <%= render :partial => "albums/miniuserindex", :locals => { :albums => @albums } %>
 <% end %>

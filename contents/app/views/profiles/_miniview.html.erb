@@ -2,4 +2,9 @@
   <b>From:</b>
   <%= link_to image_tag(profile.avatar.url(:tiny), :class => 'profile-image'), profile %>
   <%= link_to profile.nick, profile %> (<%= profile.forename %> <%= profile.surname %>)
+  <ul>
+    <li><%= link_to "Photostream", profile_pictures_path(profile) %></li>
+    <li><%= link_to "Albums", profile_albums_path(profile) %></li>
+    <li><%= link_to "User profile", profile_path(profile) %></li>
+  </ul>
 </p>

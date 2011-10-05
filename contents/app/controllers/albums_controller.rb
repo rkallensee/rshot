@@ -1,11 +1,6 @@
 class AlbumsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
-
   before_filter :get_profile
-
-  def get_profile
-    @profile = Profile.find_by_nick(params[:profile_id])
-  end
 
   # GET /albums
   # GET /albums.xml
@@ -93,5 +88,10 @@ class AlbumsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  protected
+    def get_profile
+      @profile = Profile.find_by_nick(params[:profile_id])
+    end
 
 end

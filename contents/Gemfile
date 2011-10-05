@@ -16,15 +16,15 @@ gem 'coffee-script'
 gem 'uglifier'
 gem 'therubyracer', :require => 'v8'
 
-# Rails 3.1 - JavaScript
+# Rails 3.1 - jQuery support
 gem 'jquery-rails'
 
-# openshot specific gems
-gem 'devise'
-gem 'paperclip', '~> 2.3'
-gem 'exifr'
-gem 'kaminari'
-gem 'acts_as_commentable'
+# application-specific gems
+gem 'devise', '~> 1.4.7'
+gem 'paperclip', '~> 2.4.3'
+gem 'exifr', '~> 1.1.1'
+gem 'kaminari', '~> 0.12.4'
+gem 'acts_as_commentable', '~> 3.0.1'
 
 # Use unicorn as the web server
 # gem 'unicorn'

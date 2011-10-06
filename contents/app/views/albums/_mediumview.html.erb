@@ -10,11 +10,11 @@
     <% end %>
   <% end %>
   <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
-  (<%= pluralize(album.pictures.count, 'picture') %>)
+  <span class="label notice"><%= pluralize(album.pictures.count, 'picture') %></span>
   by <%= link_to album.profile.nick, album.profile %>
 
   <div class="edit">
-    <%= link_to 'Edit', edit_profile_album_path(album.profile, album) %>,
-    <%= link_to 'Destroy', profile_album_path(album.profile, album), :confirm => 'Are you sure?', :method => :delete %>
+    <%= link_to 'Edit', edit_profile_album_path(album.profile, album), :class => "btn small" %>
+    <%= link_to 'Destroy', profile_album_path(album.profile, album), :confirm => 'Are you sure?', :method => :delete, :class => "btn small" %>
   </div>
 </div>

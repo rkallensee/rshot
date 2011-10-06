@@ -1,8 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= link_to 'Edit', edit_picture_path(@picture) %> | <%= link_to 'Back', pictures_path %> |
-  <%= link_to 'Prev', @prev_link unless @prev_link.nil? %> | <%= link_to 'Next', @next_link unless @next_link.nil? %>
+  <% unless @prev_link.nil? %>
+    <%= link_to 'Prev', @prev_link, :class => "btn" %>
+  <% else %>
+    <%= link_to 'Prev', "#", :class => "btn disabled" %>
+  <% end %>
+
+  <% unless @next_link.nil? %>
+    <%= link_to 'Next', @next_link, :class => "btn" %>
+  <% else %>
+    <%= link_to 'Next', "#", :class => "btn disabled" %>
+  <% end %>
+
+  ###
+
+  <%= link_to 'Edit', edit_picture_path(@picture), :class => "btn" %>
+  <%= link_to 'Back', pictures_path, :class => "btn" %><br />
 </p>
 
 <p>
@@ -21,8 +35,11 @@
 <div id="picture-comments">
   <h3>Comments:</h3>
   <% @comments.each do |comment| %>
-    <%= link_to image_tag(comment.user.profile.avatar.url(:tiny), :class => 'profile-image'), comment.user.profile %>
-    <%= comment.user.profile.nick %> said <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span>: <strong><%= comment.comment %></strong><br /><br />
+    <blockquote>
+      <%= link_to image_tag(comment.user.profile.avatar.url(:tiny), :class => 'profile-image'), comment.user.profile %>
+      <p><%= comment.comment %></p>
+      <small><%= comment.user.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
+    </blockquote>
   <% end %>
   <% if @comments.empty? %>
     <em>There are no comments at the moment.</em>
@@ -45,7 +62,7 @@
     <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
       <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
       <%= f.text_area :comment, :cols => 20, :rows => 2 %>
-      <div><%= f.submit %></div>
+      <div><%= f.submit(:class => "btn primary") %></div>
     <% end %>
   <% end %>
 </div>

@@ -2,6 +2,8 @@
 
 <h2>Profile of &raquo;<%= @profile.forename %> <%= @profile.surname %> (<%= @profile.nick %>)&laquo;</h2>
 
+<%= link_to 'Edit', edit_profile_path(@profile), :class => "btn" %>
+
 <p>
   <%= image_tag(@profile.avatar.url(:medium)) %>
 </p>
@@ -50,7 +52,6 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>

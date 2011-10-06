@@ -3,7 +3,7 @@
 <h2><%= @album.title %></h2>
 
 <p>
-  <b><%= pluralize(@album.pictures.count, 'picture') %></b>
+  <div><span class="label notice"><%= pluralize(@album.pictures.count, 'picture') %></span></div>
   <% for picture in @album.pictures %>
     <%= link_to image_tag(picture.photo.url(:thumb)), profile_album_picture_path(@album.profile, @album, picture) %>
   <% end %>
@@ -16,8 +16,8 @@
 </p>
 
 
-<%= link_to 'Edit', edit_profile_album_path(@album) %> |
-<%= link_to 'Back', profile_albums_path %>
+<%= link_to 'Edit', edit_profile_album_path(@album), :class => "btn" %>
+<%= link_to 'Back', profile_albums_path, :class => "btn" %>
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @album.profile } %>

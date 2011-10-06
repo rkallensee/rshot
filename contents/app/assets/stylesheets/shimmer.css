@@ -1,3 +1,8 @@
+html,
+body {
+    background-color: transparent;
+}
+
 body {
     background: -moz-radial-gradient(#FFFFFF, #F9F9F9) repeat scroll 0 0 transparent;
 }
@@ -32,6 +37,7 @@ header h1 a:active {
     color: #FFFFFF;
     text-shadow: 1px 1px 1px #777777;
     filter: dropshadow(color=#777777, offx=1, offy=1);
+    margin: 0;
 }
 
 header h1 a:hover,
@@ -48,6 +54,7 @@ header nav ul {
     left: 200px;
     list-style-type: none;
     display: inline;
+    margin: 0;
 }
 
 header nav ul li {
@@ -82,14 +89,7 @@ header nav ul li a.active {
     filter: dropshadow(color=#DDDDDD, offx=1, offy=1);
 }
 
-header .current-user {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-}
-
-header .current-user img.profile-image {
+header img.profile-image {
     float: right;
 }
 
@@ -139,6 +139,7 @@ header .current-user img.profile-image {
     box-shadow: none;
 }
 
+#main img.home-teaser-image,
 #main img.detail-image {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }

@@ -1,7 +1,7 @@
-<%= form_for [@profile, @picture], :html => { :multipart => true } do |f| %>
+<%= form_for [@profile, @picture], :html => { :multipart => true, :class => "form-stacked" } do |f| %>
   <% if @picture.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+      <h3><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h3>
 
       <ul>
       <% @picture.errors.full_messages.each do |msg| %>
@@ -11,22 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="clearfix">
     <%= f.label :photo %><br />
     <%= f.file_field :photo%>
   </div>
 
-  <div class="field">
+  <div class="clearfix">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
+  <div class="clearfix">
     <%= f.label :album %><br />
     <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(:class => "btn primary") %>
+    <%= link_to 'Back', pictures_path, :class => "btn" %>
   </div>
 <% end %>

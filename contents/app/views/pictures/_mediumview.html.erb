@@ -2,7 +2,7 @@
   <%= link_to image_tag(picture.photo.url(:small), :class => 'medium-image'), profile_picture_path(picture.profile, picture) %>
   <h3><%= link_to picture.title, profile_picture_path(picture.profile, picture) %></h3>
   <span class="label notice">
-    <%= link_to pluralize(picture.comments.count, 'comment'), profile_picture_path(picture.profile, picture, :anchor => 'picture-comments') %>
+    <%= pluralize(picture.comments.count, 'comment') %>
   </span>
 
   <div class="edit">

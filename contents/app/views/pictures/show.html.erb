@@ -33,7 +33,7 @@
 <% unless @picture.tags.empty? %>
 <p>
   <b>Tags:</b>
-  <%= @picture.tags.collect{|tag| tag.name}.join(', ') %>
+  <%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %>
 </p>
 <% end %>
 
@@ -53,9 +53,7 @@
   <% if @comment.errors.any? %>
     <div class="alert-message block-message error fade in" data-alert="alert">
       <a class="close" href="#">&times;</a>
-
       <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
-
       <ul>
       <% @comment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

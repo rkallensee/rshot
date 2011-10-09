@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
-        format.html { redirect_to(@profile, :notice => 'Profile was successfully updated.') }
+        format.html { redirect_to(@profile, :flash => {:success => 'Profile was successfully updated.'}) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

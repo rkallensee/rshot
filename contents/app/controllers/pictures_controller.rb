@@ -137,12 +137,15 @@ class PicturesController < ApplicationController
       if params[:album_id]
         @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
         @next_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @back_link = profile_album_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]))
       elsif params[:profile_id]
         @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
         @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @back_link = profile_pictures_path(Profile.find_by_nick(params[:profile_id]))
       else
         @prev_link = @scope.previous(@picture.id).first
         @next_link = @scope.next(@picture.id).first
+        @back_link = pictures_path
       end
     end
 

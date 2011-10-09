@@ -1,6 +1,7 @@
 <%= form_for [@profile, @picture], :html => { :multipart => true, :class => "form-stacked" } do |f| %>
   <% if @picture.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert-message block-message error fade in" data-alert="alert">
+      <a class="close" href="#">&times;</a>
       <h3><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h3>
 
       <ul>
@@ -24,6 +25,11 @@
   <div class="clearfix">
     <%= f.label :album %><br />
     <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :tag_list %> (separated by comma)<br />
+    <%= f.text_field :tag_list %>
   </div>
 
   <div class="actions">

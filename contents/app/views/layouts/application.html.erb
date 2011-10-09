@@ -59,7 +59,10 @@
             </aside>
             <div id="main" role="main">
                 <% flash.each do |name, msg| %>
-                    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                    <div class="alert-message <%= name %> fade in" data-alert="alert">
+                        <a class="close" href="#">&times;</a>
+                        <p><%= msg %></p>
+                    </div>
                 <% end %>
 
                 <%= yield %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <% unless @prev_link.nil? %>
     <%= link_to 'Prev', @prev_link, :class => "btn" %>
@@ -16,7 +14,7 @@
   ###
 
   <%= link_to 'Edit', edit_picture_path(@picture), :class => "btn" %>
-  <%= link_to 'Back', pictures_path, :class => "btn" %><br />
+  <%= link_to 'Back', @back_link, :class => "btn" %><br />
 </p>
 
 <p>
@@ -25,18 +23,25 @@
 
 <h2><%= @picture.title %></h2>
 
+<% unless @picture.album.nil? %>
 <p>
   <b>Album:</b>
-  <% unless @picture.album.nil? %>
-    <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
-  <% end %>
+  <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
 </p>
+<% end %>
+
+<% unless @picture.tags.empty? %>
+<p>
+  <b>Tags:</b>
+  <%= @picture.tags.collect{|tag| tag.name}.join(', ') %>
+</p>
+<% end %>
 
 <div id="picture-comments">
   <h3>Comments:</h3>
   <% @comments.each do |comment| %>
     <blockquote>
-      <%= link_to image_tag(comment.user.profile.avatar.url(:tiny), :class => 'profile-image'), comment.user.profile %>
+      <%= link_to image_tag(comment.user.profile.avatar.url(:micro), :class => 'profile-image'), comment.user.profile %>
       <p><%= comment.comment %></p>
       <small><%= comment.user.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
     </blockquote>
@@ -46,7 +51,9 @@
   <% end %>
 
   <% if @comment.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert-message block-message error fade in" data-alert="alert">
+      <a class="close" href="#">&times;</a>
+
       <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
 
       <ul>

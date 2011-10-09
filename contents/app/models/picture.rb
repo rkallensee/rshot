@@ -2,6 +2,7 @@ class Picture < ActiveRecord::Base
   belongs_to :album
   belongs_to :profile
 
+  acts_as_taggable_on :tags
   acts_as_commentable
 
   # Paperclip attachment

@@ -12,6 +12,9 @@ class Profile < ActiveRecord::Base
   has_many :pictures
   has_many :albums
 
+  # validators
+  validates :nick, :presence => true, :length => { :minimum => 3 }
+
   def to_param
     nick
   end

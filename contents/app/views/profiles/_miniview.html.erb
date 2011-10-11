@@ -1,7 +1,7 @@
 <p>
   <b>From:</b>
-  <%= link_to image_tag(profile.avatar.url(:tiny), :class => 'profile-image'), profile %>
-  <%= link_to profile.nick, profile %> (<%= profile.forename %> <%= profile.surname %>)
+  <%= link_to image_tag(profile.avatar.url(:tiny), :class => 'profile-image'), profile, {:rel => 'popover', :title => "#{profile.forename} #{profile.surname}", 'data-content' => "<b>#{pluralize(profile.pictures.count, 'picture')}</b> yet"} %>
+  <%= link_to profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'twipsy'} %>
   <ul>
     <li><%= link_to "Photostream", profile_pictures_path(profile) %></li>
     <li><%= link_to "Albums", profile_albums_path(profile) %></li>

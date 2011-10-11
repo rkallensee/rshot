@@ -11,7 +11,7 @@
   <% end %>
   <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
   <span class="label notice"><%= pluralize(album.pictures.count, 'picture') %></span>
-  by <%= link_to album.profile.nick, album.profile %>
+  by <%= link_to album.profile.nick, album.profile, {:title => "#{album.profile.forename} #{album.profile.surname}", :rel => 'twipsy'} %>
 
   <div class="edit">
     <%= link_to 'Edit', edit_profile_album_path(album.profile, album), :class => "btn small" %>

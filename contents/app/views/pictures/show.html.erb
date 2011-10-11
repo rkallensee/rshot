@@ -41,7 +41,7 @@
   <h3>Comments:</h3>
   <% @comments.each do |comment| %>
     <blockquote>
-      <%= link_to image_tag(comment.user.profile.avatar.url(:micro), :class => 'profile-image'), comment.user.profile %>
+      <%= link_to image_tag(comment.user.profile.avatar.url(:micro), :class => 'profile-image'), comment.user.profile, {:rel => 'popover', :title => "#{comment.user.profile.forename} #{comment.user.profile.surname}", 'data-content' => "<b>#{pluralize(comment.user.profile.pictures.count, 'picture')}</b> yet"} %>
       <p><%= comment.comment %></p>
       <small><%= comment.user.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
     </blockquote>

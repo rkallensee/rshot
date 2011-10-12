@@ -34,6 +34,11 @@
 
   <div class="actions">
     <%= f.submit(:class => "btn primary") %>
-    <%= link_to 'Back', pictures_path, :class => "btn" %>
+
+    <% if @picture.persisted? %>
+      <%= link_to 'Back', profile_picture_path(@profile, @picture), :class => "btn" %>
+    <% else %>
+      <%= link_to 'Back', profile_pictures_path(@profile), :class => "btn" %>
+    <% end %>
   </div>
 <% end %>

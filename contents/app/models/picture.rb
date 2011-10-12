@@ -66,8 +66,14 @@ class Picture < ActiveRecord::Base
     end
 
     if imgexif.exif?
-        exifdata[:model] = imgexif.make + " " + imgexif.model
-        exifdata[:date_time] = imgexif.date_time_original
+        if imgexif.model.include? imgexif.make
+          exifdata[:model] = imgexif.model
+        else
+          exifdata[:model] = imgexif.make + " " + imgexif.model
+        end
+
+        #exifdata[:date_time] = imgexif.date_time_original
+        exifdata[:date_time] = imgexif.date_time
         exifdata[:exposure_time] = imgexif.exposure_time.to_s
         exifdata[:focal_length] = imgexif.focal_length.to_i
         exifdata[:focal_length] = imgexif.focal_length_in_35mm_film.to_i unless imgexif.focal_length_in_35mm_film.nil?
@@ -79,7 +85,11 @@ class Picture < ActiveRecord::Base
         exifdata[:flash] = imgexif.flash
         exifdata[:width] = imgexif.width
         exifdata[:height] = imgexif.height
-        exifdata[:date_time] = imgexif.date_time
+        exifdata[:software] = imgexif.software
+        exifdata[:exposure_mode] = imgexif.exposure_mode
+        exifdata[:metering_mode] = imgexif.metering_mode
+        exifdata[:orientation] = imgexif.orientation
+
         exifdata[:exif] = imgexif.exif # debug
     end
 

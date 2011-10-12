@@ -4,9 +4,4 @@
   <span class="label notice">
     <%= pluralize(picture.comments.count, 'comment') %>
   </span>
-
-  <div class="edit">
-    <%= link_to 'Edit', edit_picture_path(picture), :class => "btn small" %>
-    <%= link_to 'Destroy', profile_picture_path(picture.profile, picture), :confirm => 'Are you sure?', :method => :delete, :class => "btn small" %>
-  </div>
 </div>

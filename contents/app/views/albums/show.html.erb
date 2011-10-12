@@ -11,12 +11,13 @@
 
 <p>
   <b>From:</b>
-  <%= link_to image_tag(@album.profile.avatar.url(:tiny)), @album.profile %>
-  <%= link_to @album.profile.nick, @album.profile %>
+  <%= link_to image_tag(@album.profile.avatar.url(:tiny)), @album.profile, {:rel => 'popover', :title => "#{@album.profile.forename} #{@album.profile.surname}", 'data-content' => "<b>#{pluralize(@album.profile.pictures.count, 'picture')}</b> yet"} %>
+  <%= link_to @album.profile.nick, @album.profile, {:title => "#{@album.profile.forename} #{@album.profile.surname}", :rel => 'twipsy'} %>
 </p>
 
 
 <%= link_to 'Edit', edit_profile_album_path(@album.profile, @album), :class => "btn" %>
+<%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn" %>
 <%= link_to 'Back', profile_albums_path, :class => "btn" %>
 
 <% content_for :sidebar do %>

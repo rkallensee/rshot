@@ -35,7 +35,7 @@
                             <li><%= link_to 'Profile', current_user.profile %></li>
                             <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
                             <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
-                            <li><%= link_to 'Upload picture', new_picture_path %></li>
+                            <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
 
                             <li class="dropdown" data-dropdown="dropdown">
                                 <%= image_tag current_user.profile.avatar.url(:micro), :class => 'profile-image' %>

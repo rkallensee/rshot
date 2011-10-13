@@ -22,7 +22,9 @@
   <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url %>
 </p>
 
-<h2><%= @picture.title %></h2>
+<% unless @picture.title.empty? %>
+    <h2><%= @picture.title %></h2>
+<% end %>
 
 <% unless @picture.album.nil? %>
 <p>
@@ -47,16 +49,30 @@
         <td><%= @picture.exifdetails[:model] %></td>
       </tr>
       <tr>
-        <th>Taken on:</th>
-        <td><%= @picture.exifdetails[:date_time] %></td>
+        <th>Taken on (original):</th>
+        <td><%= @picture.exifdetails[:date_time_original] %></td>
+      </tr>
+      <tr>
+        <th>Digitized:</th>
+        <td><%= @picture.exifdetails[:date_time_digitized] %></td>
       </tr>
       <tr>
         <th>Exposure time:</th>
-        <td><%= (Rational(*(@picture.exifdetails[:exposure_time].split('/').map( &:to_i )))*45).to_f %> s (<%= @picture.exifdetails[:exposure_time] %>)</td>
+        <td>
+          <% if @picture.exifdetails[:exposure_time].is_a?(String) %>
+            <%= (Rational(*(@picture.exifdetails[:exposure_time].split('/').map( &:to_i )))*45).to_f.round(3) %> s
+            (<%= @picture.exifdetails[:exposure_time] %>)
+          <% end %>
+        </td>
       </tr>
       <tr>
         <th>Focal length:</th>
-        <td><%= @picture.exifdetails[:focal_length] %> mm</td>
+        <td>
+          <%= @picture.exifdetails[:focal_length] %> mm
+          <% unless @picture.exifdetails[:focal_length_in_35mm_film] == 0 %>
+            (<%= @picture.exifdetails[:focal_length_in_35mm_film] %> mm in 35mm film)
+          <% end %>
+        </td>
       </tr>
       <tr>
         <th>Aperture:</th>
@@ -68,7 +84,11 @@
       </tr>
       <tr>
         <th>Exposure bias value:</th>
-        <td><%= @picture.exifdetails[:exposure_bias_value] %> EV</td>
+        <td>
+          <% if @picture.exifdetails[:exposure_bias_value].is_a?(Rational) %>
+            <%= @picture.exifdetails[:exposure_bias_value].to_f.round(3) %> EV
+          <% end %>
+        </td>
       </tr>
       <tr>
         <th>White balance:</th>
@@ -82,7 +102,30 @@
       </tr>
       <tr>
         <th>Exposure program:</th>
-        <td><%= @picture.exifdetails[:exposure_program] %></td>
+        <td>
+          <%=
+          case @picture.exifdetails[:exposure_program]
+            when 0
+              'Not defined'
+            when 1
+              'Manual'
+            when 2
+              'Normal program'
+            when 3
+              'Aperture priority'
+            when 4
+              'Shutter priority'
+            when 5
+              'Creative program (biased toward depth of field)'
+            when 6
+              'Action program (biased toward fast shutter speed)'
+            when 7
+              'Portrait mode (for closeup photos with the background out of focus)'
+            when 8
+              'Landscape mode (for landscape photos with the background in focus)'
+          end
+          %>
+        </td>
       </tr>
       <tr>
         <th>Original dimensions:</th>
@@ -184,11 +227,113 @@
       </tr>
       <tr>
         <th>Orientation:</th>
-        <td><%= @picture.exifdetails[:orientation].to_s %></td>
+        <td>
+          <%= @picture.exifdetails[:height] > @picture.exifdetails[:width] ? 'Portrait' : 'Landscape' %>
+          <% unless @picture.exifdetails[:orientation].is_a?(EXIFR::TIFF::Orientation) %>
+          (<%=
+          case @picture.exifdetails[:orientation].to_i
+            when 1
+              'top-left'
+            when 2
+              'top-right'
+            when 3
+              'bottom-right'
+            when 4
+              'bottom-left'
+            when 5
+              'left-top'
+            when 6
+              'right-top'
+            when 7
+              'right-bottom'
+            when 8
+              'left-bottom'
+          end
+          %>)
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th>Brightness value:</th>
+        <td><%= @picture.exifdetails[:brightness_value] %> EV</td>
+      </tr>
+      <tr>
+        <th>Exposure bias value:</th>
+        <td><%= @picture.exifdetails[:exposure_bias_value] %> EV</td>
+      </tr>
+      <tr>
+        <th>Max aperture:</th>
+        <td>f/<%= @picture.exifdetails[:max_aperture_value] %></td>
+      </tr>
+      <tr>
+        <th>Subject distance:</th>
+        <td><%= @picture.exifdetails[:subject_distance] %></td>
+      </tr>
+      <tr>
+        <th>Light source:</th>
+        <td><%= @picture.exifdetails[:light_source] %>
+          <%=
+          case @picture.exifdetails[:light_source].to_i
+            when 0
+              'Unknown'
+            when 1
+              'Daylight'
+            when 2
+              'Fluorescent'
+            when 3
+              'Tungsten (incandescent light)'
+            when 4
+              'Flash'
+            when 9
+              'Fine weather'
+            when 10
+              'Cloudy weather'
+            when 11
+              'Shade'
+            when 12
+              'Daylight fluorescent (D 5700 - 7100K)'
+            when 13
+              'Day white fluorescent (N 4600 - 5400K)'
+            when 14
+              'Cool white fluorescent (W 3900 - 4500K)'
+            when 15
+              'White fluorescent (WW 3200 - 3700K)'
+            when 17
+              'Standard light A'
+            when 18
+              'Standard light B'
+            when 19
+              'Standard light C'
+            when 20
+              'D55'
+            when 21
+              'D65'
+            when 22
+              'D75'
+            when 23
+              'D50'
+            when 24
+              'ISO studio tungsten'
+            when 255
+              'Other light source'
+          end
+          %>
+        </td>
+      </tr>
+      <tr>
+        <th>Flash energy:</th>
+        <td><%= @picture.exifdetails[:flash_energy] %> BCPS</td>
+      </tr>
+      <tr>
+        <th>Artist:</th>
+        <td><%= @picture.exifdetails[:artist] %></td>
+      </tr>
+      <tr>
+        <th>Copyright:</th>
+        <td><%= @picture.exifdetails[:copyright] %></td>
       </tr>
     </tbody>
   </table>
-  <%= @picture.exifdetails[:exif].inspect %>
 </div>
 
 <div id="picture-comments">

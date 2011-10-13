@@ -55,7 +55,7 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to(@picture, :flash => {:success => 'Picture was successfully created.'}) }
+        format.html { redirect_to(profile_picture_path(current_user.profile, @picture), :flash => {:success => 'Picture was successfully created.'}) }
         format.xml  { render :xml => @picture, :status => :created, :location => @picture }
       else
         @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
@@ -73,7 +73,7 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
-        format.html { redirect_to(@picture, :flash => {:success => 'Picture was successfully updated.'}) }
+        format.html { redirect_to(profile_picture_path(current_user.profile, @picture), :flash => {:success => 'Picture was successfully updated.'}) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

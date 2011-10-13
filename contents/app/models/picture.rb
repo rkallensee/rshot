@@ -14,7 +14,6 @@ class Picture < ActiveRecord::Base
     :convert_options => { :all => '-auto-orient' }
 
   # validation
-  validates :title, :presence => true, :length => { :minimum => 3 }
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 10.megabytes
 
@@ -72,11 +71,12 @@ class Picture < ActiveRecord::Base
           exifdata[:model] = imgexif.make + " " + imgexif.model
         end
 
-        #exifdata[:date_time] = imgexif.date_time_original
+        exifdata[:date_time_original] = imgexif.date_time_original
+        exifdata[:date_time_digitized] = imgexif.date_time_digitized
         exifdata[:date_time] = imgexif.date_time
         exifdata[:exposure_time] = imgexif.exposure_time.to_s
         exifdata[:focal_length] = imgexif.focal_length.to_i
-        exifdata[:focal_length] = imgexif.focal_length_in_35mm_film.to_i unless imgexif.focal_length_in_35mm_film.nil?
+        exifdata[:focal_length_in_35mm_film] = imgexif.focal_length_in_35mm_film.to_i
         exifdata[:aperture] = imgexif.f_number.to_f
         exifdata[:iso] = imgexif.iso_speed_ratings
         exifdata[:exposure_bias_value] = imgexif.exposure_bias_value.to_f
@@ -89,6 +89,14 @@ class Picture < ActiveRecord::Base
         exifdata[:exposure_mode] = imgexif.exposure_mode
         exifdata[:metering_mode] = imgexif.metering_mode
         exifdata[:orientation] = imgexif.orientation
+        exifdata[:artist] = imgexif.artist
+        exifdata[:copyright] = imgexif.copyright
+        exifdata[:brightness_value] = imgexif.brightness_value
+        exifdata[:exposure_bias_value] = imgexif.exposure_bias_value
+        exifdata[:max_aperture_value] = imgexif.max_aperture_value
+        exifdata[:subject_distance] = imgexif.subject_distance
+        exifdata[:light_source] = imgexif.light_source
+        exifdata[:flash_energy] = imgexif.flash_energy
 
         exifdata[:exif] = imgexif.exif # debug
     end

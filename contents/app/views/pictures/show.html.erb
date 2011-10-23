@@ -87,7 +87,7 @@
     </div>
 </div>
 
-<% if gps = @picture.gps %>
+<% unless @picture.metadata.gps_latitude.nil? %>
   <h3>Location of the image:</h3>
   <div id="mapdiv" style="width: 500px; height: 200px;"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
@@ -95,7 +95,7 @@
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
 
-    var lonLat = new OpenLayers.LonLat( <%= gps[1] %>, <%= gps[0] %> )
+    var lonLat = new OpenLayers.LonLat( <%= @picture.metadata.gps_longitude %>, <%= @picture.metadata.gps_latitude %> )
           .transform(
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection

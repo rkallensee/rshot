@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009145934) do
+ActiveRecord::Schema.define(:version => 20111023191353) do
 
   create_table "albums", :force => true do |t|
     t.string   "title"
@@ -32,6 +32,49 @@ ActiveRecord::Schema.define(:version => 20111009145934) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "picture_metadata", :force => true do |t|
+    t.integer  "picture_id"
+    t.string   "make"
+    t.string   "model"
+    t.string   "lens"
+    t.datetime "date_time"
+    t.datetime "date_time_original"
+    t.datetime "date_time_digitized"
+    t.string   "exposure_time"
+    t.float    "focal_length"
+    t.float    "focal_length_in_35mm_film"
+    t.float    "aperture"
+    t.integer  "iso"
+    t.float    "exposure_bias_value"
+    t.integer  "white_balance"
+    t.integer  "exposure_program"
+    t.integer  "flash"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "software"
+    t.integer  "exposure_mode"
+    t.integer  "metering_mode"
+    t.integer  "orientation"
+    t.string   "artist"
+    t.string   "copyright"
+    t.string   "description"
+    t.text     "user_comment"
+    t.string   "brightness_value"
+    t.float    "max_aperture_value"
+    t.string   "subject_distance"
+    t.integer  "light_source"
+    t.float    "flash_energy"
+    t.float    "gps_latitude"
+    t.float    "gps_longitude"
+    t.float    "gps_altitude"
+    t.float    "gps_direction"
+    t.text     "exifraw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "picture_metadata", ["picture_id"], :name => "index_picture_metadata_on_picture_id"
 
   create_table "pictures", :force => true do |t|
     t.string   "title"
@@ -58,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20111009145934) do
     t.integer  "avatar_file_size"
     t.integer  "user_id"
   end
+
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

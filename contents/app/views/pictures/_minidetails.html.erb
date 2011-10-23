@@ -2,11 +2,11 @@
 
 <dl>
     <dt>This picture was taken with a</dt>
-    <dd><%= picture.exifdetails[:model] %></dd>
+    <dd><%= picture.metadata.model %></dd>
 
     <dt>This picture was taken on</dt>
-    <dd><%= picture.exifdetails[:date_time] %></dd>
+    <dd><%= picture.metadata.date_time %></dd>
 </dl>
 
-<p>Exposure time was <%= picture.exifdetails[:exposure_time] %>s, focal length <%= picture.exifdetails[:focal_length] %>mm,
-aperture f/<%= picture.exifdetails[:aperture] %>, ISO <%= picture.exifdetails[:iso] %>.</p>
+<p>Exposure time was <%= picture.metadata.exposure_time %>s, focal length <%= picture.metadata.focal_length %>mm,
+aperture f/<%= picture.metadata.aperture %>, ISO <%= picture.metadata.iso %>.</p>

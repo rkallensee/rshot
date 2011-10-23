@@ -1,6 +1,7 @@
 class Picture < ActiveRecord::Base
   belongs_to :album
   belongs_to :profile
+  has_one :picture_metadata
 
   acts_as_taggable_on :tags
   acts_as_commentable
@@ -12,6 +13,7 @@ class Picture < ActiveRecord::Base
       :small   => ["250x250>", :jpg],
       :medium  => ["640x640>", :jpg] },
     :convert_options => { :all => '-auto-orient' }
+  before_photo_post_process :extract_and_save_metadata!
 
   # validation
   validates_attachment_presence :photo
@@ -36,71 +38,82 @@ class Picture < ActiveRecord::Base
     rand_record = self.first(:offset => offset)
   end
 
-  def gps
-    begin
-      imgexif = EXIFR::JPEG.new(photo.path)
-    rescue EXIFR::MalformedJPEG
-      return nil
+  def metadata
+    if picture_metadata.nil?
+      build_picture_metadata
     end
-    #imgexif.gps if imgexif.gps?
-    #[imgexif.gps_latitude, imgexif.gps_longitude]
-
-    # https://github.com/picuous/exifr/blob/master/lib/jpeg.rb
-    if imgexif.nil? or !imgexif.exif? or imgexif.gps_latitude.nil? or imgexif.gps_latitude.length < 2 or imgexif.gps_longitude.nil? or imgexif.gps_longitude.length < 2
-      nil
-    else
-      lat = imgexif.gps_latitude[0].to_f+imgexif.gps_latitude[1].to_f/60+imgexif.gps_latitude[2].to_f/3600
-      lon = imgexif.gps_longitude[0].to_f+imgexif.gps_longitude[1].to_f/60+imgexif.gps_longitude[2].to_f/3600
-      [lat, lon]
-    end
+    picture_metadata
   end
 
-  def exifdetails
-    exifdata = {}
-
-    begin
-      imgexif = EXIFR::JPEG.new(photo.path)
-    rescue EXIFR::MalformedJPEG
-      return exifdata
+  def extract_and_save_metadata!
+    if picture_metadata.nil?
+      build_picture_metadata
     end
 
-    if imgexif.exif?
-        if imgexif.model.include? imgexif.make
-          exifdata[:model] = imgexif.model
+    begin
+      unless photo.queued_for_write[:original].nil?
+        # if called by "before_photo_post_process" event
+        exifdata = EXIFR::JPEG.new(photo.queued_for_write[:original])
+      else
+        # if called manually, e.g. by migration
+        exifdata = EXIFR::JPEG.new(photo.path)
+      end
+    rescue EXIFR::MalformedJPEG
+      return false
+    end
+
+    if exifdata.exif?
+      picture_metadata.make = exifdata.make unless exifdata.make.nil?
+
+      unless exifdata.model.nil? && exifdata.make.nil?
+        if exifdata.model.include? exifdata.make
+          picture_metadata.model = exifdata.model
         else
-          exifdata[:model] = imgexif.make + " " + imgexif.model
+          picture_metadata.model = exifdata.make + " " + exifdata.model
         end
+      end
 
-        exifdata[:date_time_original] = imgexif.date_time_original
-        exifdata[:date_time_digitized] = imgexif.date_time_digitized
-        exifdata[:date_time] = imgexif.date_time
-        exifdata[:exposure_time] = imgexif.exposure_time.to_s
-        exifdata[:focal_length] = imgexif.focal_length.to_i
-        exifdata[:focal_length_in_35mm_film] = imgexif.focal_length_in_35mm_film.to_i
-        exifdata[:aperture] = imgexif.f_number.to_f
-        exifdata[:iso] = imgexif.iso_speed_ratings
-        exifdata[:exposure_bias_value] = imgexif.exposure_bias_value.to_f
-        exifdata[:white_balance] = imgexif.white_balance
-        exifdata[:exposure_program] = imgexif.exposure_program
-        exifdata[:flash] = imgexif.flash
-        exifdata[:width] = imgexif.width
-        exifdata[:height] = imgexif.height
-        exifdata[:software] = imgexif.software
-        exifdata[:exposure_mode] = imgexif.exposure_mode
-        exifdata[:metering_mode] = imgexif.metering_mode
-        exifdata[:orientation] = imgexif.orientation
-        exifdata[:artist] = imgexif.artist
-        exifdata[:copyright] = imgexif.copyright
-        exifdata[:brightness_value] = imgexif.brightness_value
-        exifdata[:exposure_bias_value] = imgexif.exposure_bias_value
-        exifdata[:max_aperture_value] = imgexif.max_aperture_value
-        exifdata[:subject_distance] = imgexif.subject_distance
-        exifdata[:light_source] = imgexif.light_source
-        exifdata[:flash_energy] = imgexif.flash_energy
+      # assign metadata to model if present
+      #picture_metadata.lens = exifdata.lens unless exifdata.lens.nil? # TODO - tag currently not supported by EXIFR
+      picture_metadata.date_time = exifdata.date_time unless exifdata.date_time.nil?
+      picture_metadata.date_time_original = exifdata.date_time_original unless exifdata.date_time_original.nil?
+      picture_metadata.date_time_digitized = exifdata.date_time_digitized unless exifdata.date_time_digitized.nil?
+      picture_metadata.exposure_time = exifdata.exposure_time.to_s unless exifdata.exposure_time.nil?
+      picture_metadata.focal_length = exifdata.focal_length.to_f unless exifdata.focal_length.nil?
+      picture_metadata.focal_length_in_35mm_film = exifdata.focal_length_in_35mm_film.to_f unless exifdata.focal_length_in_35mm_film.nil?
+      picture_metadata.aperture = exifdata.f_number.to_f unless exifdata.f_number.nil?
+      picture_metadata.iso = exifdata.iso_speed_ratings.to_i unless exifdata.iso_speed_ratings.nil?
+      picture_metadata.exposure_bias_value = exifdata.exposure_bias_value.to_f unless exifdata.exposure_bias_value.nil?
+      picture_metadata.white_balance = exifdata.white_balance.to_i unless exifdata.white_balance.nil?
+      picture_metadata.exposure_program = exifdata.exposure_program.to_i unless exifdata.exposure_program.nil?
+      picture_metadata.flash = exifdata.flash.to_i unless exifdata.flash.nil?
+      picture_metadata.width = exifdata.width.to_i unless exifdata.width.nil?
+      picture_metadata.height = exifdata.height.to_i unless exifdata.height.nil?
+      picture_metadata.software = exifdata.software.to_s unless exifdata.software.nil?
+      picture_metadata.exposure_mode = exifdata.exposure_mode.to_i unless exifdata.exposure_mode.nil?
+      picture_metadata.metering_mode = exifdata.metering_mode.to_i unless exifdata.metering_mode.nil?
+      picture_metadata.orientation = exifdata.orientation.to_i unless exifdata.orientation.nil?
+      picture_metadata.artist = exifdata.artist.to_s unless exifdata.artist.nil?
+      picture_metadata.copyright = exifdata.copyright.to_s unless exifdata.copyright.nil?
+      picture_metadata.description = exifdata.image_description.to_s unless exifdata.image_description.nil?
+      picture_metadata.user_comment = exifdata.user_comment.to_s unless exifdata.user_comment.nil?
+      picture_metadata.brightness_value = exifdata.brightness_value.to_s unless exifdata.brightness_value.nil?
+      picture_metadata.exposure_bias_value = exifdata.exposure_bias_value.to_s unless exifdata.exposure_bias_value.nil?
+      picture_metadata.max_aperture_value = exifdata.max_aperture_value.to_f unless exifdata.max_aperture_value.nil?
+      picture_metadata.subject_distance = exifdata.subject_distance.to_s unless exifdata.subject_distance.nil?
+      picture_metadata.light_source = exifdata.light_source.to_i unless exifdata.light_source.nil?
+      picture_metadata.flash_energy = exifdata.flash_energy.to_f unless exifdata.flash_energy.nil?
 
-        exifdata[:exif] = imgexif.exif # debug
+      picture_metadata.gps_latitude = exifdata.gps.latitude unless exifdata.gps.nil?
+      picture_metadata.gps_longitude = exifdata.gps.longitude unless exifdata.gps.nil?
+      picture_metadata.gps_altitude = exifdata.gps.altitude unless exifdata.gps.nil?
+      picture_metadata.gps_direction = exifdata.gps.image_direction unless exifdata.gps.nil?
+
+      #picture_metadata.exifraw = exifdata.exif unless exifdata.exif.nil? # TODO - store plain serialized EXIF data
+
+      picture_metadata.save
+      return true
     end
-
-    exifdata
   end
+
 end

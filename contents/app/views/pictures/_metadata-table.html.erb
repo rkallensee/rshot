@@ -3,56 +3,58 @@
 <tbody>
   <tr>
     <th>Camera:</th>
-    <td><%= picture.exifdetails[:model] %></td>
+    <td><%= picture.metadata.model %></td>
   </tr>
   <tr>
     <th>Taken on (original):</th>
-    <td><%= picture.exifdetails[:date_time_original] %></td>
+    <td><%= picture.metadata.date_time_original %></td>
   </tr>
   <tr>
     <th>Digitized:</th>
-    <td><%= picture.exifdetails[:date_time_digitized] %></td>
+    <td><%= picture.metadata.date_time_digitized %></td>
   </tr>
   <tr>
     <th>Exposure time:</th>
     <td>
-      <% if picture.exifdetails[:exposure_time].is_a?(String) %>
-        <%= (Rational(*(picture.exifdetails[:exposure_time].split('/').map( &:to_i )))*45).to_f.round(3) %> s
-        (<%= picture.exifdetails[:exposure_time] %>)
+      <% if picture.metadata.exposure_time.is_a?(String) %>
+        <%= (Rational(*(picture.metadata.exposure_time.split('/').map( &:to_i )))*45).to_f.round(3) %> s
+        (<%= picture.metadata.exposure_time %>)
       <% end %>
     </td>
   </tr>
   <tr>
     <th>Focal length:</th>
     <td>
-      <%= picture.exifdetails[:focal_length] %> mm
-      <% unless picture.exifdetails[:focal_length_in_35mm_film] == 0 %>
-        (<%= picture.exifdetails[:focal_length_in_35mm_film] %> mm in 35mm film)
+      <% unless picture.metadata.focal_length.nil? %>
+        <%= picture.metadata.focal_length.round %> mm
+        <% unless picture.metadata.focal_length_in_35mm_film.nil? %>
+          (<%= picture.metadata.focal_length_in_35mm_film %> mm in 35mm film)
+        <% end %>
       <% end %>
     </td>
   </tr>
   <tr>
     <th>Aperture:</th>
-    <td>f/<%= picture.exifdetails[:aperture] %></td>
+    <td>f/<%= picture.metadata.aperture %></td>
   </tr>
   <tr>
     <th>ISO:</th>
-    <td><%= picture.exifdetails[:iso] %></td>
+    <td><%= picture.metadata.iso %></td>
   </tr>
   <tr>
     <th>Exposure bias value:</th>
     <td>
-      <% if picture.exifdetails[:exposure_bias_value].is_a?(Rational) %>
-        <%= picture.exifdetails[:exposure_bias_value].to_f.round(3) %> EV
+      <% unless picture.metadata.exposure_bias_value.nil? %>
+        <%= picture.metadata.exposure_bias_value.round(3) %> EV
       <% end %>
     </td>
   </tr>
   <tr>
     <th>White balance:</th>
     <td>
-      <% if picture.exifdetails[:white_balance] == 0 %>
+      <% if picture.metadata.white_balance == 0 %>
         Auto white balance
-      <% elsif picture.exifdetails[:white_balance] == 2 %>
+      <% elsif picture.metadata.white_balance == 2 %>
         Manual white balance
       <% end %>
     </td>
@@ -61,7 +63,7 @@
     <th>Exposure program:</th>
     <td>
       <%=
-      case picture.exifdetails[:exposure_program]
+      case picture.metadata.exposure_program
         when 0
           'Not defined'
         when 1
@@ -86,13 +88,13 @@
   </tr>
   <tr>
     <th>Original dimensions:</th>
-    <td><%= picture.exifdetails[:width] %>x<%= picture.exifdetails[:height] %></td>
+    <td><%= picture.metadata.width %>x<%= picture.metadata.height %></td>
   </tr>
   <tr>
     <th>Flash:</th>
     <td>
       <%=
-      case picture.exifdetails[:flash]
+      case picture.metadata.flash
         when 0
             'Flash did not fire'
         when 1
@@ -143,16 +145,16 @@
   </tr>
   <tr>
     <th>Software:</th>
-    <td><%= picture.exifdetails[:software] %></td>
+    <td><%= picture.metadata.software %></td>
   </tr>
   <tr>
     <th>Exposure mode:</th>
     <td>
-      <% if picture.exifdetails[:exposure_mode] == 0 %>
+      <% if picture.metadata.exposure_mode == 0 %>
         Auto exposure
-      <% elsif picture.exifdetails[:exposure_mode] == 1 %>
+      <% elsif picture.metadata.exposure_mode == 1 %>
         Manual exposure
-      <% elsif picture.exifdetails[:exposure_mode] == 2 %>
+      <% elsif picture.metadata.exposure_mode == 2 %>
         Auto bracket
       <% end %>
     </td>
@@ -161,7 +163,7 @@
     <th>Metering mode:</th>
     <td>
       <%=
-      case picture.exifdetails[:metering_mode]
+      case picture.metadata.metering_mode
         when 0
             'Unknown'
         when 1
@@ -185,52 +187,54 @@
   <tr>
     <th>Orientation:</th>
     <td>
-      <%= picture.exifdetails[:height] > picture.exifdetails[:width] ? 'Portrait' : 'Landscape' %>
-      <% unless picture.exifdetails[:orientation].is_a?(EXIFR::TIFF::Orientation) %>
-      (<%=
-      case picture.exifdetails[:orientation].to_i
-        when 1
-          'top-left'
-        when 2
-          'top-right'
-        when 3
-          'bottom-right'
-        when 4
-          'bottom-left'
-        when 5
-          'left-top'
-        when 6
-          'right-top'
-        when 7
-          'right-bottom'
-        when 8
-          'left-bottom'
-      end
-      %>)
+      <% unless picture.metadata.height.nil? || picture.metadata.width.nil? %>
+        <%= picture.metadata.height > picture.metadata.width ? 'Portrait' : 'Landscape' %>
+        <% unless picture.metadata.orientation.nil? %>
+          (<%=
+          case picture.metadata.orientation
+            when 1
+              'top-left'
+            when 2
+              'top-right'
+            when 3
+              'bottom-right'
+            when 4
+              'bottom-left'
+            when 5
+              'left-top'
+            when 6
+              'right-top'
+            when 7
+              'right-bottom'
+            when 8
+              'left-bottom'
+          end
+          %>)
+        <% end %>
       <% end %>
     </td>
   </tr>
   <tr>
     <th>Brightness value:</th>
-    <td><%= picture.exifdetails[:brightness_value] %> EV</td>
+    <td><%= picture.metadata.brightness_value %> EV</td>
   </tr>
   <tr>
     <th>Exposure bias value:</th>
-    <td><%= picture.exifdetails[:exposure_bias_value] %> EV</td>
+    <td><%= picture.metadata.exposure_bias_value %> EV</td>
   </tr>
   <tr>
     <th>Max aperture:</th>
-    <td>f/<%= picture.exifdetails[:max_aperture_value] %></td>
+    <td>f/<%= picture.metadata.max_aperture_value %></td>
   </tr>
   <tr>
     <th>Subject distance:</th>
-    <td><%= picture.exifdetails[:subject_distance] %></td>
+    <td><%= picture.metadata.subject_distance %></td>
   </tr>
   <tr>
     <th>Light source:</th>
-    <td><%= picture.exifdetails[:light_source] %>
+    <td><%= picture.metadata.light_source %>
       <%=
-      case picture.exifdetails[:light_source].to_i
+      case picture.metadata.light_source
         when 0
           'Unknown'
         when 1
@@ -279,15 +283,39 @@
   </tr>
   <tr>
     <th>Flash energy:</th>
-    <td><%= picture.exifdetails[:flash_energy] %> BCPS</td>
+    <td><%= picture.metadata.flash_energy %></td>
+  </tr>
+  <tr>
+    <th>GPS Latitude:</th>
+    <td><%= picture.metadata.gps_latitude %></td>
+  </tr>
+  <tr>
+    <th>GPS Longitude:</th>
+    <td><%= picture.metadata.gps_longitude %></td>
+  </tr>
+  <tr>
+    <th>GPS Altitude:</th>
+    <td><%= picture.metadata.gps_altitude %></td>
+  </tr>
+  <tr>
+    <th>GPS Direction:</th>
+    <td><%= picture.metadata.gps_direction %></td>
   </tr>
   <tr>
     <th>Artist:</th>
-    <td><%= picture.exifdetails[:artist] %></td>
+    <td><%= picture.metadata.artist %></td>
   </tr>
   <tr>
     <th>Copyright:</th>
-    <td><%= picture.exifdetails[:copyright] %></td>
+    <td><%= picture.metadata.copyright %></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td><%= picture.metadata.description %></td>
+  </tr>
+  <tr>
+    <th>User comment / keywords:</th>
+    <td><%= picture.metadata.user_comment %></td>
   </tr>
 </tbody>
 </table>

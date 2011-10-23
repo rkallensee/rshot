@@ -144,6 +144,10 @@ header img.profile-image {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
+#main .picture-details-tabs {
+    overflow: hidden;
+}
+
 .mediumview-picture,
 .mediumview-album {
     width: 320px;

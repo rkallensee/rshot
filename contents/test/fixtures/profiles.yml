@@ -1,17 +1,27 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  nick: MyString
-  forename: MyString
-  surname: MyString
-  bio: MyString
-  location: MyString
-  website: MyString
+  id: 1
+  nick: raphael
+  forename: Raphael
+  surname: Kallensee
+  bio: Web application developer
+  location: Mannheim, Germany
+  website: http://raphael.kallensee.name
+  avatar_file_name:
+  avatar_content_type:
+  avatar_file_size:
+  user_id: 1
 
 two:
-  nick: MyString
-  forename: MyString
-  surname: MyString
-  bio: MyString
-  location: MyString
-  website: MyString
+  id: 2
+  nick: jdoe
+  forename: John
+  surname: Doe
+  bio: Doing all kinds of stuff.
+  location: San Francisco, CA
+  website: http://www.example.com
+  avatar_file_name:
+  avatar_content_type:
+  avatar_file_size:
+  user_id: 2

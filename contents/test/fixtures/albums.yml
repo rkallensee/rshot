@@ -1,7 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
+  id: 1
+  title: My first test album
+  profile_id: 1
 
 two:
-  title: MyString
+  id: 2
+  title: Bahama with mama
+  profile_id: 2
+
+two:
+  id: 3
+  title: Plants
+  profile_id: 1

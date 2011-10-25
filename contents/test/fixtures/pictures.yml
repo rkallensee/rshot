@@ -1,7 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  title: MyString
+  title: My first pic
+  photo_file_name:
+  photo_content_type:
+  photo_file_size:
+  album_id: 1
+  profile_id: 1
 
 two:
-  title: MyString
+  title: Plumeria
+  photo_file_name:
+  photo_content_type:
+  photo_file_size:
+  album_id: 3
+  profile_id: 1

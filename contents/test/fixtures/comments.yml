@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  title:
+  comment: That's actually pretty awesome!
+  commentable_id: 1
+  commentable_type: Picture
+  user_id: 1
+
+two:
+  id: 2
+  title:
+  comment: Wow!
+  commentable_id: 1
+  commentable_type: Picture
+  user_id: 2
+
+three:
+  id: 3
+  title:
+  comment: Great!
+  commentable_id: 2
+  commentable_type: Picture
+  user_id: 1

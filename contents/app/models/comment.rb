@@ -12,6 +12,7 @@ class Comment < ActiveRecord::Base
   # want user to vote on the quality of comments.
   #acts_as_voteable
 
-  # NOTE: Comments belong to a user
+  # NOTE: Comments belong to a profile
   belongs_to :user
+  belongs_to :profile
 end

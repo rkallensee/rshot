@@ -97,7 +97,7 @@ class PicturesController < ApplicationController
   def create_comment
     @picture = Picture.find(params[:id])
     @comment = @picture.comments.new(params[:comment])
-    @comment.user_id = current_user.id
+    @comment.profile_id = current_user.profile.id
 
     respond_to do |format|
       if @comment.save

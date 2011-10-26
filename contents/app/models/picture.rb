@@ -12,12 +12,19 @@ class Picture < ActiveRecord::Base
       :thumb   => ["75x75#", :jpg],
       :small   => ["250x250>", :jpg],
       :medium  => ["640x640>", :jpg] },
-    :convert_options => { :all => '-auto-orient' }
+    :convert_options => { :all => '-auto-orient' } #,
+    ## the following helps to obfuscate the URL. It'll change on every update of the model.
+    ##:path => ":rails_root/public/system/:attachment/:id/:style/:basename.:extension",
+    ##:url => "/system/:hash.:extension",
+    #:url => "/system/:attachment/:id/:style/:filename",
+    #:hash_secret => "tkb#H_oi?I+0-&RP;_Kd9/OF",
+    #:hash_data => ":class/:attachment/:id/:style/:updated_at"
   before_photo_post_process :extract_and_save_metadata!
 
   # validation
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 10.megabytes
+  validates_presence_of :profile_id
 
   # scopes
   scope :same_album, lambda { |att| where("album_id = ?", att) }

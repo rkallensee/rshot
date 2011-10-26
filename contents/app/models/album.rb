@@ -3,4 +3,5 @@ class Album < ActiveRecord::Base
   belongs_to :profile
 
   validates :title, :presence => true, :length => { :minimum => 3 }
+  validates_presence_of :profile_id
 end

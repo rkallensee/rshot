@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProfilesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @profile = profiles(:one)
   end

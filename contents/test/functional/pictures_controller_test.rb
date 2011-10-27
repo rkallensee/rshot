@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PicturesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @picture = pictures(:one)
   end

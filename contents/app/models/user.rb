@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   after_create :create_empty_profile
 
   def create_empty_profile
-    Profile.create(:user_id => self.id)
+    profile = Profile.create(:user_id => self.id)
+    profile.save({:validate => false})
   end
 end

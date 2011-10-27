@@ -14,6 +14,7 @@ class Profile < ActiveRecord::Base
 
   # validators
   validates :nick, :presence => true, :length => { :minimum => 3 }
+  validates_presence_of :user_id
 
   def to_param
     nick

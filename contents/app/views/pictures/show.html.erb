@@ -51,7 +51,7 @@
           <h3>Comments:</h3>
           <% @comments.each do |comment| %>
             <blockquote>
-              <%= link_to image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image'), comment.profile, {:rel => 'popover', :title => "#{comment.profile.forename} #{comment.profile.surname}", 'data-content' => "<b>#{pluralize(comment.profile.pictures.count, 'picture')}</b> yet"} %>
+              <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
               <p><%= comment.comment %></p>
               <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="twipsy"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
             </blockquote>
@@ -79,6 +79,8 @@
               <%= f.text_area :comment, :cols => 20, :rows => 2 %>
               <div><%= f.submit(:class => "btn primary") %></div>
             <% end %>
+          <% else %>
+            <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
           <% end %>
       </div>
       <div id="picture-metadata">

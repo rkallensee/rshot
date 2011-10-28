@@ -166,6 +166,23 @@ img.profile-image,
     float: left;
 }
 
+.profile-popover-content img.profile-popover-avatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.profile-popover-content:before,
+.profile-popover-content:after {
+  display: table;
+  content: "";
+  zoom: 1;
+  *display: inline;
+}
+
+.profile-popover-content:after {
+    clear: both;
+}
+
 aside {
     width: 300px;
     float: right;

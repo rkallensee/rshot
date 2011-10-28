@@ -1,0 +1,1 @@
+<%= link_to popover_element, profile, {:rel => 'popover', :title => "#{profile.forename} #{profile.surname}", 'data-content' => "<div class=\"profile-popover-content\">#{image_tag(profile.avatar.url(:medium), {:class => 'profile-popover-avatar'})} <b>#{pluralize(profile.pictures.count, 'picture')}, #{pluralize(profile.albums.count, 'album')}</b><br><b>Bio:</b> #{profile.bio}"} %>

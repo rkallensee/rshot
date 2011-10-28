@@ -1,5 +1,5 @@
 <b>From:</b>
-<%= link_to image_tag(profile.avatar.url(:tiny), :class => 'profile-image'), profile, {:rel => 'popover', :title => "#{profile.forename} #{profile.surname}", 'data-content' => "<b>#{pluralize(profile.pictures.count, 'picture')}</b> yet"} %>
+<%= render :partial => "profiles/popover", :locals => { :profile => profile, :popover_element => image_tag(profile.avatar.url(:tiny), :class => 'profile-image') } %>
 <%= link_to profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'twipsy'} %>
 <ul>
     <li><%= link_to "Photostream", profile_pictures_path(profile) %></li>

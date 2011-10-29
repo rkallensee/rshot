@@ -28,6 +28,7 @@ class ProfilesControllerTest < ActionController::TestCase
   test "should show profile" do
     get :show, :id => @profile.to_param
     assert_response :success
+    assert_not_nil assigns(:profile)
   end
 
   test "should get edit" do
@@ -39,6 +40,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
     get :edit, :id => @profile.to_param
     assert_response :success
+    assert_not_nil assigns(:profile)
   end
 
   test "should update profile" do

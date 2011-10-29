@@ -3,7 +3,9 @@
   <% unless picture.title.empty? %>
     <h3><%= link_to picture.title, profile_picture_path(picture.profile, picture) %></h3>
   <% end %>
-  <span class="label notice">
-    <%= pluralize(picture.comments.count, 'comment') %>
-  </span>
+  <div>
+    <span class="label notice">
+      <%= pluralize(picture.comments.count, 'comment') %>
+    </span>
+  </div>
 </div>

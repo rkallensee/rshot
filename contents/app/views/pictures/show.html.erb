@@ -19,7 +19,7 @@
 </p>
 
 <p>
-  <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url %>
+  <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
 </p>
 
 <% unless @picture.title.empty? %>

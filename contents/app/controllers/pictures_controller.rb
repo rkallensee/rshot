@@ -76,6 +76,7 @@ class PicturesController < ApplicationController
         format.html { redirect_to(profile_picture_path(current_user.profile, @picture), :flash => {:success => 'Picture was successfully updated.'}) }
         format.xml  { head :ok }
       else
+        @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
         format.html { render :action => "edit" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
       end
@@ -89,11 +90,12 @@ class PicturesController < ApplicationController
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pictures_url) }
+      format.html { redirect_to(profile_pictures_url(current_user.profile)) }
       format.xml  { head :ok }
     end
   end
 
+  # POST /pictures/1/create_comment
   def create_comment
     @picture = Picture.find(params[:id])
     @comment = @picture.comments.new(params[:comment])

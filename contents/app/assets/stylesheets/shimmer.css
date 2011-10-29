@@ -7,6 +7,15 @@ body {
     background: -moz-radial-gradient(#FFFFFF, #F9F9F9) repeat scroll 0 0 transparent;
 }
 
+body,
+label,
+input,
+select,
+textarea,
+.topbar input {
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 header {
     background-color: #D0D0D0;
     box-shadow: 0 5px 5px 1px #AAAAAA;

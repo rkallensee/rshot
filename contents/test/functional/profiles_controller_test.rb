@@ -8,22 +8,21 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:profiles)
+    assert_raise(ActionController::RoutingError) {
+      get :index
+    }
   end
 
   test "should get new" do
-    get :new
-    assert_response :success
+    assert_raise(ActionController::RoutingError) {
+      get :new
+    }
   end
 
   test "should create profile" do
-    assert_difference('Profile.count') do
+    assert_raise(ActionController::RoutingError) {
       post :create, :profile => @profile.attributes
-    end
-
-    assert_redirected_to profile_path(assigns(:profile))
+    }
   end
 
   test "should show profile" do
@@ -33,19 +32,29 @@ class ProfilesControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @profile.to_param
+    assert_response 302
+    assert_redirected_to new_user_session_path
+
+    sign_in :user, users(:one)
+
+    get :edit, :id => @profile.to_param
     assert_response :success
   end
 
   test "should update profile" do
     put :update, :id => @profile.to_param, :profile => @profile.attributes
+    assert_response 302
+    assert_redirected_to new_user_session_path
+
+    sign_in :user, users(:one)
+
+    put :update, :id => @profile.to_param, :profile => @profile.attributes
     assert_redirected_to profile_path(assigns(:profile))
   end
 
   test "should destroy profile" do
-    assert_difference('Profile.count', -1) do
+    assert_raise(ActionController::RoutingError) {
       delete :destroy, :id => @profile.to_param
-    end
-
-    assert_redirected_to profiles_path
+    }
   end
 end

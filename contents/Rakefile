@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Openshot::Application.load_tasks
+Rshot::Application.load_tasks

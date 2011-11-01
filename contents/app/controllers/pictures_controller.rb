@@ -1,3 +1,21 @@
+# encoding: utf-8
+#
+# rshot (http://rshot.net) - a social digital photo gallery.
+# (c) 2011 Raphael Kallensee
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 class PicturesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   before_filter :determine_scope
@@ -5,7 +23,7 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.xml
   def index
-    @pictures = @scope.order('created_at DESC').page(params[:page]).per(10)
+    @pictures = @picture_scope.order('created_at DESC').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +34,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1
   # GET /pictures/1.xml
   def show
-    @picture = Picture.find(params[:id])
+    @picture = @picture_scope.find(params[:id])
 
     set_prev_next_picture_data
     set_picture_comments_data
@@ -41,7 +59,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1/edit
   def edit
-    @picture = Picture.find(params[:id])
+    @picture = @picture_scope.find(params[:id])
     @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
   end
 
@@ -66,7 +84,7 @@ class PicturesController < ApplicationController
   # PUT /pictures/1
   # PUT /pictures/1.xml
   def update
-    @picture = Picture.find(params[:id])
+    @picture = @picture_scope.find(params[:id])
     @picture.profile_id = current_user.profile.id
 
     respond_to do |format|
@@ -84,7 +102,7 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1
   # DELETE /pictures/1.xml
   def destroy
-    @picture = Picture.find(params[:id])
+    @picture = @picture_scope.find(params[:id])
     @picture.destroy
 
     respond_to do |format|
@@ -95,7 +113,7 @@ class PicturesController < ApplicationController
 
   # POST /pictures/1/create_comment
   def create_comment
-    @picture = Picture.find(params[:id])
+    @picture = @picture_scope.find(params[:id])
     @comment = @picture.comments.new(params[:comment])
     @comment.profile_id = current_user.profile.id
 
@@ -117,23 +135,23 @@ class PicturesController < ApplicationController
 
     # get scope - since picture resource is also nested in album resource
     def determine_scope
-      @scope = Picture.scoped
+      @picture_scope = Picture.scoped
       @viewscope = 'all'
 
       if params[:album_id]
         @viewscope = 'album'
-        @scope = @scope.by_album(params[:album_id])
+        @picture_scope = @picture_scope.by_album(params[:album_id])
       elsif params[:profile_id]
         @viewscope = 'profile'
         @profile = Profile.find_by_nick(params[:profile_id])
-        @scope = @scope.by_profile(@profile)
+        @picture_scope = @picture_scope.by_profile(@profile)
       end
     end
 
     # set links to previous and next image as instance variables
     def set_prev_next_picture_data
-      @prev_picture = @scope.previous(@picture.id).first
-      @next_picture = @scope.next(@picture.id).first
+      @prev_picture = @picture_scope.previous(@picture.id).first
+      @next_picture = @picture_scope.next(@picture.id).first
 
       if params[:album_id]
         @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @prev_picture) unless @prev_picture.nil?
@@ -163,9 +181,9 @@ class PicturesController < ApplicationController
     # get redirect path to picture (used after editing and comment creation)
     def scoped_picture_url
       if params[:album_id]
-        profile_album_picture_url(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), Picture.find(params[:id]))
+        profile_album_picture_url(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @picture_scope.find(params[:id]))
       elsif params[:profile_id]
-        profile_picture_url(Profile.find_by_nick(params[:profile_id]), Picture.find(params[:id]))
+        profile_picture_url(Profile.find_by_nick(params[:profile_id]), @picture_scope.find(params[:id]))
       end
     end
 end

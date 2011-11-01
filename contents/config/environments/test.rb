@@ -1,4 +1,4 @@
-Openshot::Application.configure do
+Rshot::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's
@@ -24,7 +24,7 @@ Openshot::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  
+
   # Set host for action mailer (a Devise requirement)
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 

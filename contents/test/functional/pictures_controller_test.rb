@@ -56,7 +56,7 @@ class PicturesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update picture" do
+  test "should not update picture" do
     put :update, {:id => @picture.to_param, :picture => {:photo => fixture_file_upload('sample_photo.jpg', 'image/jpeg')}, :profile_id => profiles(:one).nick}
     assert_response 302
     assert_redirected_to new_user_session_path
@@ -65,10 +65,15 @@ class PicturesControllerTest < ActionController::TestCase
 
     put :update, {:id => @picture.to_param, :picture => @picture.attributes, :profile_id => profiles(:one).nick}
     assert_response 200 # picture wasn't updated b/c there's no image in the fixture / put request
+    assert !assigns(:picture).valid?
+  end
+
+  test "should update picture" do
+    sign_in :user, users(:one)
 
     put :update, {:id => @picture.to_param, :picture => {:photo => fixture_file_upload('sample_photo.jpg', 'image/jpeg')}, :profile_id => profiles(:one).nick}
     assert_response 302
-    assert_redirected_to profile_picture_path(profiles(:one), assigns(:picture))
+    assert_redirected_to profile_picture_path(profiles(:one), @picture)
   end
 
   test "should destroy picture" do

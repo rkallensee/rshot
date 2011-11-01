@@ -19,15 +19,7 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
 
     set_prev_next_picture_data
-
-    @comments = @picture.comments.recent.all
-    @comment = @picture.comments.new
-
-    if @viewscope == 'album'
-      @create_comment_url = create_comment_profile_album_picture_path(@picture.profile, @picture.album, @picture)
-    else
-      @create_comment_url = create_comment_profile_picture_path(@picture.profile, @picture)
-    end
+    set_picture_comments_data
 
     respond_to do |format|
       format.html # show.html.erb
@@ -112,9 +104,8 @@ class PicturesController < ApplicationController
         format.html { redirect_to(scoped_picture_url, :flash => {:success => 'Comment was successfully created.'}) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        set_prev_next_links
-        @comments = @picture.comments.recent.all
-        # todo: DRY! three lines on top!
+        set_prev_next_picture_data
+        set_picture_comments_data
         flash[:error] = 'Please actually type in a comment!'
         format.html { render :action => "show" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
@@ -152,6 +143,20 @@ class PicturesController < ApplicationController
         @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @prev_picture) unless @prev_picture.nil?
         @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @next_picture) unless @next_picture.nil?
         @back_link = profile_pictures_path(Profile.find_by_nick(params[:profile_id]))
+      end
+    end
+
+    # set instance variables for comments of current picture
+    def set_picture_comments_data
+      unless @picture.nil?
+        @comments = @picture.comments.recent.all
+        @comment = @picture.comments.new if @comment.nil?
+
+        if @viewscope == 'album'
+          @create_comment_url = create_comment_profile_album_picture_path(@picture.profile, @picture.album, @picture)
+        else
+          @create_comment_url = create_comment_profile_picture_path(@picture.profile, @picture)
+        end
       end
     end
 

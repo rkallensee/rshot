@@ -35,12 +35,20 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find_by_nick(params[:id])
+
+    if params[:id] != current_user.profile.to_param
+      redirect_to url_for(:controller => '/home', :action => 'index') # TODO: throw 403!
+    end
   end
 
   # PUT /profiles/1
   # PUT /profiles/1.xml
   def update
     @profile = Profile.find_by_nick(params[:id])
+
+    if params[:id] != current_user.profile.to_param
+      redirect_to url_for(:controller => '/home', :action => 'index') # TODO: throw 403!
+    end
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])

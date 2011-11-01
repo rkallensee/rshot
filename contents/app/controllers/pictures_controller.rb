@@ -23,6 +23,12 @@ class PicturesController < ApplicationController
     @comments = @picture.comments.recent.all
     @comment = @picture.comments.new
 
+    if @viewscope == 'album'
+      @create_comment_url = create_comment_profile_album_picture_path(@picture.profile, @picture.album, @picture)
+    else
+      @create_comment_url = create_comment_profile_picture_path(@picture.profile, @picture)
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @picture }
@@ -55,7 +61,7 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to(profile_picture_path(current_user.profile, @picture), :flash => {:success => 'Picture was successfully created.'}) }
+        format.html { redirect_to(profile_picture_url(current_user.profile, @picture), :flash => {:success => 'Picture was successfully created.'}) }
         format.xml  { render :xml => @picture, :status => :created, :location => @picture }
       else
         @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
@@ -73,7 +79,7 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
-        format.html { redirect_to(profile_picture_path(current_user.profile, @picture), :flash => {:success => 'Picture was successfully updated.'}) }
+        format.html { redirect_to(scoped_picture_url, :flash => {:success => 'Picture was successfully updated.'}) }
         format.xml  { head :ok }
       else
         @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
@@ -103,12 +109,11 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to(picture_scope_path, :flash => {:success => 'Comment was successfully created.'}) }
+        format.html { redirect_to(scoped_picture_url, :flash => {:success => 'Comment was successfully created.'}) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
-        @picture = Picture.find(params[:id])
         set_prev_next_links
-        @comments = @picture.comments.recent.limit(10).all
+        @comments = @picture.comments.recent.all
         # todo: DRY! three lines on top!
         flash[:error] = 'Please actually type in a comment!'
         format.html { render :action => "show" }
@@ -147,21 +152,15 @@ class PicturesController < ApplicationController
         @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @prev_picture) unless @prev_picture.nil?
         @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @next_picture) unless @next_picture.nil?
         @back_link = profile_pictures_path(Profile.find_by_nick(params[:profile_id]))
-      else
-        @prev_link = @prev_picture
-        @next_link = @next_picture
-        @back_link = pictures_path
       end
     end
 
-    # get redirect path to picture (after comment creation)
-    def picture_scope_path
+    # get redirect path to picture (used after editing and comment creation)
+    def scoped_picture_url
       if params[:album_id]
-        profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), Picture.find(params[:id]))
+        profile_album_picture_url(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), Picture.find(params[:id]))
       elsif params[:profile_id]
-        profile_picture_path(Profile.find_by_nick(params[:profile_id]), Picture.find(params[:id]))
-      else
-        picture_path(Picture.find(params[:id]))
+        profile_picture_url(Profile.find_by_nick(params[:profile_id]), Picture.find(params[:id]))
       end
     end
 end

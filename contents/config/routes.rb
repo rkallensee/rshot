@@ -12,12 +12,10 @@ Openshot::Application.routes.draw do
         end
       end
     end
-    resources :pictures
-  end
-
-  resources :pictures do
-    member do
-      post :create_comment
+    resources :pictures do
+      member do
+        post :create_comment
+      end
     end
   end
 

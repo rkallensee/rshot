@@ -74,7 +74,7 @@
 
           <% if user_signed_in? %>
             <h4>Add a comment</h4>
-            <%= form_for [@picture, @comment], :url => { :action => 'create_comment', :controller => 'pictures'} do |f| %>
+            <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
               <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
               <%= f.text_area :comment, :cols => 20, :rows => 2 %>
               <div><%= f.submit(:class => "btn primary") %></div>

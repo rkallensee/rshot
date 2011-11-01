@@ -121,10 +121,10 @@
     <%= render :partial => "minidetails", :locals => { :picture => @picture } %>
     <hr />
 
-    <% if @viewscope == 'album' %>
-        <%= render :partial => "albums/minicontentindex", :locals => { :album => @picture.album } %>
-        <hr />
-    <% elsif !@picture.album.nil? %>
+    <%= render :partial => "scope-image-navigation", :locals => { :picture => @picture, :prev_picture => @prev_picture, :next_picture => @next_picture, :viewscope => @viewscope } %>
+    <hr />
+
+    <% if @viewscope != 'album' && !@picture.album.nil? %>
         This picture appears in the album:<br />
         <%= render :partial => "albums/miniteaser", :locals => { :album => @picture.album } %>
         <hr />

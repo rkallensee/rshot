@@ -27,7 +27,6 @@ class Picture < ActiveRecord::Base
   validates_presence_of :profile_id
 
   # scopes
-  scope :same_album, lambda { |att| where("album_id = ?", att) }
   scope :next,       lambda { |att| where("id > ?", att).limit(1).order("id") }
   scope :previous,   lambda { |att| where("id < ?", att).limit(1).order("id DESC") }
 

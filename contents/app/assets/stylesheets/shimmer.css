@@ -16,6 +16,20 @@ textarea,
     font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.clearfix {
+    zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    zoom: 1;
+    *display: inline;
+}
+.clearfix:after {
+    clear: both;
+}
+
 header {
     background-color: #D0D0D0;
     box-shadow: 0 5px 5px 1px #AAAAAA;
@@ -166,6 +180,7 @@ header img.profile-image {
 
 img.mini-image,
 img.profile-image,
+div.mini-image,
 #mapdiv {
     box-shadow: 0 0 3px 1px #CCCCCC;
 }
@@ -208,4 +223,25 @@ aside .shimmer-album-minicontent ul li {
     float: left;
     margin: 0 5px 5px 0;
     padding: 0;
+}
+
+aside .shimmer-scope-image-navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside .shimmer-scope-image-navigation ul li {
+    float: left;
+    margin: 0 5px 5px 0;
+    padding: 0;
+}
+
+aside .shimmer-scope-image-navigation ul li.current img {
+    border: 1px solid red;
+}
+
+aside .shimmer-scope-image-navigation ul li div.image-placeholder-thumb {
+    width: 75px;
+    height: 75px;
 }

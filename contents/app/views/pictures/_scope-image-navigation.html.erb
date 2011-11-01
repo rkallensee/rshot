@@ -1,0 +1,45 @@
+<div class="shimmer-scope-image-navigation">
+    <% if viewscope == 'album' %>
+        <h3>This picture belongs to the album &raquo;<%= picture.album_name %>&laquo;</h3>
+    <% else %>
+        <h3>This picture belongs to the picture stream of &raquo;<%= picture.profile.nick %>&laquo;</h3>
+    <% end %>
+
+    <ul>
+        <li class="previous">
+            <% unless prev_picture.nil? %>
+                <% if viewscope == 'album' %>
+                    <%= link_to image_tag(prev_picture.photo.url(:thumb), :class => 'mini-image'), profile_album_picture_path(prev_picture.profile, prev_picture.album, prev_picture) %>
+                <% else %>
+                    <%= link_to image_tag(prev_picture.photo.url(:thumb), :class => 'mini-image'), profile_picture_path(prev_picture.profile, prev_picture) %>
+                <% end %>
+            <% else %>
+                <div class="image-placeholder image-placeholder-thumb mini-image"></div>
+            <% end %>
+        </li>
+        <li class="current">
+            <% unless picture.nil? %>
+                <% if viewscope == 'album' %>
+                    <%= link_to image_tag(picture.photo.url(:thumb), :class => 'mini-image'), profile_album_picture_path(picture.profile, picture.album, picture) %>
+                <% else %>
+                    <%= link_to image_tag(picture.photo.url(:thumb), :class => 'mini-image'), profile_picture_path(picture.profile, picture) %>
+                <% end %>
+            <% else %>
+                <div class="image-placeholder image-placeholder-thumb mini-image"></div>
+            <% end %>
+        </li>
+        <li class="next">
+            <% unless next_picture.nil? %>
+                <% if viewscope == 'album' %>
+                    <%= link_to image_tag(next_picture.photo.url(:thumb), :class => 'mini-image'), profile_album_picture_path(next_picture.profile, next_picture.album, next_picture) %>
+                <% else %>
+                    <%= link_to image_tag(next_picture.photo.url(:thumb), :class => 'mini-image'), profile_picture_path(next_picture.profile, next_picture) %>
+                <% end %>
+            <% else %>
+                <div class="image-placeholder image-placeholder-thumb mini-image"></div>
+            <% end %>
+        </li>
+    </ul>
+
+    <div class="clearfix"></div>
+</div>

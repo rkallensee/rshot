@@ -18,9 +18,9 @@ class PicturesController < ApplicationController
   def show
     @picture = Picture.find(params[:id])
 
-    set_prev_next_links
+    set_prev_next_picture_data
 
-    @comments = @picture.comments.recent.limit(10).all
+    @comments = @picture.comments.recent.all
     @comment = @picture.comments.new
 
     respond_to do |format|
@@ -135,18 +135,21 @@ class PicturesController < ApplicationController
     end
 
     # set links to previous and next image as instance variables
-    def set_prev_next_links
+    def set_prev_next_picture_data
+      @prev_picture = @scope.previous(@picture.id).first
+      @next_picture = @scope.next(@picture.id).first
+
       if params[:album_id]
-        @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-        @next_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @prev_picture) unless @prev_picture.nil?
+        @next_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @next_picture) unless @next_picture.nil?
         @back_link = profile_album_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]))
       elsif params[:profile_id]
-        @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.previous(@picture.id).first) unless @scope.previous(@picture.id).first.nil?
-        @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @scope.next(@picture.id).first) unless @scope.next(@picture.id).first.nil?
+        @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @prev_picture) unless @prev_picture.nil?
+        @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @next_picture) unless @next_picture.nil?
         @back_link = profile_pictures_path(Profile.find_by_nick(params[:profile_id]))
       else
-        @prev_link = @scope.previous(@picture.id).first
-        @next_link = @scope.next(@picture.id).first
+        @prev_link = @prev_picture
+        @next_link = @next_picture
         @back_link = pictures_path
       end
     end

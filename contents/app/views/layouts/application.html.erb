@@ -12,8 +12,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag 'apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
 
     <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold", :media => "all" %>
     <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic", :media => "all" %>

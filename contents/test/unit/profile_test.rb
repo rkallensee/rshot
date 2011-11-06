@@ -32,6 +32,10 @@ class ProfileTest < ActiveSupport::TestCase
     assert !profile.save
 
     profile = Profile.new({:user_id => users(:one).id, :nick => "123"})
+    assert !profile.save # mass-assignment of user_ not allowed
+
+    profile = Profile.new({:nick => "123"})
+    profile.user_id = users(:one).id
     assert profile.save
 
     assert_equal profiles(:one).to_param, "raphael"

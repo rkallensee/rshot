@@ -17,9 +17,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Album < ActiveRecord::Base
+  # relationships
   has_many :pictures, :dependent => :nullify
   belongs_to :profile
 
+  # attribute protection
+  attr_accessible :title
+
+  # validators
   validates :title, :presence => true, :length => { :minimum => 3 }
   validates_presence_of :profile_id
 end

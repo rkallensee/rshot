@@ -25,10 +25,13 @@ class Profile < ActiveRecord::Base
       :medium => ["75x75#", :jpg],
       :big    => ["120x120>", :jpg] }
 
-  # relationship
+  # relationships
   belongs_to :user
-  has_many :pictures
-  has_many :albums
+  has_many :pictures, :dependent => :destroy
+  has_many :albums, :dependent => :destroy
+
+  # attribute protection
+  attr_accessible :nick, :forename, :surname, :bio, :location, :website, :avatar
 
   # validators
   validates :nick, :presence => true, :length => { :minimum => 3 }

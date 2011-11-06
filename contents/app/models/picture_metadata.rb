@@ -17,8 +17,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class PictureMetadata < ActiveRecord::Base
+  # relationship
   belongs_to :picture
 
+  # attribute protection
+  attr_protected :picture_id
+
+  # validators
   validates_presence_of :picture_id
 
   #serialize :exifraw

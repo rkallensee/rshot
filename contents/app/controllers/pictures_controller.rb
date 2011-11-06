@@ -136,13 +136,13 @@ class PicturesController < ApplicationController
     # get scope - since picture resource is also nested in album resource
     def determine_scope
       @picture_scope = Picture.scoped
-      @viewscope = 'all'
+      @viewscope = :all
 
       if params[:album_id]
-        @viewscope = 'album'
+        @viewscope = :album
         @picture_scope = @picture_scope.by_album(params[:album_id])
       elsif params[:profile_id]
-        @viewscope = 'profile'
+        @viewscope = :profile
         @profile = Profile.find_by_nick(params[:profile_id])
         @picture_scope = @picture_scope.by_profile(@profile)
       end
@@ -170,7 +170,7 @@ class PicturesController < ApplicationController
         @comments = @picture.comments.recent.all
         @comment = @picture.comments.new if @comment.nil?
 
-        if @viewscope == 'album'
+        if @viewscope == :album
           @create_comment_url = create_comment_profile_album_picture_path(@picture.profile, @picture.album, @picture)
         else
           @create_comment_url = create_comment_profile_picture_path(@picture.profile, @picture)

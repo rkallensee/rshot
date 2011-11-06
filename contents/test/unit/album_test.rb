@@ -29,6 +29,10 @@ class AlbumTest < ActiveSupport::TestCase
     assert !album.save
 
     album = Album.new({:title => "123", :profile_id => profiles(:one).id})
+    assert !album.save # mass-assignment of profile_id not allowed
+
+    album = Album.new({:title => "123"})
+    album.profile_id = profiles(:one).id
     assert album.save
   end
 
@@ -37,6 +41,10 @@ class AlbumTest < ActiveSupport::TestCase
     assert !album.save
 
     album = Album.new({:title => "123", :profile_id => profiles(:one).id})
+    assert !album.save # mass-assignment of profile_id not allowed
+
+    album = Album.new({:title => "123"})
+    album.profile_id = profiles(:one).id
     assert album.save
   end
 end

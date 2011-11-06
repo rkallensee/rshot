@@ -25,12 +25,14 @@ class PictureMetadataTest < ActiveSupport::TestCase
     picturemetadata = PictureMetadata.new
     assert !picturemetadata.save
 
-    picturemetadata = PictureMetadata.new({:picture_id => pictures(:one).id})
+    picturemetadata = PictureMetadata.new
+    picturemetadata.picture_id = pictures(:one).id
     assert picturemetadata.save
   end
 
   test "picture metadata creation" do
-    picture = Picture.new({:profile_id => profiles(:one).id})
+    picture = Picture.new
+    picture.profile_id = profiles(:one).id
     picture.photo = sample_file("sample_photo.jpg")
     assert picture.save
 

@@ -124,7 +124,7 @@
     <%= render :partial => "scope-image-navigation", :locals => { :picture => @picture, :prev_picture => @prev_picture, :next_picture => @next_picture, :viewscope => @viewscope } %>
     <hr />
 
-    <% if @viewscope != 'album' && !@picture.album.nil? %>
+    <% if @viewscope != :album && !@picture.album.nil? %>
         This picture appears in the album:<br />
         <%= render :partial => "albums/miniteaser", :locals => { :album => @picture.album } %>
         <hr />

@@ -28,6 +28,9 @@ class PictureTest < ActiveSupport::TestCase
     assert !picture.save
 
     picture = Picture.new({:profile_id => profiles(:one).id})
+    assert !picture.save # mass-assignment of profile_id not allowed
+
+    picture.profile_id = profiles(:one).id
     picture.photo = sample_file("sample_photo.jpg")
     assert picture.save
   end

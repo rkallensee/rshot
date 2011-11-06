@@ -17,14 +17,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Picture < ActiveRecord::Base
+  # relationships
   belongs_to :album
   belongs_to :profile
-  has_one :picture_metadata
+  has_one :picture_metadata, :dependent => :destroy
 
+  # acts as ...
   acts_as_taggable_on :tags
   acts_as_commentable
 
-  # Paperclip attachment
+  # attribute protection
+  attr_accessible :title, :photo
+
+  # photo attachment (Paperclip)
   has_attached_file :photo,
     :styles => {
       :thumb   => ["75x75#", :jpg],
@@ -39,7 +44,7 @@ class Picture < ActiveRecord::Base
     #:hash_data => ":class/:attachment/:id/:style/:updated_at"
   before_photo_post_process :extract_and_save_metadata!
 
-  # validation
+  # validators
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 10.megabytes
   validates_presence_of :profile_id

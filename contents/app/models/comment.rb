@@ -20,11 +20,16 @@ class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
 
+  # relationships
   belongs_to :commentable, :polymorphic => true
   belongs_to :profile
 
   default_scope :order => 'created_at ASC'
 
+  # attribute protection
+  attr_protected :profile_id
+
+  # validators
   validates :comment, :presence => true, :length => { :minimum => 3 }
   validates_presence_of :profile_id
 

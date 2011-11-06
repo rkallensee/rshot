@@ -31,7 +31,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
     assert user.save
 
-    profile = Profile.find(3)
+    profile = Profile.last
     # find out if the profile was automatically created
     assert_equal profile, user.profile
   end

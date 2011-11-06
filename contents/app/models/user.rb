@@ -22,17 +22,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :confirmable, :lockable, :timeoutable
 
-  # Setup accessible (or protected) attributes for your model
+  # attribute protection
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   # attach profile
-  has_one :profile
+  has_one :profile, :dependent => :destroy
 
   # automatically create (empty) profile
   after_create :create_empty_profile
 
   def create_empty_profile
-    profile = Profile.create(:user_id => self.id)
+    profile = Profile.new
+    profile.user_id = self.id
     profile.save({:validate => false})
   end
 end

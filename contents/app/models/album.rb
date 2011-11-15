@@ -25,6 +25,6 @@ class Album < ActiveRecord::Base
   attr_accessible :title
 
   # validators
-  validates :title, :presence => true, :length => { :minimum => 3 }
+  validates :title, :presence => true, :length => { :minimum => 3, :maximum => 150 }
   validates_presence_of :profile_id
 end

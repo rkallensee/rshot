@@ -27,7 +27,7 @@ class Picture < ActiveRecord::Base
   acts_as_commentable
 
   # attribute protection
-  attr_accessible :title, :photo
+  attr_accessible :title, :photo, :album_id, :tag_list
 
   # photo attachment (Paperclip)
   has_attached_file :photo,
@@ -48,6 +48,7 @@ class Picture < ActiveRecord::Base
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 10.megabytes
   validates_presence_of :profile_id
+  validates :title, :length => { :maximum => 150 }
 
   # scopes
   scope :next,       lambda { |att| where("id > ?", att).limit(1).order("id") }

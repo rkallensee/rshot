@@ -21,6 +21,33 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   fixtures :users, :profiles
 
+  # shoulda tests
+  should have_one(:profile)
+  should allow_mass_assignment_of(:email)
+  should allow_mass_assignment_of(:password)
+  should allow_mass_assignment_of(:password_confirmation)
+  should allow_mass_assignment_of(:remember_me)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:encrypted_password)
+  should_not allow_mass_assignment_of(:password_salt)
+  should_not allow_mass_assignment_of(:reset_password_token)
+  should_not allow_mass_assignment_of(:remember_token)
+  should_not allow_mass_assignment_of(:remember_created_at)
+  should_not allow_mass_assignment_of(:sign_in_count)
+  should_not allow_mass_assignment_of(:current_sign_in_at)
+  should_not allow_mass_assignment_of(:last_sign_in_at)
+  should_not allow_mass_assignment_of(:current_sign_in_ip)
+  should_not allow_mass_assignment_of(:last_sign_in_ip)
+  should_not allow_mass_assignment_of(:confirmation_token)
+  should_not allow_mass_assignment_of(:confirmed_at)
+  should_not allow_mass_assignment_of(:confirmation_sent_at)
+  should_not allow_mass_assignment_of(:failed_attempts)
+  should_not allow_mass_assignment_of(:unlock_token)
+  should_not allow_mass_assignment_of(:locked_at)
+  should_not allow_mass_assignment_of(:authentication_token)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+
   test "user model basics" do
     user = User.new
     assert !user.save

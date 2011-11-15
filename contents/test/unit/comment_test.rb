@@ -21,6 +21,22 @@ require 'test_helper'
 class CommentTest < ActiveSupport::TestCase
   fixtures :pictures
 
+  # shoulda tests
+  should belong_to(:profile)
+  should belong_to(:commentable)
+  should validate_presence_of(:comment)
+  should validate_presence_of(:profile_id)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:profile_id)
+  should_not allow_mass_assignment_of(:title)
+  should_not allow_mass_assignment_of(:commentable_id)
+  should_not allow_mass_assignment_of(:commentable_type)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+  should_not allow_value("ab").for(:comment)
+  should allow_value("abc").for(:comment)
+  should ensure_length_of(:comment).is_at_least(3).is_at_most(2000)
+
   test "validate required comment profile id and comment text" do
     comment = pictures(:one).comments.new
     assert !comment.save

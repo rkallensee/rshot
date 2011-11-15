@@ -21,6 +21,27 @@ require 'test_helper'
 class ProfileTest < ActiveSupport::TestCase
   fixtures :users
 
+  # shoulda tests
+  should belong_to(:user)
+  should have_many(:pictures)
+  should have_many(:albums)
+  should have_attached_file(:avatar)
+  should validate_attachment_size(:avatar).less_than(2.megabytes)
+  should validate_presence_of(:user_id)
+  should validate_presence_of(:nick)
+  should allow_mass_assignment_of(:nick)
+  should allow_mass_assignment_of(:forename)
+  should allow_mass_assignment_of(:surname)
+  should allow_mass_assignment_of(:bio)
+  should allow_mass_assignment_of(:location)
+  should allow_mass_assignment_of(:website)
+  should allow_mass_assignment_of(:avatar)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:user_id)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+  should ensure_length_of(:nick).is_at_least(3).is_at_most(50)
+
   test "profile validation" do
     profile = Profile.new
     assert !profile.save

@@ -21,7 +21,7 @@ class PictureMetadata < ActiveRecord::Base
   belongs_to :picture
 
   # attribute protection
-  attr_protected :picture_id
+  attr_protected :picture_id, :created_at, :updated_at
 
   # validators
   validates_presence_of :picture_id

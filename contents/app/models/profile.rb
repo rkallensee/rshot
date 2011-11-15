@@ -34,7 +34,8 @@ class Profile < ActiveRecord::Base
   attr_accessible :nick, :forename, :surname, :bio, :location, :website, :avatar
 
   # validators
-  validates :nick, :presence => true, :length => { :minimum => 3 }
+  validates :nick, :presence => true, :length => { :minimum => 3, :maximum => 50 }
+  validates_attachment_size :avatar, :less_than => 2.megabytes
   validates_presence_of :user_id
 
   def to_param

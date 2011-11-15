@@ -21,6 +21,19 @@ require 'test_helper'
 class AlbumTest < ActiveSupport::TestCase
   fixtures :profiles
 
+  # shoulda tests
+  should belong_to(:profile)
+  should have_many(:pictures)
+  should validate_presence_of(:title)
+  should validate_presence_of(:profile_id)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:profile_id)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+  should_not allow_value("(1").for(:title)
+  should allow_value("(12").for(:title)
+  should ensure_length_of(:title).is_at_least(3).is_at_most(150)
+
   test "validate album title length" do
     album = Album.new({:profile_id => 1})
     assert !album.save

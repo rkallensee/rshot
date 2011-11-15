@@ -30,6 +30,10 @@ gem 'acts_as_commentable', '~> 3.0.1'
 
 gem 'fancybox-rails'
 
+group :test do
+  gem 'shoulda'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

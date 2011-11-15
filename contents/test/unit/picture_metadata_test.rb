@@ -21,6 +21,14 @@ require 'test_helper'
 class PictureMetadataTest < ActiveSupport::TestCase
   fixtures :pictures, :profiles, :picture_metadata, :albums
 
+  # shoulda tests
+  should belong_to(:picture)
+  should validate_presence_of(:picture_id)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:picture_id)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+
   test "picture metadata picture id validation" do
     picturemetadata = PictureMetadata.new
     assert !picturemetadata.save

@@ -20,6 +20,27 @@ require 'test_helper'
 
 class PictureTest < ActiveSupport::TestCase
   fixtures :pictures, :profiles, :picture_metadata, :albums
+
+  # shoulda tests
+  should belong_to(:profile)
+  should belong_to(:album)
+  should have_one(:picture_metadata)
+  should have_many(:tags).through(:tag_taggings)
+  should have_many(:comments)
+  should have_attached_file(:photo)
+  should validate_attachment_presence(:photo)
+  should validate_attachment_size(:photo).less_than(10.megabytes)
+  should validate_presence_of(:profile_id)
+  should allow_mass_assignment_of(:title)
+  should allow_mass_assignment_of(:photo)
+  should allow_mass_assignment_of(:album_id)
+  should allow_mass_assignment_of(:tag_list)
+  should_not allow_mass_assignment_of(:id)
+  should_not allow_mass_assignment_of(:profile_id)
+  should_not allow_mass_assignment_of(:created_at)
+  should_not allow_mass_assignment_of(:updated_at)
+  should ensure_length_of(:title).is_at_most(150)
+
   test "picture validations" do
     picture = Picture.new
     assert !picture.save

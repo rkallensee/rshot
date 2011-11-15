@@ -27,10 +27,10 @@ class Comment < ActiveRecord::Base
   default_scope :order => 'created_at ASC'
 
   # attribute protection
-  attr_protected :profile_id
+  attr_accessible :comment
 
   # validators
-  validates :comment, :presence => true, :length => { :minimum => 3 }
+  validates :comment, :presence => true, :length => { :minimum => 3, :maximum => 2000 }
   validates_presence_of :profile_id
 
   # NOTE: install the acts_as_votable plugin if you

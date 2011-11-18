@@ -47,22 +47,37 @@ header {
     width: 1030px;
 }
 
-.topbar ul.nav li a img.profile-image {
+header .topbar ul.nav li a img.profile-image {
     float: left;
     margin: -2px 10px 0 0;
 }
 
-.topbar {
+header .topbar {
     box-shadow: 0 5px 5px 1px #AAAAAA;
 }
 
-.topbar h3 a {
+header .topbar-inner,
+header .topbar .fill {
+    background-color: #AAA;
+    background-color: #AAAAAA;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#AAAAAA), to(#999999));
+    background-image: -moz-linear-gradient(top, #AAAAAA, #999999);
+    background-image: -ms-linear-gradient(top, #AAAAAA, #999999);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AAAAAA), color-stop(100%, #999999));
+    background-image: -webkit-linear-gradient(top, #AAAAAA, #999999);
+    background-image: -o-linear-gradient(top, #AAAAAA, #999999);
+    background-image: linear-gradient(top, #AAAAAA, #999999);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#AAAAAA', endColorstr='#999999', GradientType=0);
+}
+
+header .topbar h3 a {
     font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
     font-weight: 700;
     font-size: 35px;
     color: #FFFFFF;
-    text-shadow: 1px 1px 1px #AAAAAA;
-    filter: dropshadow(color=#AAAAAA, offx=1, offy=1);
+    text-shadow: 0px 0px 5px #555555;
+    filter: dropshadow(color=#555555, offx=1, offy=1);
     padding: 4px 20px 2px;
 }
 
@@ -76,77 +91,8 @@ header {
     margin-top: 40px;
 }
 
-header h1,
-header h1 a:link,
-header h1 a:visited,
-header h1 a:hover,
-header h1 a:active {
-    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 44px;
-    text-decoration: none;
-    line-height: 44px;
-    color: #FFFFFF;
-    text-shadow: 1px 1px 1px #777777;
-    filter: dropshadow(color=#777777, offx=1, offy=1);
-    margin: 0;
-}
-
-header h1 a:hover,
-header h1 a.active {
-    color: #333333;
-    background-color: transparent;
-    text-shadow: 1px 1px 1px #DDDDDD;
-    filter: dropshadow(color=#DDDDDD, offx=1, offy=1);
-}
-
-header nav ul {
-    position: absolute;
-    bottom: 0;
-    left: 200px;
-    list-style-type: none;
-    display: inline;
-    margin: 0;
-}
-
-header nav ul li {
-    display: inline;
-    margin: 0px 10px 0px 0px;
-    padding: 0px;
-    vertical-align: middle;
-}
-
-header nav ul li a:link,
-header nav ul li a:visited,
-header nav ul li a:hover,
-header nav ul li a:active {
-    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    text-decoration: none;
-    color: #FFFFFF;
-    background-color: transparent;
-    padding: 6px 9px;
-    vertical-align: middle;
-    display: inline-block;
-    text-shadow: 1px 1px 1px #999999;
-    filter: dropshadow(color=#999999, offx=1, offy=1);
-}
-
-header nav ul li a:hover,
-header nav ul li a.active {
-    color: #AAAAAA;
-    background-color: #FFFFFF;
-    text-shadow: 1px 1px 1px #DDDDDD;
-    filter: dropshadow(color=#DDDDDD, offx=1, offy=1);
-}
-
-header img.profile-image {
-    float: right;
-}
-
 #main {
-    padding: 20px 320px 20px 20px;
+    padding: 20px 0px 20px 20px;
 }
 
 #main h2 {
@@ -242,24 +188,14 @@ aside {
     padding: 20px 0px;
 }
 
-aside .shimmer-album-minicontent ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-aside .shimmer-album-minicontent ul li {
-    float: left;
-    margin: 0 5px 5px 0;
-    padding: 0;
-}
-
+aside .shimmer-album-minicontent ul,
 aside .shimmer-scope-image-navigation ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
+aside .shimmer-album-minicontent ul li,
 aside .shimmer-scope-image-navigation ul li {
     float: left;
     margin: 0 5px 5px 0;

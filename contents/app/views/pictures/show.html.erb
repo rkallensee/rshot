@@ -47,7 +47,7 @@
     </ul>
 
     <div class="tab-content">
-      <div class="active" id="picture-comments">
+      <div class="tab-pane active" id="picture-comments">
           <h3>Comments:</h3>
           <% @comments.each do |comment| %>
             <blockquote>
@@ -83,7 +83,7 @@
             <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
           <% end %>
       </div>
-      <div id="picture-metadata">
+      <div class="tab-pane" id="picture-metadata">
         <%= render :partial => "metadata-table", :locals => { :picture => @picture } %>
       </div>
     </div>

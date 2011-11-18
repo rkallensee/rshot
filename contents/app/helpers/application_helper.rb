@@ -17,4 +17,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 module ApplicationHelper
+  # method for devise login form also outside of devise controllers
+  def resource_name
+    :user
+  end
+
+  # method for devise login form also outside of devise controllers
+  def resource
+    @resource ||= User.new
+  end
+
+  # method for devise login form also outside of devise controllers
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 end

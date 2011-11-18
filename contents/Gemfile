@@ -34,6 +34,10 @@ group :test do
   gem 'shoulda'
 end
 
+group :development do
+  gem 'mongrel'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

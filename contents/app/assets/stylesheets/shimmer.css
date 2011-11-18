@@ -47,6 +47,35 @@ header {
     width: 1030px;
 }
 
+.topbar ul.nav li a img.profile-image {
+    float: left;
+    margin: -2px 10px 0 0;
+}
+
+.topbar {
+    box-shadow: 0 5px 5px 1px #AAAAAA;
+}
+
+.topbar h3 a {
+    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 1px #AAAAAA;
+    filter: dropshadow(color=#AAAAAA, offx=1, offy=1);
+    padding: 4px 20px 2px;
+}
+
+.topbar div > ul a,
+.nav a {
+    text-shadow: 1px 1px 1px #999999;
+    filter: dropshadow(color=#999999, offx=1, offy=1);
+}
+
+#container {
+    margin-top: 40px;
+}
+
 header h1,
 header h1 a:link,
 header h1 a:visited,

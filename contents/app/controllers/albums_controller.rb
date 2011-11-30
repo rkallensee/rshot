@@ -24,6 +24,7 @@ class AlbumsController < ApplicationController
   # GET /albums.xml
   def index
     @albums = @profile.albums.order('created_at DESC').page(params[:page]).per(10)
+    authorize! :index, Album
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +36,7 @@ class AlbumsController < ApplicationController
   # GET /albums/1.xml
   def show
     @album = @profile.albums.find(params[:id])
+    authorize! :show, @album
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +47,8 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   # GET /albums/new.xml
   def new
-    @album = @profile.albums.new
+    @album = @profile.albums.build
+    authorize! :new, @album
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,12 +59,14 @@ class AlbumsController < ApplicationController
   # GET /albums/1/edit
   def edit
     @album = @profile.albums.find(params[:id])
+    authorize! :edit, @album
   end
 
   # POST /albums
   # POST /albums.xml
   def create
-    @album = @profile.albums.new(params[:album])
+    @album = @profile.albums.build(params[:album])
+    authorize! :create, @album
     @album.profile_id = current_user.profile.id
     # think about security / permissions!
 
@@ -79,7 +84,8 @@ class AlbumsController < ApplicationController
   # PUT /albums/1
   # PUT /albums/1.xml
   def update
-    @album = current_user.profile.albums.find(params[:id])
+    @album = Album.find(params[:id])
+    authorize! :update, @album
     @album.profile_id = current_user.id ## problematic! check profile_id instead of overwriting it.
 
     respond_to do |format|
@@ -96,7 +102,8 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.xml
   def destroy
-    @album = current_user.profile.albums.find(params[:id])
+    @album = Album.find(params[:id])
+    authorize! :destroy, @album
     @album.destroy
 
     # todo: only destroy albums without pictures. or at least remove references to albums.

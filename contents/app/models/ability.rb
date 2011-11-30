@@ -20,9 +20,24 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
+    user ||= User.new # guest user (not logged in)
+
+    can :manage, [Picture, Album] do |pa|
+      pa.try(:profile).try(:user) == user
+    end
+
+    can :create, Comment do |user|
+      user.id > 0
+    end
+
+    can [:edit, :update], Profile do |profile|
+      profile.try(:user).new_record?
+    end
+
+    # everybody can read
+    can :show, [Picture, Album, Comment, PictureMetadata, Profile]
+    can :index, [Picture, Album]
+
     #   if user.admin?
     #     can :manage, :all
     #   else

@@ -1,5 +1,8 @@
 <h2>Listing <%= pluralize(@albums.count, 'album') %></h2>
-<%= link_to 'New Album', new_profile_album_path, :class => "btn" %>
+
+<% if can? :create, @profile.albums.build %>
+  <%= link_to 'New Album', new_profile_album_path, :class => "btn" %>
+<% end %>
 
 <br />
 

@@ -22,19 +22,30 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    # every user can manage its own pictures and albums
     can :manage, [Picture, Album] do |pa|
       pa.try(:profile).try(:user) == user
     end
 
-    can :create, Comment do |user|
-      user.id > 0
+    # but a picture may only assigned to a users' own album
+    can [:create, :update], Picture do |picture|
+      picture.try(:profile).try(:user) == user &&
+      ( picture.album.nil? ||
+        picture.album.try(:profile).try(:user) == picture.try(:profile).try(:user) )
     end
 
+    # comment creation is allowed for all logged-in users
+    can :create, Comment do |comment|
+      comment.try(:profile).try(:user).id > 0 &&
+      comment.try(:profile).try(:user) == user
+    end
+
+    # profiles can only get changed and only by their owners
     can [:edit, :update], Profile do |profile|
-      profile.try(:user).new_record?
+      profile.try(:user) == user
     end
 
-    # everybody can read
+    # everybody can read most of the data
     can :show, [Picture, Album, Comment, PictureMetadata, Profile]
     can :index, [Picture, Album]
 

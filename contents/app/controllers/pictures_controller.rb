@@ -24,6 +24,7 @@ class PicturesController < ApplicationController
   # GET /pictures.xml
   def index
     @pictures = @picture_scope.order('created_at DESC').page(params[:page]).per(10)
+    authorize! :index, Picture
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +36,7 @@ class PicturesController < ApplicationController
   # GET /pictures/1.xml
   def show
     @picture = @picture_scope.find(params[:id])
+    authorize! :show, @picture
 
     set_prev_next_picture_data
     set_picture_comments_data
@@ -48,7 +50,8 @@ class PicturesController < ApplicationController
   # GET /pictures/new
   # GET /pictures/new.xml
   def new
-    @picture = Picture.new
+    @picture = @profile.pictures.build
+    authorize! :new, @picture
     @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
 
     respond_to do |format|
@@ -60,21 +63,22 @@ class PicturesController < ApplicationController
   # GET /pictures/1/edit
   def edit
     @picture = @picture_scope.find(params[:id])
+    authorize! :edit, @picture
     @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
   end
 
   # POST /pictures
   # POST /pictures.xml
   def create
-    @picture = Picture.new(params[:picture])
-    @picture.profile_id = current_user.profile.id
+    @picture = @profile.pictures.build(params[:picture])
+    authorize! :create, @picture
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to(profile_picture_url(current_user.profile, @picture), :flash => {:success => 'Picture was successfully created.'}) }
+        format.html { redirect_to(profile_picture_url(@profile, @picture), :flash => {:success => 'Picture was successfully created.'}) }
         format.xml  { render :xml => @picture, :status => :created, :location => @picture }
       else
-        @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
+        @albums = Album.where("profile_id" => @profile.id).order("title ASC")
         format.html { render :action => "new" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
       end
@@ -85,14 +89,14 @@ class PicturesController < ApplicationController
   # PUT /pictures/1.xml
   def update
     @picture = @picture_scope.find(params[:id])
-    @picture.profile_id = current_user.profile.id
+    authorize! :update, @picture # todo: params are not yet in the object!
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
         format.html { redirect_to(scoped_picture_url, :flash => {:success => 'Picture was successfully updated.'}) }
         format.xml  { head :ok }
       else
-        @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
+        @albums = Album.where("profile_id" => @profile.id).order("title ASC")
         format.html { render :action => "edit" }
         format.xml  { render :xml => @picture.errors, :status => :unprocessable_entity }
       end
@@ -103,6 +107,7 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1.xml
   def destroy
     @picture = @picture_scope.find(params[:id])
+    authorize! :destroy, @picture
     @picture.destroy
 
     respond_to do |format|
@@ -116,6 +121,7 @@ class PicturesController < ApplicationController
     @picture = @picture_scope.find(params[:id])
     @comment = @picture.comments.new(params[:comment])
     @comment.profile_id = current_user.profile.id
+    authorize! :create, @comment
 
     respond_to do |format|
       if @comment.save

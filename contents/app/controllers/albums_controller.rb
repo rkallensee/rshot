@@ -67,8 +67,6 @@ class AlbumsController < ApplicationController
   def create
     @album = @profile.albums.build(params[:album])
     authorize! :create, @album
-    @album.profile_id = current_user.profile.id
-    # think about security / permissions!
 
     respond_to do |format|
       if @album.save
@@ -84,9 +82,8 @@ class AlbumsController < ApplicationController
   # PUT /albums/1
   # PUT /albums/1.xml
   def update
-    @album = Album.find(params[:id])
-    authorize! :update, @album
-    @album.profile_id = current_user.id ## problematic! check profile_id instead of overwriting it.
+    @album = @profile.albums.find(params[:id])
+    authorize! :update, @album # todo: params are not yet in the object!
 
     respond_to do |format|
       if @album.update_attributes(params[:album])
@@ -106,7 +103,7 @@ class AlbumsController < ApplicationController
     authorize! :destroy, @album
     @album.destroy
 
-    # todo: only destroy albums without pictures. or at least remove references to albums.
+    # todo: only destroy albums without pictures. pictures are already dereferenced.
 
     respond_to do |format|
       format.html { redirect_to(profile_albums_url(@profile)) }

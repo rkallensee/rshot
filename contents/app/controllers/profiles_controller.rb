@@ -23,8 +23,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.xml
   def show
     @profile = Profile.find_by_nick(params[:id])
-    @pictures = Picture.find_all_by_profile_id(@profile.id)
-    @albums = Album.find_all_by_profile_id(@profile.id)
+    authorize! :show, @profile
+    @pictures = @profile.pictures
+    @albums = @profile.albums
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,20 +36,14 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @profile = Profile.find_by_nick(params[:id])
-
-    if params[:id] != current_user.profile.to_param
-      redirect_to url_for(:controller => '/home', :action => 'index') # TODO: throw 403!
-    end
+    authorize! :edit, @profile
   end
 
   # PUT /profiles/1
   # PUT /profiles/1.xml
   def update
     @profile = Profile.find_by_nick(params[:id])
-
-    if params[:id] != current_user.profile.to_param
-      redirect_to url_for(:controller => '/home', :action => 'index') # TODO: throw 403!
-    end
+    authorize! :update, @profile
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])

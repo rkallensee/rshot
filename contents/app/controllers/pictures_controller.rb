@@ -89,7 +89,7 @@ class PicturesController < ApplicationController
   # PUT /pictures/1.xml
   def update
     @picture = @picture_scope.find(params[:id])
-    authorize! :update, @picture # todo: params are not yet in the object!
+    authorize! :update, @picture, params[:picture] # todo: params are not yet in the object!
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])

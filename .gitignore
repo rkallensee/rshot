@@ -1,4 +1,10 @@
 .idea
 contents/.idea
-contents/public/system/photos/*
-contents/public/system/avatars/*
+
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
+public/system/photos/*
+public/system/avatars/*

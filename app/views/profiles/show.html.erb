@@ -2,7 +2,9 @@
 
 <h2>Profile of &raquo;<%= @profile.forename %> <%= @profile.surname %> (<%= @profile.nick %>)&laquo;</h2>
 
-<%= link_to 'Edit', edit_profile_path(@profile), :class => "btn" %>
+<% if can? :edit, @profile %>
+  <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn" %>
+<% end %>
 
 <p>
   <%= image_tag(@profile.avatar.url(:medium)) %>

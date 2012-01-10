@@ -87,6 +87,35 @@ header .topbar h3 a {
     filter: dropshadow(color=#999999, offx=1, offy=1);
 }
 
+.topbar a {
+    color: #FFFFFF;
+}
+
+.topbar div > ul a.menu:hover,
+.nav a.menu:hover,
+.topbar div > ul li.open .menu,
+.nav li.open .menu,
+.topbar div > ul .dropdown-toggle:hover,
+.nav .dropdown-toggle:hover,
+.topbar div > ul .dropdown.open .dropdown-toggle,
+.nav .dropdown.open .dropdown-toggle {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.topbar div > ul .menu-dropdown,
+.nav .menu-dropdown,
+.topbar div > ul .dropdown-menu,
+.nav .dropdown-menu {
+    background-color: #999999;
+}
+
+.topbar div > ul .menu-dropdown li a,
+.nav .menu-dropdown li a,
+.topbar div > ul .dropdown-menu li a,
+.nav .dropdown-menu li a {
+    color: #FFFFFF;
+}
+
 #container {
     margin-top: 40px;
 }

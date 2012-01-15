@@ -44,11 +44,13 @@ class PicturesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create picture" do
+  test "should not create picture" do
     post :create, {:picture => {:photo => fixture_file_upload('sample_photo.jpg', 'image/jpeg')}, :profile_id => profiles(:one).nick}
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should create picture" do
     sign_in :user, users(:one)
 
     assert_difference('Picture.count') do

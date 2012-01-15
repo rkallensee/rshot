@@ -29,12 +29,16 @@ class Ability
     # moved outside of the block."
 
     # every user can manage its own albums
-    can :manage, Album do |album|
+    can :manage, Album do |album, params|
       album.try(:profile).try(:user) == user
     end
 
     # pictures may get created by registered users
-    can :new, Picture, user.id > 0
+    if user.id and user.id > 0
+      can :new, Picture
+    else
+      cannot :new, Picture
+    end
 
     # pictures may only get edited or destroyed by their owners
     can [:edit, :destroy], Picture do |picture|
@@ -45,7 +49,7 @@ class Ability
     # but may only get attached to users' own albums.
     can [:create, :update], Picture do |picture, params|
       unless picture.try(:profile).try(:user) == user
-        false # skip if picture doesn't belong to user'
+        false # skip if picture doesn't belong to user
       else
         if picture.album.nil? && ( params.nil? || params[:album_id].nil? )
           true # no album - permitted

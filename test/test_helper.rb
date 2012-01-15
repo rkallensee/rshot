@@ -22,7 +22,7 @@ require 'rails/test_help'
 
 # Shoulda looks for RAILS_ROOT before loading shoulda/rails, and Rails 3.1
 # doesn't have that anymore. TEMPORARY FIX! ALSO FOR PAPERCLIP MATCHERS!
-require 'shoulda/rails'
+require 'shoulda/matchers'
 require 'paperclip/matchers'
 class Test::Unit::TestCase
   extend Paperclip::Shoulda::Matchers

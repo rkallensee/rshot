@@ -83,7 +83,7 @@ class AlbumsController < ApplicationController
   # PUT /albums/1.xml
   def update
     @album = @profile.albums.find(params[:id])
-    authorize! :update, @album, params[:album] # todo: params are not yet in the object!
+    authorize! :update, @album, params[:album]
 
     respond_to do |format|
       if @album.update_attributes(params[:album])

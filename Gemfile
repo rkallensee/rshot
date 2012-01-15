@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1'
+gem 'rails', '~> 3.1' # 3.2 is on the way
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -20,22 +20,22 @@ gem 'therubyracer', :require => 'v8'
 gem 'jquery-rails'
 
 # application-specific gems
-gem 'devise', '~> 1.5.2'
+gem 'devise', '~> 1.5.3' # 2.0 is on the way
 gem 'cancan', '~> 1.6.7'
-gem 'paperclip', '~> 2.4.3'
+gem 'paperclip', '~> 2.5.0'
 gem 'exifr', '~> 1.1.1'
-gem 'kaminari', '~> 0.12.4'
-gem 'acts-as-taggable-on', '~> 2.1.0'
+gem 'kaminari', '~> 0.13.0'
+gem 'acts-as-taggable-on', '~> 2.2.2'
 gem 'acts_as_commentable', '~> 3.0.1'
 
 gem 'fancybox-rails'
 
 group :test do
-  gem 'shoulda'
+  gem 'shoulda-matchers'
 end
 
 group :development do
-  gem 'mongrel'
+  #gem 'mongrel'
 end
 
 # Use unicorn as the web server

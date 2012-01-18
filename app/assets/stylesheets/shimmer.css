@@ -154,11 +154,11 @@ header .topbar h3 a {
 }
 
 #main .medium-image-stack a.image-stacked-first {
-    -moz-transform: rotate(-5deg);
-    -webkit-transform: rotate(-5deg);
-    -o-transform: rotate(-5deg);
-    -ms-transform: rotate(-5deg);
-    transform: rotate(-5deg);
+    -moz-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    transform: rotate(-10deg);
     z-index: 2;
 }
 
@@ -180,6 +180,35 @@ header .topbar h3 a {
     width: 320px;
     float: left;
     padding-bottom: 20px;
+    position: relative;
+}
+
+.mediumview-picture .mediumview-meta,
+.mediumview-album .mediumview-meta {
+    position: absolute;
+    bottom: 24px;
+    left: 0px;
+    width: 250px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 5px;
+    z-index: 3;
+}
+
+.mediumview-album .mediumview-meta {
+    -moz-transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+    left: 25px;
+    bottom: 62px;
+    width: 240px;
+}
+
+.mediumview-picture .mediumview-meta h3,
+.mediumview-album .mediumview-meta h3 {
+    line-height: 18px;
+    padding-bottom: 5px;
 }
 
 img.mini-image,

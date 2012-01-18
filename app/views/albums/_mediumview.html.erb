@@ -9,7 +9,9 @@
       <%= link_to image_tag(album.pictures.first.photo.url(:small), :class => 'medium-image'), profile_album_path(album.profile, album) %>
     <% end %>
   <% end %>
-  <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
-  <span class="label notice"><%= pluralize(album.pictures.count, 'picture') %></span>
-  by <%= link_to album.profile.nick, album.profile, {:title => "#{album.profile.forename} #{album.profile.surname}", :rel => 'twipsy'} %>
+  <div class="mediumview-meta">
+    <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
+    <span class="label notice"><%= pluralize(album.pictures.count, 'picture') %></span>
+    by <%= link_to album.profile.nick, album.profile, {:title => "#{album.profile.forename} #{album.profile.surname}", :rel => 'twipsy'} %>
+  </div>
 </div>

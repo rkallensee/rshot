@@ -33,7 +33,7 @@ class Picture < ActiveRecord::Base
   has_attached_file :photo,
     :styles => {
       :thumb   => ["75x75#", :jpg],
-      :small   => ["250x250>", :jpg],
+      :small   => ["250x250#", :jpg],
       :medium  => ["640x640>", :jpg] },
     :convert_options => { :all => '-auto-orient' } #,
     ## the following helps to obfuscate the URL. It'll change on every update of the model.
@@ -42,7 +42,7 @@ class Picture < ActiveRecord::Base
     #:url => "/system/:attachment/:id/:style/:filename",
     #:hash_secret => "tkb#H_oi?I+0-&RP;_Kd9/OF",
     #:hash_data => ":class/:attachment/:id/:style/:updated_at"
-  before_photo_post_process :extract_and_save_metadata!
+  before_photo_post_process :extract_and_save_metadata! # TODO: this breaks upload often!
 
   # validators
   validates_attachment_presence :photo

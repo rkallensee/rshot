@@ -1,11 +1,13 @@
 <div class="mediumview-picture">
   <%= link_to image_tag(picture.photo.url(:small), :class => 'medium-image'), profile_picture_path(picture.profile, picture) %>
-  <% unless picture.title.empty? %>
-    <h3><%= link_to picture.title, profile_picture_path(picture.profile, picture) %></h3>
-  <% end %>
-  <div>
-    <span class="label notice">
-      <%= pluralize(picture.comments.count, 'comment') %>
-    </span>
+  <div class="mediumview-meta">
+    <% unless picture.title.empty? %>
+      <h3><%= link_to picture.title, profile_picture_path(picture.profile, picture) %></h3>
+    <% end %>
+    <div>
+      <span class="label notice">
+        <%= pluralize(picture.comments.count, 'comment') %>
+      </span>
+    </div>
   </div>
 </div>

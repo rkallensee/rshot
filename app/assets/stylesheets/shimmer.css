@@ -154,12 +154,15 @@ header .topbar h3 a {
 }
 
 #main .medium-image-stack a.image-stacked-first {
+    z-index: 2;
+}
+
+#main .medium-image-stack a.image-stacked-second {
     -moz-transform: rotate(-10deg);
     -webkit-transform: rotate(-10deg);
     -o-transform: rotate(-10deg);
     -ms-transform: rotate(-10deg);
     transform: rotate(-10deg);
-    z-index: 2;
 }
 
 #main .medium-image-stack a.image-stacked img.medium-image {
@@ -195,13 +198,8 @@ header .topbar h3 a {
 }
 
 .mediumview-album .mediumview-meta {
-    -moz-transform: rotate(-10deg);
-    -webkit-transform: rotate(-10deg);
-    -o-transform: rotate(-10deg);
-    -ms-transform: rotate(-10deg);
-    transform: rotate(-10deg);
-    left: 25px;
-    bottom: 62px;
+    left: 10px;
+    bottom: 60px;
     width: 240px;
 }
 

@@ -2,18 +2,7 @@
 
 <h2><%= @album.title %></h2>
 
-<p>
-  <div><span class="label notice"><%= pluralize(@album.pictures.count, 'picture') %></span></div>
-  <% for picture in @album.pictures %>
-    <%= link_to image_tag(picture.photo.url(:thumb)), profile_album_picture_path(@album.profile, @album, picture) %>
-  <% end %>
-</p>
-
-<p>
-  <b>From:</b>
-  <%= render :partial => "profiles/popover", :locals => { :profile => @album.profile, :popover_element => image_tag(@album.profile.avatar.url(:tiny)) } %>
-  <%= link_to @album.profile.nick, @album.profile, {:title => "#{@album.profile.forename} #{@album.profile.surname}", :rel => 'twipsy'} %>
-</p>
+<div><span class="label notice"><%= pluralize(@album.pictures.count, 'picture') %></span></div>
 
 <% if can? :edit, @album %>
   <%= link_to 'Edit', edit_profile_album_path(@album.profile, @album), :class => "btn" %>
@@ -22,6 +11,16 @@
   <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn" %>
 <% end %>
 <%= link_to 'Back', profile_albums_path, :class => "btn" %>
+
+<%= paginate @pictures %>
+
+<% @pictures.each do |picture| %>
+  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture } %>
+<% end %>
+
+<div class="clearfix"></div>
+
+<%= paginate @pictures %>
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @album.profile } %>

@@ -15,7 +15,7 @@
 <%= paginate @pictures %>
 
 <% @pictures.each do |picture| %>
-  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture } %>
+  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_album_picture_path(@album.profile, @album, picture) } %>
 <% end %>
 
 <div class="clearfix"></div>

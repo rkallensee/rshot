@@ -81,7 +81,7 @@ class Picture < ActiveRecord::Base
     end
 
     begin
-      unless photo.queued_for_write[:original].nil?
+      unless photo.queued_for_write[:original].nil? && File.exists?(photo.queued_for_write[:original])
         # if called by "before_photo_post_process" event
         exifdata = EXIFR::JPEG.new(photo.queued_for_write[:original])
       else

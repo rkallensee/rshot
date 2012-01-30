@@ -26,7 +26,7 @@ Devise.setup do |config|
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Basic Auth is enabled. True by default.
-  # config.http_authenticatable = true
+  config.http_authenticatable = true
 
   # Set this to true to use Basic Auth for AJAX requests.  True by default.
   # config.http_authenticatable_on_xhr = true
@@ -55,14 +55,11 @@ Devise.setup do |config|
   # You can use this to let your user access some features of your application
   # without confirming the account, but blocking it after a certain period
   # (ie 2 days).
-  # config.confirm_within = 2.days
+  # config.allow_unconfirmed_access_for = 2.days
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
   config.remember_for = 2.weeks
-
-  # If true, a valid remember token can be re-used between multiple browsers.
-  config.remember_across_browsers = false
 
   # If true, extends the user's remember period when remembered via cookie.
   config.extend_remember_period = true
@@ -102,6 +99,12 @@ Devise.setup do |config|
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
   config.token_authentication_key = :auth_token
+
+  # compat config for Devise 2.0
+  config.use_salt_as_remember_token = true
+  config.reset_password_within = 6.hour
+  config.reconfirmable = true # reconfirm changed e-mail-addresses (since 2.0)
+  config.case_insensitive_keys = [:email]
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

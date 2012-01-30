@@ -16,24 +16,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  # Include all devise modules.
-  devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :trackable, :validatable, :token_authenticatable,
-         :confirmable, :lockable, :timeoutable
+class AddDeviseReconfirmable < ActiveRecord::Migration
+  def self.up
+    add_column :users, :unconfirmed_email, :string # necessary for Devise Reconfirmable
+    add_column :users, :reset_password_sent_at, :datetime
+    remove_column :users, :remember_token # remove unnecessary field (not used in Devise 2.0)
+  end
 
-  # attribute protection
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-
-  # attach profile
-  has_one :profile, :dependent => :destroy
-
-  # automatically create (empty) profile
-  after_create :create_empty_profile
-
-  def create_empty_profile
-    profile = Profile.new
-    profile.user_id = self.id
-    profile.save({:validate => false})
+  def self.down
+    remove_column :users, :unconfirmed_email
+    remove_column :users, :reset_password_sent_at
+    add_column :users, :unconfirmed_email, :string
   end
 end

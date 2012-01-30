@@ -22,7 +22,7 @@ group :assets do
 end
 
 # application-specific gems
-gem 'devise', '~> 1.5.3' # 2.0 is on the way
+gem 'devise', '~> 2.0.0'
 gem 'cancan', '~> 1.6.7'
 gem 'paperclip', '~> 2.5.0'
 gem 'exifr', '~> 1.1.1'

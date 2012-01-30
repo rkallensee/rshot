@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1' # 3.2 is on the way
+gem 'rails', '~> 3.2.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,15 +9,17 @@ gem 'rails', '~> 3.1' # 3.2 is on the way
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mysql2'
 
-# Rails 3.1 - Asset Pipeline
+# Rails - misc
 gem 'json'
-gem 'sass'
-gem 'coffee-script'
-gem 'uglifier'
-gem 'therubyracer', :require => 'v8'
-
-# Rails 3.1 - jQuery support
 gem 'jquery-rails'
+
+# Assets and asset pipeline
+group :assets do
+  gem 'sass-rails',   '~> 3.2.0'
+  gem 'coffee-rails', '~> 3.2.0'
+  gem 'uglifier'
+  gem 'compass',      '~> 0.12.alpha'
+end
 
 # application-specific gems
 gem 'devise', '~> 1.5.3' # 2.0 is on the way

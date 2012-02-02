@@ -1,8 +1,19 @@
-<b>From:</b>
-<%= render :partial => "profiles/popover", :locals => { :profile => profile, :popover_element => image_tag(profile.avatar.url(:micro), :class => 'profile-image') } %>
-<%= link_to profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'twipsy'} %>
-<ul>
-    <li><%= link_to "Photostream", profile_pictures_path(profile) %></li>
-    <li><%= link_to "Albums", profile_albums_path(profile) %></li>
-    <li><%= link_to "User profile", profile_path(profile) %></li>
+<ul class="nav nav-list">
+    <li class="nav-header">
+      <b>From:</b>
+      <%= link_to image_tag(profile.avatar.url(:micro), :class => 'profile-image') + profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'tooltip'} %>
+    </li>
+
+    <li class="active">
+        <%= link_to "Photostream", profile_pictures_path(profile) %>
+    </li>
+    <li>
+        <%= link_to "Albums", profile_albums_path(profile) %>
+    </li>
+    <li>
+        <a href="<%= profile_path(profile) %>">
+          <i class="icon-book"></i>
+          User profile
+        </a>
+    </li>
 </ul>

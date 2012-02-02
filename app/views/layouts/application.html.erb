@@ -12,6 +12,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
     <%= favicon_link_tag 'favicon.ico' %>
     <%= favicon_link_tag 'apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
 
@@ -25,77 +30,86 @@
 </head>
 <body>
     <header>
-        <div class="topbar">
-            <div class="fill">
-                <div class="container">
-                    <h3><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="i-bar"></span>
+              <span class="i-bar"></span>
+              <span class="i-bar"></span>
+            </a>
+            <h3 class="brand"><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li class="active"><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
+                <% if user_signed_in? %>
+                    <li><%= link_to 'Profile', current_user.profile %></li>
+                    <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
+                    <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
+                    <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
+                <% end %>
+              </ul>
 
-                    <ul class="nav">
-                        <li class="active"><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
-                        <% if user_signed_in? %>
-                            <li><%= link_to 'Profile', current_user.profile %></li>
-                            <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
-                            <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
-                            <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
-                        <% end %>
-                    </ul>
-                    <ul class="nav secondary-nav">
-                        <% if user_signed_in? %>
-                            <li class="dropdown" data-dropdown="dropdown">
-                                <%= link_to image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image') + current_user.profile.nick, "#", :class => "dropdown-toggle" %>
-                                <ul class="dropdown-menu">
-                                    <li><%= link_to 'Profile', current_user.profile %></li>
-                                    <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
-                                    <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
-                                    <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
-                                    <li><%= link_to 'Account', edit_user_registration_path %></li>
-                                    <li><%= link_to "Sign out", destroy_user_session_path %></li>
-                                </ul>
-                            </li>
-                        <% else %>
-                            <li><%= link_to "Sign up", new_user_registration_path %></li>
-                            <li><%= link_to "Sign in", new_user_session_path %></li>
-                        <% end %>
-                    </ul>
-                    <% unless user_signed_in? %>
-                        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "pull-right" }) do |f| %>
-                            <%= f.email_field :email, :class => "input-small", :placeholder => :email %>
-                            <%= f.password_field :password, :class => "input-small", :placeholder => :password %>
-                            <%= content_tag( :button, "Sign in", :type => :submit, :class => "btn") %>
-                        <% end %>
-                    <% end %>
-                </div>
-            </div>
+              <ul class="nav secondary-nav">
+                <% if user_signed_in? %>
+                    <li class="dropdown user-menu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image') %>
+                        <span class="nick"><%= current_user.profile.nick %></span>
+                        <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Profile', current_user.profile %></li>
+                        <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
+                        <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
+                        <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
+                        <li><%= link_to 'Account', edit_user_registration_path %></li>
+                        <li><%= link_to "Sign out", destroy_user_session_path %></li>
+                      </ul>
+                    </li>
+                <% else %>
+                    <li><%= link_to "Sign up", new_user_registration_path %></li>
+                    <li><%= link_to "Sign in", new_user_session_path %></li>
+                <% end %>
+              </ul>
+              <% unless user_signed_in? %>
+                  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "pull-right" }) do |f| %>
+                      <%= f.email_field :email, :class => "input-small", :placeholder => :email %>
+                      <%= f.password_field :password, :class => "input-small", :placeholder => :password %>
+                      <%= content_tag( :button, "Sign in", :type => :submit, :class => "btn") %>
+                  <% end %>
+              <% end %>
+            </div><!--/.nav-collapse -->
+          </div>
         </div>
+      </div>
     </header>
 
-    <div id="container">
-        <div class="container" id="mainContainer">
-            <div class="row">
-                <div id="main" role="main" class="span13">
-                    <% flash.each do |name, msg| %>
-                        <div class="alert-message <%= name %> fade in" data-alert="alert">
-                            <a class="close" href="#">&times;</a>
-                            <p><%= msg %></p>
-                        </div>
-                    <% end %>
-
-                    <%= yield %>
-                </div>
-                <% if content_for?(:sidebar) %>
-                    <aside class="span4">
-                        <%= yield :sidebar %>
-                    </aside>
+    <div class="container" id="mainContainer">
+        <div class="row">
+            <div id="main" role="main" class="span9">
+                <% flash.each do |name, msg| %>
+                    <div class="alert-message <%= name %> fade in" data-alert="alert">
+                        <a class="close" href="#">&times;</a>
+                        <p><%= msg %></p>
+                    </div>
                 <% end %>
-                <div class="clearfix"></div>
+
+                <%= yield %>
             </div>
-            <footer>
-                <b>shimmer</b> is powered by <a href="http://rshot.net">rshot</a>, a free and
-                open-source photo sharing software created by <a href="http://raphael.kallensee.name">Raphael Kallensee</a>.
-            </footer>
+            <% if content_for?(:sidebar) %>
+                <aside class="span3">
+                    <%= yield :sidebar %>
+                </aside>
+            <% end %>
             <div class="clearfix"></div>
         </div>
-    </div><!--! end of #container -->
+        <footer>
+            <b>shimmer</b> is powered by <a href="http://rshot.net">rshot</a>, a free and
+            open-source photo sharing software created by <a href="http://raphael.kallensee.name">Raphael Kallensee</a>.
+        </footer>
+        <div class="clearfix"></div>
+    </div>
 
 </body>
 </html>

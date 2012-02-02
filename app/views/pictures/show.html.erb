@@ -22,75 +22,78 @@
   <%= link_to 'Back', @back_link, :class => "btn" %><br />
 </p>
 
-<p>
-  <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
-</p>
-
-<% unless @picture.title.empty? %>
-    <h2><%= @picture.title %></h2>
-<% end %>
-
-<% unless @picture.album.nil? %>
-<p>
-  <b>Album:</b>
-  <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
-</p>
-<% end %>
-
-<% unless @picture.tags.empty? %>
-<p>
-  <b>Tags:</b>
-  <%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %>
-</p>
-<% end %>
-
 <div class="picture-details-tabs">
-    <ul class="tabs" data-tabs="tabs" >
-      <li class="active"><a href="#picture-comments">Comments</a></li>
-      <li><a href="#picture-metadata">EXIF metadata</a></li>
+  <div class="tabbable tabs-left">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#picture-view" data-toggle="tab">Picture</a></li>
+      <li><a href="#picture-comments" data-toggle="tab">Comments</a></li>
+      <li><a href="#picture-metadata" data-toggle="tab">EXIF metadata</a></li>
     </ul>
-
     <div class="tab-content">
-      <div class="tab-pane active" id="picture-comments">
-          <h3>Comments:</h3>
-          <% @comments.each do |comment| %>
+      <div class="tab-pane active" id="picture-view">
+        <p>
+          <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
+        </p>
+
+        <% unless @picture.title.empty? %>
+            <h2><%= @picture.title %></h2>
+        <% end %>
+
+        <% unless @picture.album.nil? %>
+            <p>
+              <b>Album:</b>
+              <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
+            </p>
+        <% end %>
+
+        <% unless @picture.tags.empty? %>
+            <p>
+              <b>Tags:</b>
+              <%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %>
+            </p>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="picture-comments">
+        <h3>Comments:</h3>
+        <% @comments.each do |comment| %>
             <blockquote>
               <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
               <p><%= comment.comment %></p>
-              <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="twipsy"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
+              <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="tooltip"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
             </blockquote>
-          <% end %>
-          <% if @comments.empty? %>
+        <% end %>
+        <% if @comments.empty? %>
             <em>There are no comments at the moment.</em>
-          <% end %>
+        <% end %>
 
-          <% if @comment.errors.any? %>
+        <% if @comment.errors.any? %>
             <div class="alert-message block-message error fade in" data-alert="alert">
               <a class="close" href="#">&times;</a>
               <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
               <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
+                <% @comment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
               </ul>
             </div>
-          <% end %>
+        <% end %>
 
-          <% if user_signed_in? %>
+        <% if user_signed_in? %>
             <h4>Add a comment</h4>
             <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
-              <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
-              <%= f.text_area :comment, :cols => 20, :rows => 2 %>
-              <div><%= f.submit(:class => "btn primary") %></div>
+                <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
+                <%= f.text_area :comment, :cols => 20, :rows => 2 %>
+                <div><%= f.submit(:class => "btn primary") %></div>
             <% end %>
-          <% else %>
+        <% else %>
             <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
-          <% end %>
+        <% end %>
       </div>
       <div class="tab-pane" id="picture-metadata">
         <%= render :partial => "metadata-table", :locals => { :picture => @picture } %>
       </div>
     </div>
+  </div>
 </div>
 
 <% unless @picture.metadata.gps_latitude.nil? %>

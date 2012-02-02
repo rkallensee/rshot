@@ -1,14 +1,18 @@
 <h3>This user has <%= pluralize(albums.count, 'album') %>:</h3>
 
-<ul>
-<% albums.reverse.first(5).each do |album| %>
-    <li>
-        <% unless album.pictures.empty? %>
-            <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'), profile_album_path(album.profile, album) %>
-        <% end %>
-        <h4><%= album.title %></h4>
-    </li>
-<% end %>
-</ul>
+<div class="shimmer-user-minialbumlist">
+    <ul>
+    <% albums.reverse.first(5).each do |album| %>
+        <li>
+            <% unless album.pictures.empty? %>
+                <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'),
+                    profile_album_path(album.profile, album), :rel => 'tooltip', :title => album.title %>
+            <% end %>
+        </li>
+    <% end %>
+    </ul>
+</div>
+
+<div class="clearfix"></div>
 
 <%= link_to 'more albums', profile_albums_path(albums.first.profile) %>

@@ -6,8 +6,10 @@
     <% end %>
     <div>
       <span class="label notice">
-        <%= pluralize(picture.comments.count, 'comment') %>
+        <i class="icon-comment icon-white"></i> <%= pluralize(picture.comments.count, 'comment') %>
       </span>
+      by <%= link_to picture.profile.nick, picture.profile,
+         {:title => "#{picture.profile.forename} #{picture.profile.surname}", :rel => 'tooltip'} %>
     </div>
   </div>
 </div>

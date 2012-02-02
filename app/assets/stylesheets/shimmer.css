@@ -249,14 +249,17 @@ aside {
 }
 
 aside .shimmer-album-minicontent ul,
-aside .shimmer-scope-image-navigation ul {
+aside .shimmer-scope-image-navigation ul,
+aside .shimmer-user-minialbumlist ul,
+aside .shimmer-album-miniteaser ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
 aside .shimmer-album-minicontent ul li,
-aside .shimmer-scope-image-navigation ul li {
+aside .shimmer-scope-image-navigation ul li,
+aside .shimmer-user-minialbumlist ul li {
     float: left;
     margin: 0 5px 5px 0;
     padding: 0;

@@ -1,4 +1,4 @@
-<%= form_for [@profile, @picture], :html => { :multipart => true, :class => "form-stacked" } do |f| %>
+<%= form_for [@profile, @picture], :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
   <% if @picture.errors.any? %>
     <div class="alert-message block-message error fade in" data-alert="alert">
       <a class="close" href="#">&times;</a>
@@ -12,28 +12,37 @@
     </div>
   <% end %>
 
-  <div class="clearfix">
-    <%= f.label :photo %><br />
-    <%= f.file_field :photo%>
+  <div class="control-group">
+    <%= f.label :photo, :class => 'control-label' %>
+    <div class="controls">
+        <%= f.file_field :photo%>
+    </div>
   </div>
 
-  <div class="clearfix">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+        <%= f.text_field :title %>
+    </div>
   </div>
 
-  <div class="clearfix">
-    <%= f.label :album %><br />
-    <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
+  <div class="control-group">
+    <%= f.label :album, :class => 'control-label' %>
+    <div class="controls">
+        <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
+    </div>
   </div>
 
-  <div class="clearfix">
-    <%= f.label :tag_list %> (separated by comma)<br />
-    <%= f.text_field :tag_list %>
+  <div class="control-group">
+    <%= f.label :tag_list, :class => 'control-label' %>
+    <div class="controls">
+        <%= f.text_field :tag_list %>
+        <p class="help-block">Separated by comma.</p>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit(:class => "btn primary") %>
+  <div class="form-actions">
+    <%= f.submit(:class => "btn btn-primary") %>
 
     <% if @picture.persisted? %>
       <%= link_to 'Back', profile_picture_path(@profile, @picture), :class => "btn" %>

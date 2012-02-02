@@ -1,3 +1,5 @@
+<h2><%= @picture.title.empty? ? 'Picture' : @picture.title %></h2>
+
 <p>
   <% unless @prev_link.nil? %>
     <%= link_to 'Prev', @prev_link, :class => "btn" %>
@@ -25,19 +27,15 @@
 <div class="picture-details-tabs">
   <div class="tabbable tabs-left">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#picture-view" data-toggle="tab">Picture</a></li>
-      <li><a href="#picture-comments" data-toggle="tab">Comments</a></li>
-      <li><a href="#picture-metadata" data-toggle="tab">EXIF metadata</a></li>
+      <li class="active"><a href="#picture-view" data-toggle="tab"><i class="icon-picture"></i>Picture</a></li>
+      <li><a href="#picture-comments" data-toggle="tab"><i class="icon-comment"></i>Comments</a></li>
+      <li><a href="#picture-metadata" data-toggle="tab"><i class="icon-list-alt"></i>EXIF metadata</a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="picture-view">
         <p>
           <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
         </p>
-
-        <% unless @picture.title.empty? %>
-            <h2><%= @picture.title %></h2>
-        <% end %>
 
         <% unless @picture.album.nil? %>
             <p>

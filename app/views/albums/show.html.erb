@@ -2,7 +2,7 @@
 
 <h2><%= @album.title %></h2>
 
-<div><span class="label notice"><%= pluralize(@album.pictures.count, 'picture') %></span></div>
+<div><span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@album.pictures.count, 'picture') %></span></div>
 
 <% if can? :edit, @album %>
   <%= link_to 'Edit', edit_profile_album_path(@album.profile, @album), :class => "btn" %>
@@ -11,6 +11,8 @@
   <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn" %>
 <% end %>
 <%= link_to 'Back', profile_albums_path, :class => "btn" %>
+
+<div class="clearfix"></div>
 
 <%= paginate @pictures %>
 

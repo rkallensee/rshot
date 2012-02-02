@@ -11,7 +11,7 @@
   <% end %>
   <div class="mediumview-meta">
     <h3><%= link_to album.title, profile_album_path(album.profile, album) %></h3>
-    <span class="label notice"><%= pluralize(album.pictures.count, 'picture') %></span>
+    <span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(album.pictures.count, 'picture') %></span>
     by <%= link_to album.profile.nick, album.profile, {:title => "#{album.profile.forename} #{album.profile.surname}", :rel => 'tooltip'} %>
   </div>
 </div>

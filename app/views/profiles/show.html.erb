@@ -41,14 +41,14 @@
 </p>
 
 <p>
-  <span class="label notice"><%= pluralize(@albums.count, 'album') %>:</span><br />
+  <span class="label notice"><i class="icon-folder-open icon-white"></i> <%= pluralize(@albums.count, 'album') %>:</span><br />
   <% for album in @albums %>
     <%= link_to (album.pictures.count > 0 ? image_tag(album.pictures.first.photo.url(:thumb)) : album.title), profile_album_path(@profile, album) %>
   <% end %>
 </p>
 
 <p>
-  <span class="label notice"><%= pluralize(@pictures.count, 'picture') %>:</span><br />
+  <span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@pictures.count, 'picture') %>:</span><br />
   <% for picture in @pictures %>
     <%= link_to image_tag(picture.photo.url(:thumb)), profile_picture_path(@profile, picture) %>
   <% end %>

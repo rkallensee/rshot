@@ -5,15 +5,21 @@
     </li>
 
     <li class="active">
-        <%= link_to "Photostream", profile_pictures_path(profile) %>
+        <a href="<%= profile_pictures_path(profile) %>">
+            <i class="icon-picture"></i>
+            Photostream
+        </a>
     </li>
     <li>
-        <%= link_to "Albums", profile_albums_path(profile) %>
+        <a href="<%= profile_albums_path(profile) %>">
+            <i class="icon-folder-open"></i>
+            Albums
+        </a>
     </li>
     <li>
         <a href="<%= profile_path(profile) %>">
-          <i class="icon-book"></i>
-          User profile
+            <i class="icon-user"></i>
+            User profile
         </a>
     </li>
 </ul>

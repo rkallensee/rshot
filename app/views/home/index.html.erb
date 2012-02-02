@@ -1,9 +1,30 @@
-<div class="hero-unit">
-    <% if @picture %>
-        <%= link_to image_tag(@picture.photo.url(:medium), :class => 'home-teaser-image'), profile_picture_path(@picture.profile, @picture) %>
-        <h2><%= @picture.title %></h2>
-        <div>by <%= link_to @picture.profile.nick, @picture.profile, {:title => "#{@picture.profile.forename} #{@picture.profile.surname}", :rel => 'tooltip'} %></div>
-    <% end %>
+<div class="hero-unit hero-unit-homepage">
+  <% if @picture %>
+  <div id="homepage-carousel" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="item active">
+        <%= link_to image_tag(@picture.photo.url(:medium), :class => 'home-teaser-image'),
+            profile_picture_path(@picture.profile, @picture) %>
+        <div class="carousel-caption">
+          <h2><%= @picture.title %></h2>
+          <div>by <%= link_to @picture.profile.nick, @picture.profile,
+            {:title => "#{@picture.profile.forename} #{@picture.profile.surname}", :rel => 'tooltip'} %></div>
+        </div>
+      </div>
+      <div class="item">
+        <%= link_to image_tag(@picture.photo.url(:medium), :class => 'home-teaser-image'),
+                    profile_picture_path(@picture.profile, @picture) %>
+        <div class="carousel-caption">
+          <h2><%= @picture.title %></h2>
+          <div>by <%= link_to @picture.profile.nick, @picture.profile,
+                              {:title => "#{@picture.profile.forename} #{@picture.profile.surname}", :rel => 'tooltip'} %></div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#homepage-carousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#homepage-carousel" data-slide="next">&rsaquo;</a>
+  </div>
+  <% end %>
 </div>
 
 <% content_for :sidebar do %>

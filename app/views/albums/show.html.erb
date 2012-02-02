@@ -5,10 +5,13 @@
 <div><span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@album.pictures.count, 'picture') %></span></div>
 
 <% if can? :edit, @album %>
-  <%= link_to 'Edit', edit_profile_album_path(@album.profile, @album), :class => "btn" %>
+  <a href="<%= edit_profile_album_path(@album.profile, @album) %>" class="btn btn-info">
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  </a>
 <% end %>
 <% if can? :destroy, @album %>
-  <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn" %>
+  <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
 <% end %>
 <%= link_to 'Back', profile_albums_path, :class => "btn" %>
 

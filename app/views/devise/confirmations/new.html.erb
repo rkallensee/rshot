@@ -1,15 +1,17 @@
 <h2>Resend confirmation instructions</h2>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => "form-stacked" }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => "form-horizontal" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="clearfix">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.email_field :email %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit("Resend confirmation instructions", :class => "btn primary") %>
+  <div class="form-actions">
+    <%= f.submit("Resend confirmation instructions", :class => "btn btn-primary") %>
   </div>
 <% end %>
 

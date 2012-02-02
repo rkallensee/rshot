@@ -2,24 +2,39 @@
 
 <p>
   <% unless @prev_link.nil? %>
-    <%= link_to 'Prev', @prev_link, :class => "btn" %>
+    <a href="<%= @prev_link %>" class="btn">
+      <i class="icon-chevron-left"></i>
+      Previous
+    </a>
   <% else %>
-    <%= link_to 'Prev', "#", :class => "btn disabled" %>
+    <a href="#" class="btn disabled">
+      <i class="icon-chevron-left"></i>
+      Previous
+    </a>
   <% end %>
 
   <% unless @next_link.nil? %>
-    <%= link_to 'Next', @next_link, :class => "btn" %>
+    <a href="<%= @next_link %>" class="btn">
+      Next
+      <i class="icon-chevron-right"></i>
+    </a>
   <% else %>
-    <%= link_to 'Next', "#", :class => "btn disabled" %>
+    <a href="#" class="btn disabled">
+      Next
+      <i class="icon-chevron-right"></i>
+    </a>
   <% end %>
 
   ###
 
   <% if can? :edit, @picture %>
-    <%= link_to 'Edit', edit_profile_picture_path(@picture.profile, @picture), :class => "btn" %>
+    <a href="<%= edit_profile_picture_path(@picture.profile, @picture) %>" class="btn btn-info">
+      <i class="icon-pencil icon-white"></i>
+      Edit
+    </a>
   <% end %>
   <% if can? :destroy, @picture %>
-    <%= link_to 'Destroy', profile_picture_path(@picture.profile, @picture), :confirm => 'Are you sure?', :method => :delete, :class => "btn" %>
+    <%= link_to 'Destroy', profile_picture_path(@picture.profile, @picture), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
   <% end %>
   <%= link_to 'Back', @back_link, :class => "btn" %><br />
 </p>

@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     $('a[rel=popover]').popover({html: true});
 
+    $('.carousel').carousel();
+
     $("a.lightbox").fancybox({
         'transitionIn'  :   'elastic',
         'transitionOut' :   'elastic',

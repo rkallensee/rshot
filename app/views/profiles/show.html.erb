@@ -3,7 +3,7 @@
 <h2>Profile of &raquo;<%= @profile.forename %> <%= @profile.surname %> (<%= @profile.nick %>)&laquo;</h2>
 
 <% if can? :edit, @profile %>
-  <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn" %>
+  <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-info" %>
 <% end %>
 
 <p>

@@ -29,39 +29,13 @@ textarea,
 .clearfix:after {
     clear: both;
 }
-/*
-header {
-    background-color: #D0D0D0;
-    box-shadow: 0 5px 5px 1px #AAAAAA;
-    padding-top: 10px;
-}
 
 .container {
-    width: 990px;
-    margin: 0px auto;
     position: relative;
 }
 
-#mainContainer {
-    margin-bottom: 10px;
-    width: 1030px;
-}
-*/
-header .navbar ul.nav li.user-menu {
-    height: 40px;
-}
-
-header .navbar ul.nav li a img.profile-image {
-    float: left;
-    margin: -2px 10px 0 0;
-}
-/*
-header .topbar {
-    box-shadow: 0 5px 5px 1px #AAAAAA;
-}
-
-header .topbar-inner,
-header .topbar .fill {
+header .navbar-inner,
+header .navbar .fill {
     background-color: #AAA;
     background-color: #AAAAAA;
     background-repeat: repeat-x;
@@ -74,60 +48,50 @@ header .topbar .fill {
     background-image: linear-gradient(top, #AAAAAA, #999999);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#AAAAAA', endColorstr='#999999', GradientType=0);
 }
-*/
-header .topbar h3 a {
+
+header .navbar {
+    box-shadow: 0 0px 10px 2px #333333;
+}
+
+header .navbar h3 a {
     font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
     font-weight: 700;
-    font-size: 35px;
+    font-size: 20px;
     color: #FFFFFF;
     text-shadow: 0px 0px 5px #555555;
     filter: dropshadow(color=#555555, offx=1, offy=1);
     padding: 4px 20px 2px;
 }
-/*
-.topbar div > ul a,
-.nav a {
-    text-shadow: 1px 1px 1px #999999;
-    filter: dropshadow(color=#999999, offx=1, offy=1);
+
+header .navbar ul.rshot-user-menu {
+    float: right;
 }
 
-.topbar a {
-    color: #FFFFFF;
+header .navbar ul.rshot-user-menu li.user-menu {
+    height: 40px;
 }
 
-.topbar div > ul a.menu:hover,
-.nav a.menu:hover,
-.topbar div > ul li.open .menu,
-.nav li.open .menu,
-.topbar div > ul .dropdown-toggle:hover,
-.nav .dropdown-toggle:hover,
-.topbar div > ul .dropdown.open .dropdown-toggle,
-.nav .dropdown.open .dropdown-toggle {
-    background-color: rgba(0, 0, 0, 0.5);
+header .navbar ul.rshot-user-menu li a img.profile-image {
+    float: left;
+    margin: -2px 10px 0 0;
 }
 
-.topbar div > ul .menu-dropdown,
-.nav .menu-dropdown,
-.topbar div > ul .dropdown-menu,
-.nav .dropdown-menu {
-    background-color: #999999;
+header .navbar form.form-inline {
+    margin-bottom: 0;
 }
 
-.topbar div > ul .menu-dropdown li a,
-.nav .menu-dropdown li a,
-.topbar div > ul .dropdown-menu li a,
-.nav .dropdown-menu li a {
-    color: #FFFFFF;
+header .navbar form.form-inline input {
+    margin-top: 5px;
 }
-*/
+
 body {
     padding-top: 40px;
 }
-/*
+
 #main {
-    padding: 20px 0px 20px 20px;
+    padding: 20px 0px 0px;
 }
-*/
+
 #main h2 {
     font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
     font-size: 1.9em;
@@ -178,6 +142,10 @@ body {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
+#main .hero-unit-homepage img {
+    margin: 0 auto;
+}
+
 #main .picture-details-tabs {
     overflow: hidden;
 }
@@ -195,7 +163,7 @@ body {
     position: absolute;
     bottom: 24px;
     left: 0px;
-    width: 250px;
+    width: 240px;
     background-color: rgba(255,255,255,0.5);
     padding: 5px;
     z-index: 3;
@@ -204,13 +172,16 @@ body {
 .mediumview-album .mediumview-meta {
     left: 10px;
     bottom: 60px;
-    width: 240px;
 }
 
 .mediumview-picture .mediumview-meta h3,
 .mediumview-album .mediumview-meta h3 {
     line-height: 18px;
     padding-bottom: 5px;
+}
+
+.mediumview-picture .mediumview-meta i.icon-map-marker {
+    float: right;
 }
 
 img.mini-image,
@@ -246,6 +217,10 @@ aside {
     width: 300px;
     float: right;
     padding: 20px 0px;
+}
+
+aside .rshot-miniprofile {
+    padding: 8px 0;
 }
 
 aside .shimmer-album-minicontent ul,

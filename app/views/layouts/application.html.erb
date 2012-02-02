@@ -50,7 +50,7 @@
                 <% end %>
               </ul>
 
-              <ul class="nav secondary-nav">
+              <ul class="nav rshot-user-menu">
                 <% if user_signed_in? %>
                     <li class="dropdown user-menu">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -59,12 +59,43 @@
                         <b class="caret"></b>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><%= link_to 'Profile', current_user.profile %></li>
-                        <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
-                        <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
-                        <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
-                        <li><%= link_to 'Account', edit_user_registration_path %></li>
-                        <li><%= link_to "Sign out", destroy_user_session_path %></li>
+                        <li>
+                          <a href="<%= url_for(current_user.profile) %>">
+                            <i class="icon-user"></i>
+                            Profile
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%= profile_pictures_path(current_user.profile) %>">
+                            <i class="icon-camera"></i>
+                            My pictures
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%= profile_albums_path(current_user.profile) %>">
+                            <i class="icon-folder-open"></i>
+                            My albums
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="<%= new_profile_picture_path(current_user.profile) %>">
+                            <i class="icon-camera"></i>
+                            Upload picture
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%= edit_user_registration_path %>">
+                            <i class="icon-cog"></i>
+                            Account
+                          </a>
+                        </li>
+                        <li>
+                          <a href="<%= destroy_user_session_path %>">
+                            <i class="icon-off"></i>
+                            Sign out
+                          </a>
+                        </li>
                       </ul>
                     </li>
                 <% else %>
@@ -73,7 +104,7 @@
                 <% end %>
               </ul>
               <% unless user_signed_in? %>
-                  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "pull-right" }) do |f| %>
+                  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-inline pull-right" }) do |f| %>
                       <%= f.email_field :email, :class => "input-small", :placeholder => :email %>
                       <%= f.password_field :password, :class => "input-small", :placeholder => :password %>
                       <%= content_tag( :button, "Sign in", :type => :submit, :class => "btn") %>
@@ -89,9 +120,9 @@
         <div class="row">
             <div id="main" role="main" class="span9">
                 <% flash.each do |name, msg| %>
-                    <div class="alert-message <%= name %> fade in" data-alert="alert">
-                        <a class="close" href="#">&times;</a>
-                        <p><%= msg %></p>
+                    <div class="alert alert-<%= name %> fade in">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
+                        <%= msg %>
                     </div>
                 <% end %>
 

@@ -10,6 +10,9 @@
       </span>
       by <%= link_to picture.profile.nick, picture.profile,
          {:title => "#{picture.profile.forename} #{picture.profile.surname}", :rel => 'tooltip'} %>
+      <% unless picture.metadata.gps_latitude.nil? %>
+        <i class="icon-map-marker"></i>
+      <% end %>
     </div>
   </div>
 </div>

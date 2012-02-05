@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # rshot (http://rshot.net) - a social digital photo gallery.
-# (c) 2011 Raphael Kallensee
+# (c) 2011-2012 Raphael Kallensee
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by

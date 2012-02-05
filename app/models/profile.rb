@@ -35,6 +35,7 @@ class Profile < ActiveRecord::Base
 
   # validators
   validates :nick, :presence => true, :length => { :minimum => 3, :maximum => 50 }
+  validates_uniqueness_of :nick
   validates_attachment_size :avatar, :less_than => 2.megabytes
   validates_presence_of :user_id
 

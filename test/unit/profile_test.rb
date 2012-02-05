@@ -29,6 +29,7 @@ class ProfileTest < ActiveSupport::TestCase
   should validate_attachment_size(:avatar).less_than(2.megabytes)
   should validate_presence_of(:user_id)
   should validate_presence_of(:nick)
+  should validate_uniqueness_of(:nick)
   should allow_mass_assignment_of(:nick)
   should allow_mass_assignment_of(:forename)
   should allow_mass_assignment_of(:surname)

@@ -26,19 +26,19 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    assert_raise(ActionController::RoutingError) {
+    assert_raise(AbstractController::ActionNotFound) {
       get :index
     }
   end
 
   test "should get new" do
-    assert_raise(ActionController::RoutingError) {
+    assert_raise(AbstractController::ActionNotFound) {
       get :new
     }
   end
 
   test "should create profile" do
-    assert_raise(ActionController::RoutingError) {
+    assert_raise(AbstractController::ActionNotFound) {
       post :create, :profile => @profile.attributes
     }
   end
@@ -62,18 +62,20 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should update profile" do
-    put :update, :id => @profile.to_param, :profile => @profile.attributes
+    put :update, :id => @profile.to_param, :profile => @profile.attributes.except(
+      "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")
     assert_response 302
     assert_redirected_to new_user_session_path
 
     sign_in :user, users(:one)
 
-    put :update, :id => @profile.to_param, :profile => @profile.attributes
+    put :update, :id => @profile.to_param, :profile => @profile.attributes.except(
+      "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")
     assert_redirected_to profile_path(assigns(:profile))
   end
 
   test "should destroy profile" do
-    assert_raise(ActionController::RoutingError) {
+    assert_raise(AbstractController::ActionNotFound) {
       delete :destroy, :id => @profile.to_param
     }
   end

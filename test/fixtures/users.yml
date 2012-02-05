@@ -6,7 +6,6 @@ one:
   encrypted_password: f00b4r
   password_salt: b4rb4z
   reset_password_token: 23456
-  remember_token: 23456
   remember_created_at: nil
   sign_in_count: 1
   current_sign_in_at: 2011-01-02 03:04:05
@@ -20,6 +19,8 @@ one:
   unlock_token: 23456
   locked_at: nil
   authentication_token: 23456
+  unconfirmed_email: nil
+  reset_password_sent_at: nil
 
 two:
   id: 2
@@ -27,7 +28,6 @@ two:
   encrypted_password: f00f00f00
   password_salt: b4rb4rb4r
   reset_password_token: 12345
-  remember_token: 12345
   remember_created_at: nil
   sign_in_count: 1
   current_sign_in_at: 2011-01-02 03:04:05
@@ -41,3 +41,5 @@ two:
   unlock_token: 12345
   locked_at: nil
   authentication_token: 12345
+  unconfirmed_email: nil
+  reset_password_sent_at: nil

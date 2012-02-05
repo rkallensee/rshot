@@ -45,14 +45,16 @@ class AlbumsControllerTest < ActionController::TestCase
   end
 
   test "should create album" do
-    post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes}
+    post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes.except(
+      "id", "created_at", "updated_at", "profile_id")}
     assert_response 302
     assert_redirected_to new_user_session_path
 
     sign_in :user, users(:one)
 
     assert_difference('Album.count') do
-      post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes}
+      post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes.except(
+        "id", "created_at", "updated_at", "profile_id")}
     end
 
     assert_redirected_to profile_album_path(profiles(:one), assigns(:album))
@@ -75,13 +77,15 @@ class AlbumsControllerTest < ActionController::TestCase
   end
 
   test "should update album" do
-    put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes}
+    put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes.except(
+      "id", "created_at", "updated_at", "profile_id")}
     assert_response 302
     assert_redirected_to new_user_session_path
 
     sign_in :user, users(:one)
 
-    put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes}
+    put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes.except(
+      "id", "created_at", "updated_at", "profile_id")}
     assert_redirected_to profile_album_path(profiles(:one), assigns(:album))
   end
 

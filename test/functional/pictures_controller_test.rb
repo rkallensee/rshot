@@ -83,7 +83,12 @@ class PicturesControllerTest < ActionController::TestCase
 
     sign_in :user, users(:one)
 
-    put :update, {:id => @picture.to_param, :picture => @picture.attributes, :profile_id => profiles(:one).nick}
+    assert_raise(ActiveModel::MassAssignmentSecurity::Error) {
+      put :update, {:id => @picture.to_param, :profile_id => profiles(:one).nick, :picture => @picture.attributes}
+    }
+
+    put :update, {:id => @picture.to_param, :profile_id => profiles(:one).nick, :picture => @picture.attributes.except(
+      "id", "created_at", "updated_at", "photo_file_name", "photo_content_type", "photo_file_size", "profile_id")}
     assert_response 200 # picture wasn't updated b/c there's no image in the fixture / put request
     assert !assigns(:picture).valid?
   end

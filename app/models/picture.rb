@@ -42,7 +42,7 @@ class Picture < ActiveRecord::Base
     #:url => "/system/:attachment/:id/:style/:filename",
     #:hash_secret => "tkb#H_oi?I+0-&RP;_Kd9/OF",
     #:hash_data => ":class/:attachment/:id/:style/:updated_at"
-  before_photo_post_process :extract_and_save_metadata! # TODO: this breaks upload often!
+  before_photo_post_process :extract_and_save_metadata! # TODO: this seems to break upload sometimes.
 
   # validators
   validates_attachment_presence :photo
@@ -83,11 +83,13 @@ class Picture < ActiveRecord::Base
     begin
       unless photo.queued_for_write[:original].nil? && File.exists?(photo.queued_for_write[:original])
         # if called by "before_photo_post_process" event
-        exifdata = EXIFR::JPEG.new(photo.queued_for_write[:original])
+        path = photo.queued_for_write[:original]
       else
         # if called manually, e.g. by migration
-        exifdata = EXIFR::JPEG.new(photo.path)
+        path = photo.path
       end
+
+      exifdata = EXIFR::JPEG.new(path)
     rescue EXIFR::MalformedJPEG
       return false
     end

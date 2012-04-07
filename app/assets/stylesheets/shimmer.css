@@ -187,8 +187,14 @@ body {
 img.mini-image,
 img.profile-image,
 div.mini-image,
-#mapdiv {
+#mapdiv,
+#geotag-map {
     box-shadow: 0 0 3px 1px #CCCCCC;
+}
+
+#geotag-map {
+    width: 500px;
+    height: 200px;
 }
 
 #picture-comments img.profile-image {

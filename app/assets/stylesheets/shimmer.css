@@ -161,7 +161,7 @@ body {
 .mediumview-picture .mediumview-meta,
 .mediumview-album .mediumview-meta {
     position: absolute;
-    bottom: 24px;
+    bottom: 20px;
     left: 0px;
     width: 240px;
     background-color: rgba(255,255,255,0.5);
@@ -178,6 +178,12 @@ body {
 .mediumview-album .mediumview-meta h3 {
     line-height: 18px;
     padding-bottom: 5px;
+}
+
+.mediumview-picture .mediumview-meta span.label,
+.mediumview-album .mediumview-meta span.label{
+    margin-right: 2px;
+    display: inline-block;
 }
 
 .mediumview-picture .mediumview-meta i.icon-map-marker {

@@ -40,7 +40,7 @@
 </p>
 
 <div class="picture-details-tabs">
-  <div class="tabbable tabs-left">
+  <div class="tabbable">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#picture-view" data-toggle="tab"><i class="icon-picture"></i>Picture</a></li>
       <li><a href="#picture-comments" data-toggle="tab"><i class="icon-comment"></i>Comments</a></li>
@@ -48,23 +48,20 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="picture-view">
-        <p>
-          <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
-        </p>
+        <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
 
+        <dl class="dl-horizontal">
+            <dt>Uploaded:</dt>
+            <dd><%= time_ago_in_words(@picture.created_at) %> ago</dd>
         <% unless @picture.album.nil? %>
-            <p>
-              <b>Album:</b>
-              <%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %>
-            </p>
+            <dt>Album:</dt>
+            <dd><%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %></dd>
         <% end %>
-
         <% unless @picture.tags.empty? %>
-            <p>
-              <b>Tags:</b>
-              <%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %>
-            </p>
+            <dt>Tags:</dt>
+            <dd><%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %></dd>
         <% end %>
+        </dl>
       </div>
       <div class="tab-pane" id="picture-comments">
         <h3>Comments:</h3>

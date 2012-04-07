@@ -5,14 +5,20 @@
       <h3><%= link_to picture.title, path %></h3>
     <% end %>
     <div>
-      <span class="label notice">
-        <i class="icon-comment icon-white"></i> <%= pluralize(picture.comments.count, 'comment') %>
-      </span>
-      by <%= link_to picture.profile.nick, picture.profile,
-         {:title => "#{picture.profile.forename} #{picture.profile.surname}", :rel => 'tooltip'} %>
+
       <% unless picture.metadata.gps_latitude.nil? %>
         <i class="icon-map-marker"></i>
       <% end %>
+      <span class="label notice">
+        <i class="icon-time icon-white"></i> <%= time_ago_in_words(picture.created_at) %> ago
+      </span>
+      <span class="label notice">
+        <i class="icon-user icon-white"></i> <%= link_to picture.profile.nick, picture.profile,
+          {:title => "#{picture.profile.forename} #{picture.profile.surname}", :rel => 'tooltip'} %>
+      </span>
+      <span class="label notice">
+        <i class="icon-comment icon-white"></i> <%= picture.comments.count %>
+      </span>
     </div>
   </div>
 </div>

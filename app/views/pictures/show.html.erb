@@ -43,7 +43,6 @@
   <div class="tabbable">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#picture-view" data-toggle="tab"><i class="icon-picture"></i>Picture</a></li>
-      <li><a href="#picture-comments" data-toggle="tab"><i class="icon-comment"></i>Comments</a></li>
       <li><a href="#picture-metadata" data-toggle="tab"><i class="icon-list-alt"></i>EXIF metadata</a></li>
     </ul>
     <div class="tab-content">
@@ -63,42 +62,6 @@
         <% end %>
         </dl>
       </div>
-      <div class="tab-pane" id="picture-comments">
-        <h3>Comments:</h3>
-        <% @comments.each do |comment| %>
-            <blockquote>
-              <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
-              <p><%= comment.comment %></p>
-              <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="tooltip"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
-            </blockquote>
-        <% end %>
-        <% if @comments.empty? %>
-            <em>There are no comments at the moment.</em>
-        <% end %>
-
-        <% if @comment.errors.any? %>
-            <div class="alert-message block-message error fade in" data-alert="alert">
-              <a class="close" href="#">&times;</a>
-              <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
-              <ul>
-                <% @comment.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <% if user_signed_in? %>
-            <h4>Add a comment</h4>
-            <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
-                <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
-                <%= f.text_area :comment, :cols => 20, :rows => 2 %>
-                <div><%= f.submit(:class => "btn primary") %></div>
-            <% end %>
-        <% else %>
-            <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
-        <% end %>
-      </div>
       <div class="tab-pane" id="picture-metadata">
         <%= render :partial => "metadata-table", :locals => { :picture => @picture } %>
       </div>
@@ -114,6 +77,43 @@
         data-lon="<%= @picture.metadata.gps_longitude %>"
         data-description="Location from picture geotag."></div>
 <% end %>
+
+<!-- comments start -->
+<h3>Comments:</h3>
+<% @comments.each do |comment| %>
+    <blockquote>
+      <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
+      <p><%= comment.comment %></p>
+      <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="tooltip"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
+    </blockquote>
+<% end %>
+<% if @comments.empty? %>
+    <em>There are no comments at the moment.</em>
+<% end %>
+
+<% if @comment.errors.any? %>
+    <div class="alert-message block-message error fade in" data-alert="alert">
+      <a class="close" href="#">&times;</a>
+      <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<% if user_signed_in? %>
+    <h4>Add a comment</h4>
+    <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
+        <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
+        <%= f.text_area :comment, :cols => 20, :rows => 2 %>
+        <div><%= f.submit(:class => "btn primary") %></div>
+    <% end %>
+<% else %>
+    <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
+<% end %>
+<!-- comments /end -->
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>

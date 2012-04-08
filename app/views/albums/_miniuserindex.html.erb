@@ -2,7 +2,7 @@
 
 <div class="shimmer-user-minialbumlist">
     <ul>
-    <% albums.reverse.first(5).each do |album| %>
+    <% albums.reverse.first(6).each do |album| %>
         <li>
             <% unless album.pictures.empty? %>
                 <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'),

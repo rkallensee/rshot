@@ -8,13 +8,13 @@
     <li class="active">
         <a href="<%= profile_pictures_path(profile) %>">
             <i class="icon-picture"></i>
-            Photostream
+            Photostream <span class="badge badge-inverse"><%= profile.pictures.count %></span>
         </a>
     </li>
     <li>
         <a href="<%= profile_albums_path(profile) %>">
             <i class="icon-folder-open"></i>
-            Albums
+            Albums <span class="badge badge-inverse"><%= profile.albums.count %></span>
         </a>
     </li>
     <li>

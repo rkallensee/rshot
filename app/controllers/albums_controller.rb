@@ -23,7 +23,7 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.xml
   def index
-    @albums = @profile.albums.order('created_at DESC').page(params[:page]).per(10)
+    @albums = @profile.albums.order('created_at DESC').page(params[:page]).per(12)
     authorize! :index, Album
 
     respond_to do |format|

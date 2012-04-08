@@ -23,7 +23,7 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.xml
   def index
-    @pictures = @picture_scope.order('created_at DESC').page(params[:page]).per(10)
+    @pictures = @picture_scope.order('created_at DESC').page(params[:page]).per(12)
     authorize! :index, Picture
 
     respond_to do |format|

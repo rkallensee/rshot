@@ -63,6 +63,10 @@ header .navbar h3 a {
     padding: 4px 20px 2px;
 }
 
+header .navbar .nav > li > a {
+    color: #FFF;
+}
+
 header .navbar ul.rshot-user-menu {
     float: right;
 }
@@ -178,6 +182,11 @@ body {
 .mediumview-album .mediumview-meta h3 {
     line-height: 18px;
     padding-bottom: 5px;
+}
+
+.mediumview-picture .mediumview-meta h3 a,
+.mediumview-album .mediumview-meta h3 a {
+    font-family: 'PT Sans Narrow', sans-serif;
 }
 
 .mediumview-picture .mediumview-meta span.label,

@@ -4,55 +4,49 @@
 
 <% if can? :edit, @profile %>
   <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-info" %>
+  <%= link_to 'Change e-mail / password', edit_user_registration_path, :class => "btn btn-info" %>
 <% end %>
 
-<p>
-  <%= image_tag(@profile.avatar.url(:medium)) %>
-</p>
+<dl class="dl-horizontal">
+  <dt>&nbsp;</dt>
+  <dd><%= image_tag(@profile.avatar.url(:medium)) %></dd>
 
-<p>
-  <b>Nick:</b>
-  <%= @profile.nick %>
-</p>
+  <dt>Nick:</dt>
+  <dd><%= @profile.nick %></dd>
 
-<p>
-  <b>Forename:</b>
-  <%= @profile.forename %>
-</p>
+  <dt>Forename:</dt>
+  <dd><%= @profile.forename %></dd>
 
-<p>
-  <b>Surname:</b>
-  <%= @profile.surname %>
-</p>
+  <dt>Surname:</dt>
+  <dd><%= @profile.surname %></dd>
 
-<p>
-  <b>Bio:</b>
-  <%= @profile.bio %>
-</p>
+  <dt>Bio:</dt>
+  <dd><%= @profile.bio %></dd>
 
-<p>
-  <b>Location:</b>
-  <%= @profile.location %>
-</p>
+  <dt>Location:</dt>
+  <dd><%= @profile.location %></dd>
 
-<p>
-  <b>Website:</b>
-  <%= @profile.website %>
-</p>
+  <dt>Website:</dt>
+  <dd><%= @profile.website %></dd>
+</dl>
 
-<p>
-  <span class="label notice"><i class="icon-folder-open icon-white"></i> <%= pluralize(@albums.count, 'album') %>:</span><br />
-  <% for album in @albums %>
-    <%= link_to (album.pictures.count > 0 ? image_tag(album.pictures.first.photo.url(:thumb)) : album.title), profile_album_path(@profile, album) %>
-  <% end %>
-</p>
+<h3>The latest albums:</h3>
+<% @albums.reverse.first(3).each do |album| %>
+    <%= render :partial => "albums/mediumview", :locals => { :album => album } %>
+<% end %>
+<a href="<%= profile_albums_path(@profile) %>">
+  <i class="icon-folder-open"></i>
+  All albums
+</a>
 
-<p>
-  <span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@pictures.count, 'picture') %>:</span><br />
-  <% for picture in @pictures %>
-    <%= link_to image_tag(picture.photo.url(:thumb)), profile_picture_path(@profile, picture) %>
-  <% end %>
-</p>
+<h3>The latest pictures:</h3>
+<% @pictures.reverse.first(6).each do |picture| %>
+    <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_picture_path(picture.profile, picture) } %>
+<% end %>
+<a href="<%= profile_pictures_path(@profile) %>">
+  <i class="icon-picture"></i>
+  Show all photos in Photostream
+</a>
 
 
 <% content_for :sidebar do %>

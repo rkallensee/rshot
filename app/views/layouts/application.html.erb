@@ -20,8 +20,7 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= favicon_link_tag 'apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold", :media => "all" %>
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic", :media => "all" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold|PT+Sans:regular,italic,bold,bolditalic|PT+Sans+Narrow:400,700", :media => "all" %>
 
     <title>rshot</title>
     <%= stylesheet_link_tag    "application" %>
@@ -46,10 +45,31 @@
               <ul class="nav">
                 <li class="active"><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
                 <% if user_signed_in? %>
-                    <li><%= link_to 'Profile', current_user.profile %></li>
-                    <li><%= link_to 'My pictures', profile_pictures_path(current_user.profile) %></li>
-                    <li><%= link_to 'My albums', profile_albums_path(current_user.profile) %></li>
-                    <li><%= link_to 'Upload picture', new_profile_picture_path(current_user.profile) %></li>
+                  <li>
+                    <a href="<%= url_for(current_user.profile) %>">
+                      <i class="icon-user icon-white"></i>
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<%= profile_pictures_path(current_user.profile) %>">
+                      <i class="icon-picture icon-white"></i>
+                      My pictures
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<%= profile_albums_path(current_user.profile) %>">
+                      <i class="icon-folder-open icon-white"></i>
+                      My albums
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="<%= new_profile_picture_path(current_user.profile) %>">
+                      <i class="icon-camera icon-white"></i>
+                      Upload picture
+                    </a>
+                  </li>
                 <% end %>
               </ul>
 
@@ -70,7 +90,7 @@
                         </li>
                         <li>
                           <a href="<%= profile_pictures_path(current_user.profile) %>">
-                            <i class="icon-camera"></i>
+                            <i class="icon-picture"></i>
                             My pictures
                           </a>
                         </li>

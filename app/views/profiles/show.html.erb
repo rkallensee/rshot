@@ -1,53 +1,77 @@
-<p id="notice"><%= notice %></p>
+<div class="profile-detail">
+  <h2>Profile of &raquo;<%= @profile.forename %> <%= @profile.surname %> (<%= @profile.nick %>)&laquo;</h2>
 
-<h2>Profile of &raquo;<%= @profile.forename %> <%= @profile.surname %> (<%= @profile.nick %>)&laquo;</h2>
+  <% if can? :edit, @profile %>
+  <div class="profile-navigation btn-toolbar">
+    <div class="edit-menu">
+      <div class="btn-group">
+        <a href="<%= edit_profile_path(@profile) %>" class="btn btn-primary">
+          <i class="icon-pencil icon-white"></i>
+          Edit your profile
+        </a>
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="<%= edit_profile_path(@profile) %>">
+              <i class="icon-pencil"></i>
+              Edit your profile
+            </a>
+          </li>
+          <li>
+            <a href="<%= edit_user_registration_path %>">
+              <i class="icon-pencil"></i>
+              Change your e-mail-address and password
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% end %>
 
-<% if can? :edit, @profile %>
-  <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-info" %>
-  <%= link_to 'Change e-mail / password', edit_user_registration_path, :class => "btn btn-info" %>
-<% end %>
+  <dl class="dl-horizontal">
+    <dt>&nbsp;</dt>
+    <dd><%= image_tag(@profile.avatar.url(:medium)) %></dd>
 
-<dl class="dl-horizontal">
-  <dt>&nbsp;</dt>
-  <dd><%= image_tag(@profile.avatar.url(:medium)) %></dd>
+    <dt>Nick:</dt>
+    <dd><%= @profile.nick %></dd>
 
-  <dt>Nick:</dt>
-  <dd><%= @profile.nick %></dd>
+    <dt>Forename:</dt>
+    <dd><%= @profile.forename %></dd>
 
-  <dt>Forename:</dt>
-  <dd><%= @profile.forename %></dd>
+    <dt>Surname:</dt>
+    <dd><%= @profile.surname %></dd>
 
-  <dt>Surname:</dt>
-  <dd><%= @profile.surname %></dd>
+    <dt>Bio:</dt>
+    <dd><%= @profile.bio %></dd>
 
-  <dt>Bio:</dt>
-  <dd><%= @profile.bio %></dd>
+    <dt>Location:</dt>
+    <dd><%= @profile.location %></dd>
 
-  <dt>Location:</dt>
-  <dd><%= @profile.location %></dd>
+    <dt>Website:</dt>
+    <dd><%= @profile.website %></dd>
+  </dl>
 
-  <dt>Website:</dt>
-  <dd><%= @profile.website %></dd>
-</dl>
+  <h3>The latest albums:</h3>
+  <% @albums.reverse.first(3).each do |album| %>
+      <%= render :partial => "albums/mediumview", :locals => { :album => album } %>
+  <% end %>
+  <a href="<%= profile_albums_path(@profile) %>">
+    <i class="icon-folder-open"></i>
+    All albums
+  </a>
 
-<h3>The latest albums:</h3>
-<% @albums.reverse.first(3).each do |album| %>
-    <%= render :partial => "albums/mediumview", :locals => { :album => album } %>
-<% end %>
-<a href="<%= profile_albums_path(@profile) %>">
-  <i class="icon-folder-open"></i>
-  All albums
-</a>
-
-<h3>The latest pictures:</h3>
-<% @pictures.reverse.first(6).each do |picture| %>
-    <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_picture_path(picture.profile, picture) } %>
-<% end %>
-<a href="<%= profile_pictures_path(@profile) %>">
-  <i class="icon-picture"></i>
-  Show all photos in Photostream
-</a>
-
+  <h3>The latest pictures:</h3>
+  <% @pictures.reverse.first(6).each do |picture| %>
+      <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_picture_path(picture.profile, picture) } %>
+  <% end %>
+  <a href="<%= profile_pictures_path(@profile) %>">
+    <i class="icon-picture"></i>
+    Show all photos in Photostream
+  </a>
+</div>
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @profile } %>

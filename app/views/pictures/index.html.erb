@@ -1,14 +1,28 @@
-<h2>Listing <%= pluralize(@pictures.size, 'picture') %></h2>
+<div class="picture-index">
+  <h2>Listing <%= pluralize(@pictures.size, 'picture') %></h2>
 
-<%= paginate @pictures %>
+  <% if can? :create, @profile.pictures.build %>
+    <div class="picture-navigation btn-toolbar">
+      <a href="<%= new_profile_picture_path %>" class="btn btn-primary">
+        <i class="icon-file icon-white"></i>
+        New picture
+      </a>
+    </div>
+  <% end %>
 
-<% @pictures.each do |picture| %>
-  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_picture_path(picture.profile, picture) } %>
-<% end %>
+  <%= paginate @pictures %>
 
-<div class="clearfix"></div>
+  <div class="picture-list">
+    <% @pictures.each do |picture| %>
+      <%= render :partial => "pictures/mediumview",
+                 :locals => { :picture => picture, :path => profile_picture_path(picture.profile, picture) } %>
+    <% end %>
+  </div>
 
-<%= paginate @pictures %>
+  <div class="clearfix"></div>
+
+  <%= paginate @pictures %>
+</div>
 
 <% content_for :sidebar do %>
     <% unless @profile.nil? %>

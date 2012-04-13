@@ -1,5 +1,5 @@
 <div class="shimmer-scope-image-navigation">
-    <% if viewscope == 'album' %>
+    <% if viewscope == :album %>
         <h3>This picture belongs to the album &raquo;<%= picture.album_name %>&laquo;</h3>
     <% else %>
         <h3>This picture belongs to the picture stream of &raquo;<%= picture.profile.nick %>&laquo;</h3>
@@ -40,6 +40,17 @@
             <% end %>
         </li>
     </ul>
-
     <div class="clearfix"></div>
+
+  <% if viewscope == :album %>
+    <a href="<%= profile_album_path(picture.profile, picture.album) %>">
+      <i class="icon-folder-open"></i>
+      Show all pictures in this album
+    </a>
+  <% else %>
+    <a href="<%= profile_pictures_path(picture.profile) %>">
+      <i class="icon-picture"></i>
+      Show all photos in Photostream
+    </a>
+  <% end %>
 </div>

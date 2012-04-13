@@ -15,4 +15,7 @@
 
 <div class="clearfix"></div>
 
-<%= link_to 'more albums', profile_albums_path(albums.first.profile) %>
+<a href="<%= profile_albums_path(albums.first.profile) %>">
+  <i class="icon-folder-open"></i>
+  All albums
+</a>

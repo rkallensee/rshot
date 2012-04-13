@@ -1,31 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="album-detail">
+  <h2><%= @album.title %></h2>
 
-<h2><%= @album.title %></h2>
+  <div class="album-navigation btn-toolbar">
+    <%= link_to 'Back', profile_albums_path, :class => "btn" %>
 
-<div><span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@album.pictures.count, 'picture') %></span></div>
+    <% if can? :edit, @album %>
+      <div class="edit-menu">
+        <div class="btn-group">
+          <a href="<%= edit_profile_album_path(@album.profile, @album) %>" class="btn btn-primary">
+            <i class="icon-pencil icon-white"></i>
+            Edit
+          </a>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="<%= edit_profile_album_path(@album.profile, @album) %>">
+                <i class="icon-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li>
+              <% if can? :destroy, @album %>
+                <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<% if can? :edit, @album %>
-  <a href="<%= edit_profile_album_path(@album.profile, @album) %>" class="btn btn-info">
-    <i class="icon-pencil icon-white"></i>
-    Edit
-  </a>
-<% end %>
-<% if can? :destroy, @album %>
-  <%= link_to 'Destroy', profile_album_path(@album.profile, @album), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
-<% end %>
-<%= link_to 'Back', profile_albums_path, :class => "btn" %>
+  <div><span class="label notice"><i class="icon-picture icon-white"></i> <%= pluralize(@album.pictures.count, 'picture') %></span></div>
 
-<div class="clearfix"></div>
+  <%= paginate @pictures %>
 
-<%= paginate @pictures %>
+  <% @pictures.each do |picture| %>
+    <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_album_picture_path(@album.profile, @album, picture) } %>
+  <% end %>
 
-<% @pictures.each do |picture| %>
-  <%= render :partial => "pictures/mediumview", :locals => { :picture => picture, :path => profile_album_picture_path(@album.profile, @album, picture) } %>
-<% end %>
+  <div class="clearfix"></div>
 
-<div class="clearfix"></div>
-
-<%= paginate @pictures %>
+  <%= paginate @pictures %>
+</div>
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @album.profile } %>

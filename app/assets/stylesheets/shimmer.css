@@ -53,6 +53,10 @@ header .navbar {
     box-shadow: 0 0px 10px 2px #333333;
 }
 
+header .navbar h3.brand {
+    padding-bottom: 10px;
+}
+
 header .navbar h3 a {
     font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
     font-weight: 700;
@@ -212,10 +216,106 @@ div.mini-image,
     height: 200px;
 }
 
+/* picture index */
+
+.picture-index {
+    position: relative;
+}
+
+.picture-index .picture-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+/* picture details */
+
+.picture-detail {
+    position: relative;
+}
+
+.picture-detail .picture-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.picture-detail .picture-navigation .edit-menu {
+    text-align: right;
+    padding-top: 5px;
+}
+
+.picture-detail .picture-navigation .edit-menu ul.dropdown-menu {
+    text-align: left;
+}
+
+.picture-detail #picture-view {
+    padding: 0px 20px;
+}
+
 #picture-comments img.profile-image {
     margin: 2px 10px 4px 0px;
     float: left;
 }
+
+/* album index */
+
+.album-index {
+    position: relative;
+}
+
+.album-index .album-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+.album-index .album-list {
+    padding: 20px 0 0;
+}
+
+/* album details */
+
+.album-detail {
+    position: relative;
+}
+
+.album-detail .album-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+.album-detail .album-navigation .edit-menu {
+    text-align: right;
+    padding-top: 5px;
+}
+
+.album-detail .album-navigation .edit-menu ul.dropdown-menu {
+    text-align: left;
+}
+
+/* profile detail */
+
+.profile-detail {
+    position: relative;
+}
+
+.profile-detail .profile-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}
+
+.profile-detail .profile-navigation .edit-menu ul.dropdown-menu {
+    text-align: left;
+}
+
+/* profile, popovers */
 
 .profile-popover-content img.profile-popover-avatar {
     float: left;

@@ -23,7 +23,7 @@ $(document).ready(function() {
         var mapnik_osm = new L.TileLayer(
             "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             {
-                maxZoom: 14,
+                maxZoom: 18,
                 minZoom: 1,
                 attribution: "Map: &copy; <a href=\"http://www.openstreetmap.org\" target=\"_blank\" style=\"\">OpenStreetMap contributors</a>, "
                 +"<a href=\"http://creativecommons.org/licenses/by-sa/2.0/\" target=\"_blank\">CC-BY-SA</a>"
@@ -33,7 +33,7 @@ $(document).ready(function() {
         Rshot.map.addLayer(mapnik_osm);
 
         if( $('#geotag-map').data('lat') != '' && $('#geoip-map').data('lon') != '' ) {
-            Rshot.map.setView(new L.LatLng($('#geotag-map').data('lat'), $('#geotag-map').data('lon')), 9);
+            Rshot.map.setView(new L.LatLng($('#geotag-map').data('lat'), $('#geotag-map').data('lon')), 16);
             var markerLocation = new L.LatLng($('#geotag-map').data('lat'), $('#geotag-map').data('lon'));
             var marker = new L.Marker(markerLocation);
             Rshot.map.addLayer(marker);

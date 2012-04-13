@@ -1,119 +1,137 @@
-<h2><%= @picture.title.empty? ? 'Picture' : @picture.title %></h2>
+<div class="picture-detail">
+  <h2><%= @picture.title.empty? ? 'Picture' : @picture.title %></h2>
 
-<p>
-  <% unless @prev_link.nil? %>
-    <a href="<%= @prev_link %>" class="btn">
-      <i class="icon-chevron-left"></i>
-      Previous
-    </a>
-  <% else %>
-    <a href="#" class="btn disabled">
-      <i class="icon-chevron-left"></i>
-      Previous
-    </a>
-  <% end %>
+  <div class="picture-navigation btn-toolbar">
+    <% unless @prev_link.nil? %>
+      <a href="<%= @prev_link %>" class="btn">
+        <i class="icon-chevron-left"></i>
+        Previous
+      </a>
+    <% else %>
+      <a href="#" class="btn disabled">
+        <i class="icon-chevron-left"></i>
+        Previous
+      </a>
+    <% end %>
 
-  <% unless @next_link.nil? %>
-    <a href="<%= @next_link %>" class="btn">
-      Next
-      <i class="icon-chevron-right"></i>
-    </a>
-  <% else %>
-    <a href="#" class="btn disabled">
-      Next
-      <i class="icon-chevron-right"></i>
-    </a>
-  <% end %>
+    <% unless @next_link.nil? %>
+      <a href="<%= @next_link %>" class="btn">
+        Next
+        <i class="icon-chevron-right"></i>
+      </a>
+    <% else %>
+      <a href="#" class="btn disabled">
+        Next
+        <i class="icon-chevron-right"></i>
+      </a>
+    <% end %>
 
-  ###
+    <%= link_to 'Back', @back_link, :class => "btn" %>
 
-  <% if can? :edit, @picture %>
-    <a href="<%= edit_profile_picture_path(@picture.profile, @picture) %>" class="btn btn-info">
-      <i class="icon-pencil icon-white"></i>
-      Edit
-    </a>
-  <% end %>
-  <% if can? :destroy, @picture %>
-    <%= link_to 'Destroy', profile_picture_path(@picture.profile, @picture), :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>
-  <% end %>
-  <%= link_to 'Back', @back_link, :class => "btn" %><br />
-</p>
-
-<div class="picture-details-tabs">
-  <div class="tabbable">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#picture-view" data-toggle="tab"><i class="icon-picture"></i>Picture</a></li>
-      <li><a href="#picture-metadata" data-toggle="tab"><i class="icon-list-alt"></i>EXIF metadata</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active" id="picture-view">
-        <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
-
-        <dl class="dl-horizontal">
-            <dt>Uploaded:</dt>
-            <dd><%= time_ago_in_words(@picture.created_at) %> ago</dd>
-        <% unless @picture.album.nil? %>
-            <dt>Album:</dt>
-            <dd><%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %></dd>
-        <% end %>
-        <% unless @picture.tags.empty? %>
-            <dt>Tags:</dt>
-            <dd><%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %></dd>
-        <% end %>
-        </dl>
+    <% if can? :edit, @picture %>
+      <div class="edit-menu">
+        <div class="btn-group">
+          <a href="<%= edit_profile_picture_path(@picture.profile, @picture) %>" class="btn btn-primary">
+            <i class="icon-pencil icon-white"></i>
+            Edit
+          </a>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="<%= edit_profile_picture_path(@picture.profile, @picture) %>">
+                <i class="icon-pencil"></i>
+                Edit
+              </a>
+            </li>
+            <li>
+              <% if can? :destroy, @picture %>
+                <%= link_to 'Destroy', profile_picture_path(@picture.profile, @picture), :confirm => 'Are you sure?', :method => :delete %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="tab-pane" id="picture-metadata">
-        <%= render :partial => "metadata-table", :locals => { :picture => @picture } %>
+    <% end %>
+  </div>
+
+  <div class="picture-details-tabs">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#picture-view" data-toggle="tab"><i class="icon-picture"></i>Picture</a></li>
+        <li><a href="#picture-metadata" data-toggle="tab"><i class="icon-list-alt"></i>EXIF metadata</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="picture-view">
+          <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
+
+          <dl class="dl-horizontal">
+              <dt>Uploaded:</dt>
+              <dd><span title="<%= @picture.created_at %>"><%= time_ago_in_words(@picture.created_at) %> ago</span></dd>
+          <% unless @picture.album.nil? %>
+              <dt>Album:</dt>
+              <dd><%= link_to @picture.album.title, profile_album_path(@picture.profile, @picture.album) %></dd>
+          <% end %>
+          <% unless @picture.tags.empty? %>
+              <dt>Tags:</dt>
+              <dd><%= raw @picture.tags.collect{|tag| '<a href="#">'+tag.name+'</a>'}.join(', ') %></dd>
+          <% end %>
+          </dl>
+        </div>
+        <div class="tab-pane" id="picture-metadata">
+          <%= render :partial => "metadata-table", :locals => { :picture => @picture } %>
+        </div>
       </div>
     </div>
   </div>
+
+  <% unless @picture.metadata.gps_latitude.nil? %>
+    <h3>Location of the image:</h3>
+
+      <div id="geotag-map"
+          data-lat="<%= @picture.metadata.gps_latitude %>"
+          data-lon="<%= @picture.metadata.gps_longitude %>"
+          data-description="Location from picture geotag."></div>
+  <% end %>
+
+  <!-- comments start -->
+  <h3>Comments:</h3>
+  <% @comments.each do |comment| %>
+      <blockquote>
+        <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
+        <p><%= comment.comment %></p>
+        <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="tooltip"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
+      </blockquote>
+  <% end %>
+  <% if @comments.empty? %>
+      <em>There are no comments at the moment.</em>
+  <% end %>
+
+  <% if @comment.errors.any? %>
+      <div class="alert-message block-message error fade in" data-alert="alert">
+        <a class="close" href="#">&times;</a>
+        <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+      <h4>Add a comment</h4>
+      <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
+          <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
+          <%= f.text_area :comment, :cols => 20, :rows => 2 %>
+          <div><%= f.submit(:class => "btn btn-primary") %></div>
+      <% end %>
+  <% else %>
+      <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
+  <% end %>
+  <!-- comments /end -->
 </div>
-
-<% unless @picture.metadata.gps_latitude.nil? %>
-  <h3>Location of the image:</h3>
-
-    <div id="geotag-map"
-        data-lat="<%= @picture.metadata.gps_latitude %>"
-        data-lon="<%= @picture.metadata.gps_longitude %>"
-        data-description="Location from picture geotag."></div>
-<% end %>
-
-<!-- comments start -->
-<h3>Comments:</h3>
-<% @comments.each do |comment| %>
-    <blockquote>
-      <%= render :partial => "profiles/popover", :locals => { :profile => comment.profile, :popover_element => image_tag(comment.profile.avatar.url(:micro), :class => 'profile-image') } %>
-      <p><%= comment.comment %></p>
-      <small><%= comment.profile.nick %>, <span class="comment-ago" title="<%= comment.created_at %>" rel="tooltip"><%= time_ago_in_words(comment.created_at) %> ago</span></small>
-    </blockquote>
-<% end %>
-<% if @comments.empty? %>
-    <em>There are no comments at the moment.</em>
-<% end %>
-
-<% if @comment.errors.any? %>
-    <div class="alert-message block-message error fade in" data-alert="alert">
-      <a class="close" href="#">&times;</a>
-      <h4><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h4>
-      <ul>
-        <% @comment.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
-
-<% if user_signed_in? %>
-    <h4>Add a comment</h4>
-    <%= form_for [@picture, @comment], :url => @create_comment_url do |f| %>
-        <%= image_tag(current_user.profile.avatar.url(:tiny), :class => 'profile-image') %>
-        <%= f.text_area :comment, :cols => 20, :rows => 2 %>
-        <div><%= f.submit(:class => "btn primary") %></div>
-    <% end %>
-<% else %>
-    <p><em><%= link_to "Sign in", new_user_session_path %> to add a comment!</em></p>
-<% end %>
-<!-- comments /end -->
 
 <% content_for :sidebar do %>
     <%= render :partial => "profiles/miniview", :locals => { :profile => @picture.profile } %>

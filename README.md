@@ -14,11 +14,19 @@ rshot is under heavy development. Currently it should be considered as nothing m
 than a quick hack. *It's not safe to use it in production environments yet!*
 
 
-Installation
-------------
+Installation (local)
+----------------------
 
 For production you should set up and configure a Passenger/Apache, Thin/Nginx, Mongrel
-or similar setup - you can find more about these setups in the interwebs.
+or similar setup - you can find more about these setups in the interwebs. This is just 
+a quick installation guide - a more detailed one based on nginx can be found
+in the "wiki":http://forge.webpresso.net/projects/rshot/wiki/Installation
+(work-in-progress).
+
+### Requirements ###
+
+rshot requires Ruby 1.9 and Rails 3.2 as well as some Rubygems. The installation of
+Ruby or an application/web server is not part of this guide.
 
 ### Install from GIT ###
 
@@ -26,6 +34,18 @@ Clone the GIT repository in a folder where you want to install the application:
 
 ```mkdir /var/www/rshot
 git clone http://code.webpresso.net/git/rshot /var/www/rshot```
+
+### Install dependencies ###
+
+The dependencies are managed with Bundler. Install Bundler, if not already installed, with rubygems via 
+
+```gem install bundler```
+
+and install all required rubygems via
+
+```bundle install```
+
+in the installation directory.
 
 ### Configuration ###
 
@@ -51,6 +71,15 @@ convenient way to disable registrations at the moment.
 
 http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-production-environment-only/5370688#5370688
 
+### Start the application ###
+
+To run the application on your local system, you can start it by running
+
+<pre>
+rails server
+</pre>
+
+in the installation directory.
 
 Versioning
 ----------
@@ -100,6 +129,8 @@ License
 ---------------------
 
 Copyright 2011-2012 Raphael Kallensee.
+
+[![AGPLv3](http://www.gnu.org/graphics/agplv3-155x51.png)](http://www.gnu.org/licenses/agpl-3.0.html)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by

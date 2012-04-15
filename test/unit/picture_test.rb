@@ -55,6 +55,7 @@ class PictureTest < ActiveSupport::TestCase
     picture.profile_id = profiles(:one).id
     assert !picture.save
 
+    picture = Picture.new
     picture.profile_id = profiles(:one).id
     picture.photo = sample_file("sample_photo.jpg")
     assert picture.save

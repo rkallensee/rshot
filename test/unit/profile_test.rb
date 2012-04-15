@@ -27,6 +27,7 @@ class ProfileTest < ActiveSupport::TestCase
   should have_many(:albums)
   should have_attached_file(:avatar)
   should validate_attachment_size(:avatar).less_than(2.megabytes)
+  should_not validate_attachment_presence(:avatar)
   should validate_presence_of(:user_id)
   should validate_presence_of(:nick)
   should validate_uniqueness_of(:nick)

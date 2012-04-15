@@ -22,10 +22,6 @@ require 'rails/test_help'
 
 # Require paperclip matchers for Shoulda
 require 'paperclip/matchers'
-class Test::Unit::TestCase
-  extend Paperclip::Shoulda::Matchers
-end
-
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
@@ -39,4 +35,6 @@ class ActiveSupport::TestCase
     File.new("test/fixtures/#{filename}")
   end
 
+  # Extend to make Paperclip Shoulda matchers available
+  extend Paperclip::Shoulda::Matchers
 end

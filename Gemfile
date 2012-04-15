@@ -30,7 +30,7 @@ gem 'fancybox-rails'
 
 group :test do
   gem 'rake'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'sqlite3'
   gem 'shoulda'
 end
 

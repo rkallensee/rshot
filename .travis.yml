@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 1.9.3
 env:
-  - DB=sqlite
+  - DB=sqlite3
+before_script:
+  - RAILS_ENV=test bundle exec rake --trace db:drop db:create db:migrate
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake --trace test

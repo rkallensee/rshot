@@ -31,6 +31,7 @@ gem 'fancybox-rails'
 group :test do
   gem 'rake'
   gem 'sqlite3'
+  gem 'test-unit', :require => "test/unit" # this fixes a bug causing trouble in TravisCI: https://github.com/thoughtbot/shoulda-context/pull/4
   gem 'shoulda'
 end
 

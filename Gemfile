@@ -24,7 +24,7 @@ end
 # application-specific gems
 gem 'devise', '~> 2.0.0'
 gem 'cancan', '~> 1.6.7'
-gem 'paperclip', '~> 2.5.0' # upgrade to 3.0.1
+gem 'paperclip', '~> 3.0.2'
 gem 'exifr', '~> 1.1.2'
 gem 'kaminari', '~> 0.13.0'
 gem 'acts-as-taggable-on', '~> 2.2.2'
@@ -33,7 +33,7 @@ gem 'acts_as_commentable', '~> 3.0.1'
 gem 'fancybox-rails'
 
 group :test do
-  gem 'shoulda-matchers'
+  gem 'shoulda'
 end
 
 group :development do

@@ -50,26 +50,28 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, :id => @profile.to_param
+    get :edit
     assert_response 302
     assert_redirected_to new_user_session_path
 
     sign_in :user, users(:one)
 
-    get :edit, :id => @profile.to_param
+    # edit works without param for logged-in user
+    get :edit
     assert_response :success
     assert_not_nil assigns(:profile)
   end
 
   test "should update profile" do
-    put :update, :id => @profile.to_param, :profile => @profile.attributes.except(
+    put :update, :profile => @profile.attributes.except(
       "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")
     assert_response 302
     assert_redirected_to new_user_session_path
 
     sign_in :user, users(:one)
 
-    put :update, :id => @profile.to_param, :profile => @profile.attributes.except(
+    # update works without param for logged-in user
+    put :update, :profile => @profile.attributes.except(
       "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")
     assert_redirected_to profile_path(assigns(:profile))
   end

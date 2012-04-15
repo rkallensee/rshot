@@ -33,16 +33,16 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # GET /profiles/1/edit
+  # GET /profile/edit (custom, non-resourceful)
   def edit
-    @profile = Profile.find_by_nick(params[:id])
+    @profile = current_user.profile
     authorize! :edit, @profile
   end
 
-  # PUT /profiles/1
-  # PUT /profiles/1.xml
+  # PUT /profile/update (custom, non-resourceful)
+  # PUT /profile/update.xml
   def update
-    @profile = Profile.find_by_nick(params[:id])
+    @profile = current_user.profile
     authorize! :update, @profile
 
     respond_to do |format|

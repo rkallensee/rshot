@@ -22,7 +22,7 @@ Rshot::Application.routes.draw do
 
   #match ":nick" => 'profiles#show', :as => "profile"
   #scope ":nick", :as => "profile" do
-  resources :profiles, :only => [:show, :edit, :update] do
+  resources :profiles, :only => [:show] do
     resources :albums do
       resources :pictures do
         member do
@@ -37,6 +37,11 @@ Rshot::Application.routes.draw do
     end
   end
 
+  # edit and update actions for profile are not resourceful
+  get "profile/edit" => "profiles#edit"
+  put "profile/update" => "profiles#update"
+
+  # homepage
   get "home/index"
 
   # The priority is based upon order of creation:

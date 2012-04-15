@@ -47,14 +47,18 @@ class ProfileTest < ActiveSupport::TestCase
     profile = Profile.new
     assert !profile.save
 
-    profile = Profile.new({:user_id => users(:one).id})
+    assert_raise ActiveModel::MassAssignmentSecurity::Error do
+      # mass-assignment of user_id not allowed
+      profile = Profile.new({:user_id => users(:one).id})
+      assert !profile.save
+    end
+
+    profile = Profile.new({:nick => "12"})
     assert !profile.save
 
-    profile = Profile.new({:user_id => users(:one).id, :nick => "12"})
+    profile = Profile.new({:nick => "12"})
+    profile.user_id = users(:one).id
     assert !profile.save
-
-    profile = Profile.new({:user_id => users(:one).id, :nick => "123"})
-    assert !profile.save # mass-assignment of user_ not allowed
 
     profile = Profile.new({:nick => "123"})
     profile.user_id = users(:one).id

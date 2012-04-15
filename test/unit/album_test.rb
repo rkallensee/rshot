@@ -35,14 +35,18 @@ class AlbumTest < ActiveSupport::TestCase
   should ensure_length_of(:title).is_at_least(3).is_at_most(150)
 
   test "validate album title length" do
-    album = Album.new({:profile_id => 1})
+    album = Album.new
+    album.profile_id = 1
     assert !album.save
 
-    album = Album.new({:title => "12", :profile_id => profiles(:one).id})
+    album = Album.new({:title => "12"})
+    album.profile_id = profiles(:one).id
     assert !album.save
 
-    album = Album.new({:title => "123", :profile_id => profiles(:one).id})
-    assert !album.save # mass-assignment of profile_id not allowed
+    assert_raise ActiveModel::MassAssignmentSecurity::Error do
+      # mass-assignment of profile_id not allowed
+      album = Album.new({:title => "123", :profile_id => profiles(:one).id})
+    end
 
     album = Album.new({:title => "123"})
     album.profile_id = profiles(:one).id
@@ -53,8 +57,10 @@ class AlbumTest < ActiveSupport::TestCase
     album = Album.new({:title => "123"})
     assert !album.save
 
-    album = Album.new({:title => "123", :profile_id => profiles(:one).id})
-    assert !album.save # mass-assignment of profile_id not allowed
+    assert_raise ActiveModel::MassAssignmentSecurity::Error do
+      album = Album.new({:title => "123", :profile_id => profiles(:one).id})
+      assert !album.save # mass-assignment of profile_id not allowed
+    end
 
     album = Album.new({:title => "123"})
     album.profile_id = profiles(:one).id

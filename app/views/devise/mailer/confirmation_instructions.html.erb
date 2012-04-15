@@ -4,4 +4,4 @@
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
 
-<p>Please go to your <%= link_to 'Profile', profile_path(@resource.profile) %> later and fill out your details!</p>
+<p>Please go to your <%= link_to 'Profile', url_for(:action => 'edit', :controller => 'profiles') %> later and fill out your details!</p>

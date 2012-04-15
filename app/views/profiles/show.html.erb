@@ -5,7 +5,7 @@
   <div class="profile-navigation btn-toolbar">
     <div class="edit-menu">
       <div class="btn-group">
-        <a href="<%= edit_profile_path(@profile) %>" class="btn btn-primary">
+        <a href="<%= url_for(:action => 'edit', :controller => 'profiles') %>" class="btn btn-primary">
           <i class="icon-pencil icon-white"></i>
           Edit your profile
         </a>
@@ -14,7 +14,7 @@
         </button>
         <ul class="dropdown-menu">
           <li>
-            <a href="<%= edit_profile_path(@profile) %>">
+            <a href="<%= url_for(:action => 'edit', :controller => 'profiles') %>">
               <i class="icon-pencil"></i>
               Edit your profile
             </a>

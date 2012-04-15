@@ -59,7 +59,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
 
     profile = Profile.last
-    # find out if the profile was automatically created
-    assert_equal profile, user.profile
+    # find out if the profile was automatically created by after_create callback
+    assert_equal profile, User.find(user.id).profile # user.profile is nil for some reason
   end
 end

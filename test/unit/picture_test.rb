@@ -45,11 +45,15 @@ class PictureTest < ActiveSupport::TestCase
     picture = Picture.new
     assert !picture.save
 
-    picture = Picture.new({:profile_id => profiles(:one).id})
-    assert !picture.save
+    assert_raise ActiveModel::MassAssignmentSecurity::Error do
+      # mass-assignment of profile_id not allowed
+      picture = Picture.new({:profile_id => profiles(:one).id})
+      assert !picture.save
+    end
 
-    picture = Picture.new({:profile_id => profiles(:one).id})
-    assert !picture.save # mass-assignment of profile_id not allowed
+    picture = Picture.new
+    picture.profile_id = profiles(:one).id
+    assert !picture.save
 
     picture.profile_id = profiles(:one).id
     picture.photo = sample_file("sample_photo.jpg")

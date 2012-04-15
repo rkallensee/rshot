@@ -20,8 +20,7 @@ Installation (local)
 For production you should set up and configure a Passenger/Apache, Thin/Nginx, Mongrel
 or similar setup - you can find more about these setups in the interwebs. This is just 
 a quick installation guide - a more detailed one based on nginx can be found
-in the "wiki":http://forge.webpresso.net/projects/rshot/wiki/Installation
-(work-in-progress).
+in the [wiki](http://forge.webpresso.net/projects/rshot/wiki/Installation) (work-in-progress).
 
 ### Requirements ###
 
@@ -66,18 +65,14 @@ Edit the following config files:
 ### Disable registrations ###
 
 If you don't want to allow everyone to register at your installation,
-please have a look at the following link. Sorry that there's not a
+please have a look at [this Stackoverflow question](http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-production-environment-only/5370688#5370688). Sorry that there's not a
 convenient way to disable registrations at the moment.
-
-http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-production-environment-only/5370688#5370688
 
 ### Start the application ###
 
 To run the application on your local system, you can start it by running
 
-<pre>
-rails server
-</pre>
+```rails server```
 
 in the installation directory.
 

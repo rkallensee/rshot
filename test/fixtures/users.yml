@@ -21,6 +21,8 @@ one:
   authentication_token: 23456
   unconfirmed_email: nil
   reset_password_sent_at: nil
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 2
@@ -43,3 +45,6 @@ two:
   authentication_token: 12345
   unconfirmed_email: nil
   reset_password_sent_at: nil
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+

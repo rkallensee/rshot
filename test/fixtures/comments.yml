@@ -7,6 +7,8 @@ one:
   commentable_id: 1
   commentable_type: Picture
   profile_id: 1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 2
@@ -15,6 +17,8 @@ two:
   commentable_id: 1
   commentable_type: Picture
   profile_id: 2
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 three:
   id: 3
@@ -23,3 +27,6 @@ three:
   commentable_id: 2
   commentable_type: Picture
   profile_id: 1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+

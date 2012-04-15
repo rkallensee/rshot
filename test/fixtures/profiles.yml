@@ -12,6 +12,8 @@ one:
   avatar_content_type:
   avatar_file_size:
   user_id: 1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 2
@@ -25,3 +27,6 @@ two:
   avatar_content_type:
   avatar_file_size:
   user_id: 2
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+

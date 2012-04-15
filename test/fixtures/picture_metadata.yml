@@ -38,6 +38,8 @@ one:
   gps_altitude: 95
   gps_direction:
   exifraw:
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 2
@@ -77,3 +79,6 @@ two:
   gps_altitude:
   gps_direction:
   exifraw:
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+

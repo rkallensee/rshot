@@ -4,13 +4,19 @@ one:
   id: 1
   title: My first test album
   profile_id: 1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 2
   title: Bahama with mama
   profile_id: 2
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
   id: 3
   title: Plants
   profile_id: 1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

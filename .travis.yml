@@ -4,6 +4,6 @@ rvm:
 env:
   - DB=sqlite3
 before_script:
-  - RAILS_ENV=test bundle exec rake --trace db:create db:migrate
+  - RAILS_ENV=test bundle exec rake --trace db:create db:schema:load
 script:
   - RAILS_ENV=test bundle exec rake --trace test

@@ -164,6 +164,7 @@ DEPENDENCIES
   mysql2
   paperclip (~> 3.0.2)
   rails (~> 3.2.3)
+  rake
   sass-rails (~> 3.2.0)
   shoulda
   sqlite3-ruby

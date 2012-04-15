@@ -33,6 +33,7 @@ gem 'acts_as_commentable', '~> 3.0.1'
 gem 'fancybox-rails'
 
 group :test do
+  gem 'rake'
   gem 'shoulda'
 end
 

@@ -1,8 +1,17 @@
 rshot
 =====
 
+[![Build Status](https://secure.travis-ci.org/rkallensee/rshot.png?branch=master)](http://travis-ci.org/rkallensee/rshot) [![Dependency Status](https://gemnasium.com/rkallensee/rshot.png?travis)](https://gemnasium.com/rkallensee/rshot)
+
 rshot is a social digital photo gallery software written in Ruby. It should make
 it easy to publish your digital photos and make them easily browseable by anyone.
+
+
+Status
+------
+
+rshot is under heavy development. Currently it should be considered as nothing more
+than a quick hack. *It's not safe to use it in production environments yet!*
 
 
 Installation
@@ -46,7 +55,7 @@ http://stackoverflow.com/questions/5370164/disabling-devise-registration-for-pro
 Versioning
 ----------
 
-rshot will use the Semantic Versioning guidelines as much as possible.
+rshot will use the Semantic Versioning guidelines.
 
 Releases will be numbered with the follow format:
 

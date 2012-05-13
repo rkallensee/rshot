@@ -71,17 +71,13 @@ header .navbar .nav > li > a {
     color: #FFF;
 }
 
-header .navbar ul.rshot-user-menu {
-    float: right;
+header .navbar div.rshot-user-menu {
+    padding: 4px 0px 4px 5px;
 }
 
-header .navbar ul.rshot-user-menu li.user-menu {
-    height: 40px;
-}
-
-header .navbar ul.rshot-user-menu li a img.profile-image {
+header .navbar div.rshot-user-menu a img.profile-image {
     float: left;
-    margin: -2px 10px 0 0;
+    margin: -2px 10px -2px 0;
 }
 
 header .navbar form.form-inline {
@@ -241,12 +237,12 @@ div.mini-image,
     top: 0;
 }
 
-.picture-detail .picture-navigation .edit-menu {
+.picture-detail .picture-navigation .picture-actions {
     text-align: right;
     padding-top: 5px;
 }
 
-.picture-detail .picture-navigation .edit-menu ul.dropdown-menu {
+.picture-detail .picture-navigation .picture-actions ul.dropdown-menu {
     text-align: left;
 }
 

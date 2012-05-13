@@ -36,9 +36,9 @@
         <div class="navbar-inner">
           <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="i-bar"></span>
-              <span class="i-bar"></span>
-              <span class="i-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
             </a>
             <h3 class="brand"><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
             <div class="nav-collapse">
@@ -73,66 +73,65 @@
                 <% end %>
               </ul>
 
-              <ul class="nav rshot-user-menu">
+              <div class="btn-group pull-right rshot-user-menu">
                 <% if user_signed_in? %>
-                    <li class="dropdown user-menu">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image') %>
-                        <span class="nick"><%= current_user.profile.nick %></span>
-                        <b class="caret"></b>
+                  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image') %>
+                    <span class="nick"><%= current_user.profile.nick %></span>
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="<%= url_for(current_user.profile) %>">
+                        <i class="icon-user"></i>
+                        Profile
                       </a>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="<%= url_for(current_user.profile) %>">
-                            <i class="icon-user"></i>
-                            Profile
-                          </a>
-                        </li>
-                        <li>
-                          <a href="<%= profile_pictures_path(current_user.profile) %>">
-                            <i class="icon-picture"></i>
-                            My pictures
-                          </a>
-                        </li>
-                        <li>
-                          <a href="<%= profile_albums_path(current_user.profile) %>">
-                            <i class="icon-folder-open"></i>
-                            My albums
-                          </a>
-                        </li>
-
-                        <li>
-                          <a href="<%= new_profile_picture_path(current_user.profile) %>">
-                            <i class="icon-camera"></i>
-                            Upload picture
-                          </a>
-                        </li>
-                        <li>
-                          <a href="<%= edit_user_registration_path %>">
-                            <i class="icon-cog"></i>
-                            Account
-                          </a>
-                        </li>
-                        <li>
-                          <a href="<%= destroy_user_session_path %>">
-                            <i class="icon-off"></i>
-                            Sign out
-                          </a>
-                        </li>
-                      </ul>
                     </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a href="<%= profile_pictures_path(current_user.profile) %>">
+                        <i class="icon-picture"></i>
+                        My pictures
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<%= profile_albums_path(current_user.profile) %>">
+                        <i class="icon-folder-open"></i>
+                        My albums
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="<%= new_profile_picture_path(current_user.profile) %>">
+                        <i class="icon-camera"></i>
+                        Upload picture
+                      </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a href="<%= edit_user_registration_path %>">
+                        <i class="icon-wrench"></i>
+                        Account
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<%= destroy_user_session_path %>">
+                        <i class="icon-off"></i>
+                        Sign out
+                      </a>
+                    </li>
+                  </ul>
                 <% else %>
-                    <li><%= link_to "Sign up", new_user_registration_path %></li>
-                    <li><%= link_to "Sign in", new_user_session_path %></li>
+                  <a class="btn" href="<%= new_user_registration_path %>">
+                    <i class="icon-plus-sign"></i>
+                    Sign up
+                  </a>
+                  <a class="btn" href="<%= new_user_session_path %>">
+                    <i class="icon-ok-sign"></i>
+                    Sign in
+                  </a>
                 <% end %>
-              </ul>
-              <% unless user_signed_in? %>
-                  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form-inline pull-right" }) do |f| %>
-                      <%= f.email_field :email, :class => "input-small", :placeholder => :email %>
-                      <%= f.password_field :password, :class => "input-small", :placeholder => :password %>
-                      <%= content_tag( :button, "Sign in", :type => :submit, :class => "btn") %>
-                  <% end %>
-              <% end %>
+              </div>
             </div><!--/.nav-collapse -->
           </div>
         </div>

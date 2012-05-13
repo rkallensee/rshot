@@ -28,8 +28,8 @@
 
     <%= link_to 'Back', @back_link, :class => "btn" %>
 
-    <% if can? :edit, @picture %>
-      <div class="edit-menu">
+    <div class="picture-actions">
+      <% if can? :edit, @picture %>
         <div class="btn-group">
           <a href="<%= edit_profile_picture_path(@picture.profile, @picture) %>" class="btn btn-primary">
             <i class="icon-pencil icon-white"></i>
@@ -52,8 +52,16 @@
             </li>
           </ul>
         </div>
+      <% end %>
+      <div class="btn-group">
+        <a href="#" class="btn btn-inverse" title="Like">
+          <i class="icon-heart icon-white"></i>
+        </a>
+        <a href="<%= url_for @picture.photo.url(:large) %>" class="btn btn-inverse lightbox" title="Fullscreen">
+          <i class="icon-fullscreen icon-white"></i>
+        </a>
       </div>
-    <% end %>
+    </div>
   </div>
 
   <div class="picture-details-tabs">
@@ -64,7 +72,8 @@
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="picture-view">
-          <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url, {:class => 'lightbox'} %>
+
+          <%= link_to image_tag(@picture.photo.url(:medium), :class => 'detail-image'), @picture.photo.url(:large), {:class => 'lightbox'} %>
 
           <dl class="dl-horizontal">
               <dt>Uploaded:</dt>

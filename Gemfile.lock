@@ -161,7 +161,7 @@ DEPENDENCIES
   json
   kaminari (~> 0.13.0)
   mysql2
-  paperclip (~> 3.0.2)
+  paperclip (~> 3.0.3)
   rails (~> 3.2.3)
   rake
   sass-rails (~> 3.2.0)

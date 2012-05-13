@@ -34,7 +34,8 @@ class Picture < ActiveRecord::Base
     :styles => {
       :thumb   => ["75x75#", :jpg],
       :small   => ["250x250#", :jpg],
-      :medium  => ["640x640>", :jpg] },
+      :medium  => ["820x820>", :jpg],
+      :large   => ["1920x1920>", :jpg] },
     :convert_options => { :all => '-auto-orient' },
     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
     :url => "/system/:attachment/:id/:style/:filename"

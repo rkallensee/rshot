@@ -54,17 +54,23 @@ header .navbar {
 }
 
 header .navbar h3.brand {
-    padding-bottom: 10px;
+    padding-bottom: 3px;
 }
 
 header .navbar h3 a {
-    font-family: 'Yanone Kaffeesatz', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 20px;
+    font-family: 'Lobster', Arial, sans-serif;
+    font-weight: normal;
+    font-size: 26px;
     color: #FFFFFF;
-    text-shadow: 0px 0px 5px #555555;
+    text-shadow: 0px 0px 15px #555555;
     filter: dropshadow(color=#555555, offx=1, offy=1);
     padding: 4px 20px 2px;
+}
+
+header .navbar h3 a:hover,
+header .navbar h3 a:active {
+    text-shadow: 0px 0px 5px #555555;
+    text-decoration: none;
 }
 
 header .navbar .nav > li > a {
@@ -208,8 +214,9 @@ div.mini-image,
 }
 
 #geotag-map {
-    width: 500px;
+    width: 820px;
     height: 200px;
+    margin-left: 20px;
 }
 
 /* picture index */
@@ -250,9 +257,17 @@ div.mini-image,
     padding: 0px 20px;
 }
 
-#picture-comments img.profile-image {
+.picture-detail .picture-comments {
+    margin-top: 20px;
+}
+
+.picture-detail .picture-comments img.profile-image {
     margin: 2px 10px 4px 0px;
     float: left;
+}
+
+.picture-detail .picture-comments blockquote p {
+    font-size: 1em;
 }
 
 /* album index */

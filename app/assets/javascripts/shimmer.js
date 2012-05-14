@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         Rshot.map.addLayer(mapnik_osm);
 
-        if( $('#geotag-map').data('lat') != '' && $('#geoip-map').data('lon') != '' ) {
+        if( $('#geotag-map').data('lat') != '' && $('#geotag-map').data('lon') != '' ) {
             Rshot.map.setView(new L.LatLng($('#geotag-map').data('lat'), $('#geotag-map').data('lon')), 16);
             var markerLocation = new L.LatLng($('#geotag-map').data('lat'), $('#geotag-map').data('lon'));
             var marker = new L.Marker(markerLocation);

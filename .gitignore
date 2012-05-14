@@ -5,6 +5,7 @@ contents/.idea
 db/*.sqlite3
 log/*.log
 tmp/**/*
+.sass-cache/
 
 public/system/photos/*
 public/system/avatars/*

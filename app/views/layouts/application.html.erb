@@ -20,8 +20,6 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= favicon_link_tag 'apple-touch-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold|PT+Sans:regular,italic,bold,bolditalic|PT+Sans+Narrow:400,700", :media => "all" %>
-
     <title>rshot</title>
     <%= stylesheet_link_tag    "application" %>
     <script>
@@ -43,7 +41,7 @@
             <h3 class="brand"><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
             <div class="nav-collapse">
               <ul class="nav">
-                <li class="active"><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
+                <li><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
                 <% if user_signed_in? %>
                   <li>
                     <a href="<%= url_for(current_user.profile) %>">

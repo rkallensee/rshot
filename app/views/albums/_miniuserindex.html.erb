@@ -1,21 +1,23 @@
-<h3>This user has <%= pluralize(albums.count, 'album') %>:</h3>
+<% unless albums.empty? %>
+  <h3><%= albums.first.profile.nick %> has <%= pluralize(albums.count, 'album') %>:</h3>
 
-<div class="shimmer-user-minialbumlist">
-    <ul>
-    <% albums.reverse.first(6).each do |album| %>
-        <li>
-            <% unless album.pictures.empty? %>
-                <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'),
-                    profile_album_path(album.profile, album), :rel => 'tooltip', :title => album.title %>
-            <% end %>
-        </li>
-    <% end %>
-    </ul>
-</div>
+  <div class="shimmer-user-minialbumlist">
+      <ul>
+      <% albums.reverse.first(6).each do |album| %>
+          <li>
+              <% unless album.pictures.empty? %>
+                  <%= link_to image_tag(album.pictures.first.photo.url(:thumb), :class => 'mini-image'),
+                      profile_album_path(album.profile, album), :rel => 'tooltip', :title => album.title %>
+              <% end %>
+          </li>
+      <% end %>
+      </ul>
+  </div>
 
-<div class="clearfix"></div>
+  <div class="clearfix"></div>
 
-<a href="<%= profile_albums_path(albums.first.profile) %>">
-  <i class="icon-folder-open"></i>
-  All albums
-</a>
+  <a href="<%= profile_albums_path(albums.first.profile) %>">
+    <i class="icon-folder-open"></i>
+    All albums
+  </a>
+<% end %>

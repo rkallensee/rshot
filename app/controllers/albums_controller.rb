@@ -38,7 +38,7 @@ class AlbumsController < ApplicationController
     @album = @profile.albums.find(params[:id])
     authorize! :show, @album
 
-    @pictures = @album.pictures.order('created_at ASC').page(params[:page]).per(10)
+    @pictures = @album.pictures.order('created_at ASC').page(params[:page]).per(12)
 
     respond_to do |format|
       format.html # show.html.erb

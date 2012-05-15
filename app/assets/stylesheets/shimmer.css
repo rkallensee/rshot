@@ -214,9 +214,8 @@ div.mini-image,
 }
 
 #geotag-map {
-    width: 820px;
     height: 200px;
-    margin-left: 20px;
+    margin: 0 30px 0 20px;
 }
 
 /* picture index */

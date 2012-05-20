@@ -31,28 +31,28 @@
   </div>
   <% end %>
 
-  <dl class="dl-horizontal">
-    <dt>&nbsp;</dt>
-    <dd><%= image_tag(@profile.avatar.url(:medium)) %></dd>
+  <div class="profile-details well clearfix">
+    <%= image_tag(@profile.avatar.url(:big), :class => 'profile-image') %>
+    <dl class="profile-infolist dl-horizontal">
+      <dt>Nick:</dt>
+      <dd><%= @profile.nick %></dd>
 
-    <dt>Nick:</dt>
-    <dd><%= @profile.nick %></dd>
+      <dt>Forename:</dt>
+      <dd><%= @profile.forename %></dd>
 
-    <dt>Forename:</dt>
-    <dd><%= @profile.forename %></dd>
+      <dt>Surname:</dt>
+      <dd><%= @profile.surname %></dd>
 
-    <dt>Surname:</dt>
-    <dd><%= @profile.surname %></dd>
+      <dt>Bio:</dt>
+      <dd><%= @profile.bio %></dd>
 
-    <dt>Bio:</dt>
-    <dd><%= @profile.bio %></dd>
+      <dt>Location:</dt>
+      <dd><%= @profile.location %></dd>
 
-    <dt>Location:</dt>
-    <dd><%= @profile.location %></dd>
-
-    <dt>Website:</dt>
-    <dd><%= @profile.website %></dd>
-  </dl>
+      <dt>Website:</dt>
+      <dd><%= @profile.website %></dd>
+    </dl>
+  </div>
 
   <h3>The latest albums:</h3>
   <% @albums.reverse.first(3).each do |album| %>

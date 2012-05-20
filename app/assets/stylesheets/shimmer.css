@@ -55,12 +55,13 @@ header .navbar {
 
 header .navbar h3.brand {
     padding-bottom: 3px;
+    padding-top: 3px;
 }
 
 header .navbar h3 a {
-    font-family: 'Lobster', Arial, sans-serif;
+    font-family: 'Lobster Two', Arial, sans-serif;
     font-weight: normal;
-    font-size: 26px;
+    font-size: 30px;
     color: #FFFFFF;
     text-shadow: 0px 0px 15px #555555;
     filter: dropshadow(color=#555555, offx=1, offy=1);
@@ -323,6 +324,11 @@ div.mini-image,
 
 .profile-detail .profile-navigation .edit-menu ul.dropdown-menu {
     text-align: left;
+}
+
+.profile-detail .profile-image,
+.profile-detail dl.profile-infolist {
+    float: left;
 }
 
 /* profile, popovers */

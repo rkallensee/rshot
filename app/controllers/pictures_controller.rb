@@ -19,6 +19,7 @@
 class PicturesController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   before_filter :determine_scope
+  before_filter :set_existing_user_tags, :only => [:new, :edit, :create, :update]
 
   # GET /pictures
   # GET /pictures.xml
@@ -65,7 +66,6 @@ class PicturesController < ApplicationController
     @picture = @picture_scope.find(params[:id])
     authorize! :edit, @picture
     @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
-    @existing_tags = current_user.profile.owned_tags.map { |t| t.name }
   end
 
   # POST /pictures
@@ -191,6 +191,15 @@ class PicturesController < ApplicationController
         profile_album_picture_url(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @picture_scope.find(params[:id]))
       elsif params[:profile_id]
         profile_picture_url(Profile.find_by_nick(params[:profile_id]), @picture_scope.find(params[:id]))
+      end
+    end
+
+    # set existing tags of logged-in user as instance variable
+    def set_existing_user_tags
+      unless current_user.nil?
+        @existing_tags = current_user.profile.owned_tags.map { |t| t.name }
+      else
+        @existing_tags = []
       end
     end
 end

@@ -65,6 +65,7 @@ class PicturesController < ApplicationController
     @picture = @picture_scope.find(params[:id])
     authorize! :edit, @picture
     @albums = Album.where("profile_id" => current_user.profile.id).order("title ASC")
+    @existing_tags = current_user.profile.owned_tags.map { |t| t.name }
   end
 
   # POST /pictures

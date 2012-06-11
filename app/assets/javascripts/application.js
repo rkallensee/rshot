@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require select2
 //= require fancybox
 //= require_tree ./vendor
 //= require_tree .

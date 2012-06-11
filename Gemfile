@@ -15,11 +15,11 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.0'
   gem 'uglifier'
   gem 'compass',      '~> 0.13.alpha'
-
-  # custom asset libraries
-  gem 'select2-rails', '~> 0.0.4'
-  gem 'fancybox-rails', '~> 0.1.4'
 end
+
+# custom asset libraries
+gem 'select2-rails', '~> 0.0.4'
+gem 'fancybox-rails', '~> 0.1.4'
 
 # application-specific gems
 gem 'devise', '~> 2.1.0'

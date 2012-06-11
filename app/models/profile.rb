@@ -35,6 +35,9 @@ class Profile < ActiveRecord::Base
   # attribute protection
   attr_accessible :nick, :forename, :surname, :bio, :location, :website, :avatar
 
+  # can be owner of tags
+  acts_as_tagger
+
   # validators
   validates :nick, :presence => true, :length => { :minimum => 3, :maximum => 50 }
   validates_uniqueness_of :nick

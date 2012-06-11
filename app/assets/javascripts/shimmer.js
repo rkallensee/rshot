@@ -40,4 +40,14 @@ $(document).ready(function() {
             marker.bindPopup($('#geotag-map').data('description')); // .openPopup();
         }
     }
+
+    // select2 controls for album selection and tag input in picture details
+    $('select.album-selection').select2({
+        placeholder: "Select an album",
+        allowClear: true
+    });
+    $('input.tag-input').each(function() {
+        var existingTags = $(this).data('all-user-tags');
+        $(this).select2({tags: existingTags.split(',')});
+    });
 });

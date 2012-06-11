@@ -45,7 +45,9 @@ class Picture < ActiveRecord::Base
     #:url => "/system/:attachment/:id/:style/:filename",
     #:hash_secret => "tkb#H_oi?I+0-&RP;_Kd9/OF",
     #:hash_data => ":class/:attachment/:id/:style/:updated_at"
-  after_save :extract_and_save_metadata! # TODO: before_photo_post_process seems to break upload sometimes.
+
+  before_save :set_tag_ownership
+  after_save :extract_and_save_metadata!
 
   # validators
   validates_attachment :photo, :presence => true,
@@ -141,6 +143,13 @@ class Picture < ActiveRecord::Base
       picture_metadata.save
       return true
     end
+  end
+
+  def set_tag_ownership
+    # set the owner of tags of the current tag_list
+    set_owner_tag_list_on(self.profile, :tags, self.tag_list)
+    # clear the list to avoid duplicate taggings
+    self.tag_list = nil
   end
 
 end

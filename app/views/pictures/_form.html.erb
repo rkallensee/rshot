@@ -29,14 +29,14 @@
   <div class="control-group">
     <%= f.label :album, :class => 'control-label' %>
     <div class="controls">
-        <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}) %>
+        <%= collection_select(:picture, :album_id, @albums, :id, :title, {:include_blank => true}, :class => 'album-selection') %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :tag_list, :class => 'control-label' %>
     <div class="controls">
-        <%= f.text_field :tag_list %>
+        <%= f.text_field :tag_list, :value => @picture.all_tags_list, :class => 'tag-input', 'data-all-user-tags' => @existing_tags.join(',') %>
         <p class="help-block">Separated by comma.</p>
     </div>
   </div>

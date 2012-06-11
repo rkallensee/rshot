@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.3'
+gem 'rails', '~> 3.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,19 +14,22 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.0'
   gem 'coffee-rails', '~> 3.2.0'
   gem 'uglifier'
-  gem 'compass',      '~> 0.12.alpha'
+  gem 'compass',      '~> 0.13.alpha'
+
+  # custom asset libraries
+  gem 'select2-rails', '~> 0.0.4'
+  gem 'fancybox-rails', '~> 0.1.4'
 end
 
 # application-specific gems
-gem 'devise', '~> 2.0.0'
+gem 'devise', '~> 2.1.0'
+gem 'devise-encryptable', '~> 0.1.1'
 gem 'cancan', '~> 1.6.7'
-gem 'paperclip', '~> 3.0.3'
-gem 'exifr', '~> 1.1.2'
+gem 'paperclip', '~> 3.0.4'
+gem 'exifr', '~> 1.1.3'
 gem 'kaminari', '~> 0.13.0'
-gem 'acts-as-taggable-on', '~> 2.2.2'
+gem 'acts-as-taggable-on', '~> 2.3.1'
 gem 'acts_as_commentable', '~> 3.0.1'
-
-gem 'fancybox-rails'
 
 group :test do
   gem 'rake'

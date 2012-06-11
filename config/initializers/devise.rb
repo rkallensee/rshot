@@ -101,7 +101,6 @@ Devise.setup do |config|
   config.token_authentication_key = :auth_token
 
   # compat config for Devise 2.0
-  config.use_salt_as_remember_token = true
   config.reset_password_within = 6.hour
   config.reconfirmable = true # reconfirm changed e-mail-addresses (since 2.0)
   config.case_insensitive_keys = [:email]

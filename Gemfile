@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.5'
+gem 'rails', '~> 3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -28,7 +28,7 @@ gem 'cancan', '~> 1.6.7'
 gem 'paperclip', '~> 3.0.4'
 gem 'exifr', '~> 1.1.3'
 gem 'kaminari', '~> 0.13.0'
-gem 'acts-as-taggable-on', '~> 2.3.1'
+gem 'acts-as-taggable-on', '~> 2.3.3'
 gem 'acts_as_commentable', '~> 3.0.1'
 
 group :test do

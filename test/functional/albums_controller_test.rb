@@ -27,6 +27,12 @@ class AlbumsControllerTest < ActionController::TestCase
     @album = albums(:one)
   end
 
+  def sign_user_one_in
+    @user = users(:one)
+    @user.confirm! if @user.respond_to?(:confirm!) && !@user.confirmed?
+    sign_in @user
+  end
+
   test "should get index" do
     get :index, :profile_id => profiles(:one).nick
     assert_response :success
@@ -38,7 +44,7 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response 302
     assert_redirected_to new_user_session_path
 
-    sign_in :user, users(:one)
+    sign_user_one_in
 
     get :new, :profile_id => profiles(:one).nick
     assert_response :success
@@ -50,7 +56,7 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response 302
     assert_redirected_to new_user_session_path
 
-    sign_in :user, users(:one)
+    sign_user_one_in
 
     assert_difference('Album.count') do
       post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes.except(
@@ -70,7 +76,7 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response 302
     assert_redirected_to new_user_session_path
 
-    sign_in :user, users(:one)
+    sign_user_one_in
 
     get :edit, {:profile_id => profiles(:one).nick, :id => @album.to_param}
     assert_response :success
@@ -82,7 +88,7 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response 302
     assert_redirected_to new_user_session_path
 
-    sign_in :user, users(:one)
+    sign_user_one_in
 
     put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes.except(
       "id", "created_at", "updated_at", "profile_id")}
@@ -94,7 +100,7 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response 302
     assert_redirected_to new_user_session_path
 
-    sign_in :user, users(:one)
+    sign_user_one_in
 
     assert_difference('Album.count', -1) do
       delete :destroy, {:profile_id => profiles(:one).nick, :id => @album.to_param}

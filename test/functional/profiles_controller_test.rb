@@ -26,19 +26,19 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    assert_raise(AbstractController::ActionNotFound) {
+    assert_raise(ActionController::RoutingError) {
       get :index
     }
   end
 
   test "should get new" do
-    assert_raise(AbstractController::ActionNotFound) {
+    assert_raise(ActionController::RoutingError) {
       get :new
     }
   end
 
   test "should create profile" do
-    assert_raise(AbstractController::ActionNotFound) {
+    assert_raise(ActionController::RoutingError) {
       post :create, :profile => @profile.attributes
     }
   end
@@ -77,7 +77,7 @@ class ProfilesControllerTest < ActionController::TestCase
   end
 
   test "should destroy profile" do
-    assert_raise(AbstractController::ActionNotFound) {
+    assert_raise(ActionController::RoutingError) {
       delete :destroy, :id => @profile.to_param
     }
   end

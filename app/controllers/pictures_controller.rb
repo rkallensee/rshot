@@ -163,11 +163,9 @@ class PicturesController < ApplicationController
       if params[:album_id]
         @prev_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @prev_picture) unless @prev_picture.nil?
         @next_link = profile_album_picture_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]), @next_picture) unless @next_picture.nil?
-        @back_link = profile_album_path(Profile.find_by_nick(params[:profile_id]), Album.find(params[:album_id]))
       elsif params[:profile_id]
         @prev_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @prev_picture) unless @prev_picture.nil?
         @next_link = profile_picture_path(Profile.find_by_nick(params[:profile_id]), @next_picture) unless @next_picture.nil?
-        @back_link = profile_pictures_path(Profile.find_by_nick(params[:profile_id]))
       end
     end
 

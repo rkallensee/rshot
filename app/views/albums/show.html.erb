@@ -2,8 +2,6 @@
   <h2><%= @album.title %></h2>
 
   <div class="album-navigation btn-toolbar">
-    <%= link_to 'Back', profile_albums_path, :class => "btn" %>
-
     <% if can? :edit, @album %>
       <div class="edit-menu">
         <div class="btn-group">

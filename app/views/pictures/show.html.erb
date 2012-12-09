@@ -2,31 +2,31 @@
   <h2><%= @picture.title.empty? ? 'Picture' : @picture.title %></h2>
 
   <div class="picture-navigation btn-toolbar">
-    <% unless @prev_link.nil? %>
-      <a href="<%= @prev_link %>" class="btn">
-        <i class="icon-chevron-left"></i>
-        Previous
-      </a>
-    <% else %>
-      <a href="#" class="btn disabled">
-        <i class="icon-chevron-left"></i>
-        Previous
-      </a>
-    <% end %>
+    <div class="btn-group">
+      <% unless @prev_link.nil? %>
+        <a href="<%= @prev_link %>" class="btn">
+          <i class="icon-chevron-left"></i>
+          Previous
+        </a>
+      <% else %>
+        <a href="#" class="btn disabled">
+          <i class="icon-chevron-left"></i>
+          Previous
+        </a>
+      <% end %>
 
-    <% unless @next_link.nil? %>
-      <a href="<%= @next_link %>" class="btn">
-        Next
-        <i class="icon-chevron-right"></i>
-      </a>
-    <% else %>
-      <a href="#" class="btn disabled">
-        Next
-        <i class="icon-chevron-right"></i>
-      </a>
-    <% end %>
-
-    <%= link_to 'Back', @back_link, :class => "btn" %>
+      <% unless @next_link.nil? %>
+        <a href="<%= @next_link %>" class="btn">
+          Next
+          <i class="icon-chevron-right"></i>
+        </a>
+      <% else %>
+        <a href="#" class="btn disabled">
+          Next
+          <i class="icon-chevron-right"></i>
+        </a>
+      <% end %>
+    </div>
 
     <div class="picture-actions">
       <% if can? :edit, @picture %>

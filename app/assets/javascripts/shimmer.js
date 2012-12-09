@@ -57,11 +57,15 @@ $(document).ready(function() {
             switch (ev.which) {
                 case 37:
                     // left arrow
-                    window.location = $('div.picture-navigation a.prev-image').attr('href');
+                    if ($('div.picture-navigation a.prev-image').size() > 0) {
+                        window.location = $('div.picture-navigation a.prev-image').attr('href');
+                    }
                     break;
                 case 39:
                     // right arrow
-                    window.location = $('div.picture-navigation a.next-image').attr('href');
+                    if ($('div.picture-navigation a.next-image').size() > 0) {
+                        window.location = $('div.picture-navigation a.next-image').attr('href');
+                    }
                     break;
             }
         });

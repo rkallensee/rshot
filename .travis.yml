@@ -7,3 +7,4 @@ before_script:
   - RAILS_ENV=test bundle exec rake --trace db:create db:schema:load
 script:
   - RAILS_ENV=test bundle exec rake --trace test
+bundler_args: "--without development assets"

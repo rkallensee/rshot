@@ -25,6 +25,13 @@ class ProfilesControllerTest < ActionController::TestCase
     @profile = profiles(:one)
   end
 
+  def sign_user_one_in
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = users(:one)
+    @user.confirm! if @user.respond_to?(:confirm!) && !@user.confirmed?
+    sign_in @user
+  end
+
   test "should get index" do
     assert_raise(ActionController::RoutingError) {
       get :index
@@ -49,12 +56,14 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:profile)
   end
 
-  test "should get edit" do
+  test "should not get edit when not logged in" do
     get :edit
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
-    sign_in :user, users(:one)
+  test "should get edit when logged in" do
+    sign_user_one_in
 
     # edit works without param for logged-in user
     get :edit
@@ -62,13 +71,15 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:profile)
   end
 
-  test "should update profile" do
+  test "should not update profile when not logged in" do
     put :update, :profile => @profile.attributes.except(
       "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
-    sign_in :user, users(:one)
+  test "should update profile when logged in" do
+    sign_user_one_in
 
     # update works without param for logged-in user
     put :update, :profile => @profile.attributes.except(
@@ -76,7 +87,7 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_redirected_to profile_path(assigns(:profile))
   end
 
-  test "should destroy profile" do
+  test "should not ever destroy profile" do
     assert_raise(ActionController::RoutingError) {
       delete :destroy, :id => @profile.to_param
     }

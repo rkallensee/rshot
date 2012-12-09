@@ -3,9 +3,9 @@
 one:
   id: 1
   email: raphael@example.com
-  encrypted_password: f00b4r
+  encrypted_password: <%= User.new.send(:password_digest, 'f00b4r') %>
   password_salt: b4rb4z
-  reset_password_token: 23456
+  reset_password_token: nil
   remember_created_at: nil
   sign_in_count: 1
   current_sign_in_at: 2011-01-02 03:04:05
@@ -29,7 +29,7 @@ two:
   email: john@example.com
   encrypted_password: f00f00f00
   password_salt: b4rb4rb4r
-  reset_password_token: 12345
+  reset_password_token: 1234
   remember_created_at: nil
   sign_in_count: 1
   current_sign_in_at: 2011-01-02 03:04:05

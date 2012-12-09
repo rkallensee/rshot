@@ -21,13 +21,14 @@ require 'test_helper'
 class AlbumsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  fixtures :profiles, :users
+  fixtures :users, :profiles
 
   setup do
     @album = albums(:one)
   end
 
   def sign_user_one_in
+    @request.env["devise.mapping"] = Devise.mappings[:user]
     @user = users(:one)
     @user.confirm! if @user.respond_to?(:confirm!) && !@user.confirmed?
     sign_in @user
@@ -39,23 +40,26 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:albums)
   end
 
-  test "should get new" do
+  test "should not get new because not logged in" do
     get :new, :profile_id => profiles(:one).nick
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should get new" do
     sign_user_one_in
-
     get :new, :profile_id => profiles(:one).nick
     assert_response :success
   end
 
-  test "should create album" do
+  test "should not create album when not logged in" do
     post :create, {:profile_id => profiles(:one).nick, :album => @album.attributes.except(
       "id", "created_at", "updated_at", "profile_id")}
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should create album when logged in" do
     sign_user_one_in
 
     assert_difference('Album.count') do
@@ -71,23 +75,27 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should not get edit when not logged in" do
     get :edit, {:profile_id => profiles(:one).nick, :id => @album.to_param}
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should get edit when logged in" do
     sign_user_one_in
 
     get :edit, {:profile_id => profiles(:one).nick, :id => @album.to_param}
     assert_response :success
   end
 
-  test "should update album" do
+  test "should not update album when not logged in" do
     put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes.except(
       "id", "created_at", "updated_at", "profile_id")}
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should update album when logged in" do
     sign_user_one_in
 
     put :update, {:profile_id => profiles(:one).nick, :id => @album.to_param, :album => @album.attributes.except(
@@ -95,11 +103,13 @@ class AlbumsControllerTest < ActionController::TestCase
     assert_redirected_to profile_album_path(profiles(:one), assigns(:album))
   end
 
-  test "should destroy album" do
+  test "should not destroy album when not logged in" do
     delete :destroy, {:profile_id => profiles(:one).nick, :id => @album.to_param}
     assert_response 302
     assert_redirected_to new_user_session_path
+  end
 
+  test "should destroy album when logged in" do
     sign_user_one_in
 
     assert_difference('Album.count', -1) do

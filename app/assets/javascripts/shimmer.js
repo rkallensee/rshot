@@ -50,4 +50,20 @@ $(document).ready(function() {
         var existingTags = $(this).data('all-user-tags');
         $(this).select2({tags: existingTags.split(',')});
     });
+
+    // arrow key navigation
+    if( $('div.picture-navigation').size() > 0 ) {
+        $("body").keyup(function(ev) {
+            switch (ev.which) {
+                case 37:
+                    // left arrow
+                    window.location = $('div.picture-navigation a.prev-image').attr('href');
+                    break;
+                case 39:
+                    // right arrow
+                    window.location = $('div.picture-navigation a.next-image').attr('href');
+                    break;
+            }
+        });
+    }
 });

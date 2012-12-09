@@ -4,7 +4,7 @@
   <div class="picture-navigation btn-toolbar">
     <div class="btn-group">
       <% unless @prev_link.nil? %>
-        <a href="<%= @prev_link %>" class="btn">
+        <a href="<%= @prev_link %>" class="btn prev-image">
           <i class="icon-chevron-left"></i>
           Previous
         </a>
@@ -16,7 +16,7 @@
       <% end %>
 
       <% unless @next_link.nil? %>
-        <a href="<%= @next_link %>" class="btn">
+        <a href="<%= @next_link %>" class="btn next-image">
           Next
           <i class="icon-chevron-right"></i>
         </a>

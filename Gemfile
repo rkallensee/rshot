@@ -42,6 +42,8 @@ end
 group :development do
   gem 'mysql2'
   gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :production do

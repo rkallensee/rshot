@@ -41,30 +41,30 @@
             <h3 class="brand"><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
             <div class="nav-collapse">
               <ul class="nav">
-                <li><%= link_to 'Home', :controller => '/home', :action => 'index' %></li>
+                <li class="active"><%= link_to 'Home', {:controller => '/home', :action => 'index'} %></li>
                 <% if user_signed_in? %>
                   <li>
                     <a href="<%= url_for(current_user.profile) %>">
-                      <i class="icon-user icon-white"></i>
+                      <i class="icon-user"></i>
                       Profile
                     </a>
                   </li>
                   <li>
                     <a href="<%= profile_pictures_path(current_user.profile) %>">
-                      <i class="icon-picture icon-white"></i>
+                      <i class="icon-picture"></i>
                       My pictures
                     </a>
                   </li>
                   <li>
                     <a href="<%= profile_albums_path(current_user.profile) %>">
-                      <i class="icon-folder-open icon-white"></i>
+                      <i class="icon-folder-open"></i>
                       My albums
                     </a>
                   </li>
 
                   <li>
                     <a href="<%= new_profile_picture_path(current_user.profile) %>">
-                      <i class="icon-camera icon-white"></i>
+                      <i class="icon-camera"></i>
                       Upload picture
                     </a>
                   </li>
@@ -74,7 +74,7 @@
               <div class="btn-group pull-right rshot-user-menu">
                 <% if user_signed_in? %>
                   <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image') %>
+                    <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image img-rounded') %>
                     <span class="nick"><%= current_user.profile.nick %></span>
                     <span class="caret"></span>
                   </a>

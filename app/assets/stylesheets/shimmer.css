@@ -34,38 +34,21 @@ textarea,
     position: relative;
 }
 
-header .navbar-inner,
-header .navbar .fill {
-    background-color: #AAA;
-    background-color: #AAAAAA;
-    background-repeat: repeat-x;
-    background-image: -khtml-gradient(linear, left top, left bottom, from(#AAAAAA), to(#999999));
-    background-image: -moz-linear-gradient(top, #AAAAAA, #999999);
-    background-image: -ms-linear-gradient(top, #AAAAAA, #999999);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AAAAAA), color-stop(100%, #999999));
-    background-image: -webkit-linear-gradient(top, #AAAAAA, #999999);
-    background-image: -o-linear-gradient(top, #AAAAAA, #999999);
-    background-image: linear-gradient(top, #AAAAAA, #999999);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#AAAAAA', endColorstr='#999999', GradientType=0);
-}
-
-header .navbar {
-    box-shadow: 0 0px 10px 2px #333333;
-}
-
 header .navbar h3.brand {
     padding-bottom: 3px;
     padding-top: 3px;
+    margin: 0;
+    line-height: 25px;
 }
 
 header .navbar h3 a {
     font-family: 'Lobster Two', Arial, sans-serif;
     font-weight: normal;
-    font-size: 30px;
-    color: #FFFFFF;
+    font-size: 25px;
+    color: #555555;
     text-shadow: 0px 0px 15px #555555;
     filter: dropshadow(color=#555555, offx=1, offy=1);
-    padding: 4px 20px 2px;
+    padding: 1px 20px 1px;
 }
 
 header .navbar h3 a:hover,
@@ -74,25 +57,14 @@ header .navbar h3 a:active {
     text-decoration: none;
 }
 
-header .navbar .nav > li > a {
-    color: #FFF;
-}
-
 header .navbar div.rshot-user-menu {
-    padding: 4px 0px 4px 5px;
+    padding: 1px 0px 1px 5px;
+    margin-top: 3px;
 }
 
 header .navbar div.rshot-user-menu a img.profile-image {
     float: left;
     margin: -2px 10px -2px 0;
-}
-
-header .navbar form.form-inline {
-    margin-bottom: 0;
-}
-
-header .navbar form.form-inline input {
-    margin-top: 5px;
 }
 
 body {
@@ -189,6 +161,8 @@ body {
 .mediumview-album .mediumview-meta h3 {
     line-height: 18px;
     padding-bottom: 5px;
+    font-size: 19px;
+    margin: 5px 0 0 0;
 }
 
 .mediumview-picture .mediumview-meta h3 a,

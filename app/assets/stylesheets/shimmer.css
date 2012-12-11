@@ -34,27 +34,24 @@ textarea,
     position: relative;
 }
 
-header .navbar h3.brand {
-    padding-bottom: 3px;
-    padding-top: 3px;
-    margin: 0;
-    line-height: 25px;
-}
-
-header .navbar h3 a {
+header .navbar a.brand {
     font-family: 'Lobster Two', Arial, sans-serif;
     font-weight: normal;
     font-size: 25px;
     color: #555555;
     text-shadow: 0px 0px 15px #555555;
     filter: dropshadow(color=#555555, offx=1, offy=1);
-    padding: 1px 20px 1px;
+    padding: 8px 20px 5px;
 }
 
-header .navbar h3 a:hover,
-header .navbar h3 a:active {
+header .navbar a.brand:hover,
+header .navbar a.brand:active {
     text-shadow: 0px 0px 5px #555555;
     text-decoration: none;
+}
+
+.navbar .nav > li > a {
+    padding: 12px 15px 8px;
 }
 
 header .navbar div.rshot-user-menu {
@@ -332,6 +329,11 @@ aside {
 
 aside .rshot-miniprofile {
     padding: 8px 0;
+}
+
+aside ul.picture-mini-details {
+    list-style-type: none;
+    margin-left: 2px;
 }
 
 aside .shimmer-album-minicontent ul,

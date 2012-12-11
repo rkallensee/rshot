@@ -1,12 +1,10 @@
 <h3>Picture details</h3>
 
-<dl>
-    <dt>This picture was taken with a</dt>
-    <dd><%= picture.metadata.model %></dd>
-
-    <dt>This picture was taken on</dt>
-    <dd><%= picture.metadata.date_time %></dd>
-</dl>
-
-<p>Exposure time was <%= picture.metadata.exposure_time %>s, focal length <%= picture.metadata.focal_length %>mm,
-aperture f/<%= picture.metadata.aperture %>, ISO <%= picture.metadata.iso %>.</p>
+<ul class="picture-mini-details">
+	<li><i class="icon-camera"></i> <%= picture.metadata.model %> <span class="muted">Camera model</span></li>
+	<li><i class="icon-time"></i> <%= picture.metadata.date_time %> <span class="muted">Taken on</span></li>
+	<li><i class="icon-star-empty"></i> <%= picture.metadata.exposure_time %>s <span class="muted">Shutter speed</span></li>
+	<li><i class="icon-resize-full"></i> <%= picture.metadata.focal_length %>mm <span class="muted">Focal length</span></li>
+	<li><i class="icon-adjust"></i> f/<%= picture.metadata.aperture %> <span class="muted">Aperture</span></li>
+	<li><i class="icon-film"></i> ISO <%= picture.metadata.iso %> <span class="muted">ISO</span></li>
+</ul>

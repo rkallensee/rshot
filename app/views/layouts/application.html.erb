@@ -38,7 +38,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </a>
-            <h3 class="brand"><%= link_to 'shimmer', :controller => '/home', :action => 'index' %></h3>
+            <%= link_to 'shimmer', {:controller => '/home', :action => 'index'}, :class => 'brand' %></h3>
             <div class="nav-collapse">
               <ul class="nav">
                 <li class="active"><%= link_to 'Home', {:controller => '/home', :action => 'index'} %></li>
@@ -120,11 +120,11 @@
                     </li>
                   </ul>
                 <% else %>
-                  <a class="btn" href="<%= new_user_registration_path %>">
+                  <a class="btn btn-small" href="<%= new_user_registration_path %>">
                     <i class="icon-plus-sign"></i>
                     Sign up
                   </a>
-                  <a class="btn" href="<%= new_user_session_path %>">
+                  <a class="btn btn-small" href="<%= new_user_session_path %>">
                     <i class="icon-ok-sign"></i>
                     Sign in
                   </a>

@@ -12,10 +12,12 @@
       <span class="label notice">
         <i class="icon-time icon-white"></i> <%= time_ago_in_words(picture.created_at) %> ago
       </span>
+      <!--
       <span class="label notice">
         <i class="icon-user icon-white"></i> <%= link_to picture.profile.nick, picture.profile,
           {:title => "#{picture.profile.forename} #{picture.profile.surname}", :rel => 'tooltip'} %>
       </span>
+      -->
       <span class="label notice">
         <i class="icon-comment icon-white"></i> <%= picture.comments.count %>
       </span>

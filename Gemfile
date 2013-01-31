@@ -1,32 +1,31 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.9'
+gem 'rails', '~> 3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Rails - misc
 gem 'json'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.2.0'
 
 # Assets and asset pipeline
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier',     '>= 1.0.3'
-  gem 'therubyracer'
-  gem 'libv8'
+  gem 'sass-rails',   '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'uglifier',     '>= 1.3.0'
+  gem 'therubyracer', '~> 0.11.3'
 end
 
 # custom asset libraries
 gem 'select2-rails', '~> 3.2.1'
-gem 'fancybox-rails', '~> 0.1.4'
+gem 'fancybox-rails', :git => 'https://github.com/rkallensee/fancybox-rails.git'
 
 # application-specific gems
-gem 'devise', '~> 2.1.2'
+gem 'devise', '~> 2.2.3'
 gem 'devise-encryptable', '~> 0.1.1'
 gem 'cancan', '~> 1.6.8'
-gem 'paperclip', '~> 3.3.1'
+gem 'paperclip', '~> 3.4.0'
 gem 'exifr', '~> 1.1.3'
 gem 'kaminari', '~> 0.14.1'
 gem 'acts-as-taggable-on', '~> 2.3.3'

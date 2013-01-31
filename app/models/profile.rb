@@ -26,6 +26,7 @@ class Profile < ActiveRecord::Base
       :big    => ["120x120>", :jpg] },
     :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
     :url => "/system/:attachment/:id/:style/:filename"
+  crop_attached_file :avatar, :aspect => "1:1"
 
   # relationships
   belongs_to :user
@@ -33,7 +34,9 @@ class Profile < ActiveRecord::Base
   has_many :albums, :dependent => :destroy
 
   # attribute protection
-  attr_accessible :nick, :forename, :surname, :bio, :location, :website, :avatar
+  attr_accessible :nick, :forename, :surname, :bio, :location, :website, :avatar,
+    :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h, :avatar_original_w,
+    :avatar_original_h, :avatar_box_w, :avatar_aspect
 
   # can be owner of tags
   acts_as_tagger

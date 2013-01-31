@@ -6,6 +6,7 @@
  *= require_self
  *= require select2
  *= require fancybox
+ *= require jquery.jcrop
  *= require bootstrap.css
  *= require bootstrap-responsive.css
  *= require_tree .

@@ -20,6 +20,7 @@
         <%= image_tag @profile.avatar.url(:tiny) %>
       <% end %>
       <%= f.file_field :avatar %>
+      <%= link_to 'Crop your avatar', {:controller => :profiles, :action => :crop_avatar}, :class => "btn" %>
     </div>
   </div>
 

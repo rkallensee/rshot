@@ -71,6 +71,33 @@ class ProfilesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:profile)
   end
 
+  test "should not get crop avatar action when not logged in" do
+    get :crop_avatar
+    assert_response 302
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should not get crop avatar action when no avatar was set" do
+    sign_user_one_in
+
+    get :crop_avatar
+    assert_response 302
+    assert_redirected_to profile_path(assigns(:profile))
+    assert_equal 'Please upload an avatar first.', flash[:error]
+  end
+
+  test "should get crop avatar action when logged in and avatar was set" do
+    sign_user_one_in
+
+    put :update, {:profile => {:avatar => fixture_file_upload('sample_photo.jpg', 'image/jpeg')}}
+    assert_response 302
+    assert_redirected_to profile_path(assigns(:profile))
+    assert_equal 'Profile was successfully updated.', flash[:success]
+
+    get :crop_avatar
+    assert_response 200
+  end
+
   test "should not update profile when not logged in" do
     put :update, :profile => @profile.attributes.except(
       "id", "created_at", "updated_at", "avatar_file_name", "avatar_content_type", "avatar_file_size", "user_id")

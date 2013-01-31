@@ -40,6 +40,7 @@ Rshot::Application.routes.draw do
   # edit and update actions for profile are not resourceful
   get "profile/edit" => "profiles#edit"
   put "profile/update" => "profiles#update"
+  get "profile/crop_avatar" => "profiles#crop_avatar"
 
   # homepage
   get "home/index"

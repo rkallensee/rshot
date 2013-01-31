@@ -98,6 +98,10 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.4.0)
       mime-types
+    papercrop (0.1.0)
+      jquery-rails
+      paperclip (>= 3.4)
+      rails (>= 3.1)
     polyglot (0.3.3)
     rack (1.4.4)
     rack-cache (1.2)
@@ -184,6 +188,7 @@ DEPENDENCIES
   kaminari (~> 0.14.1)
   mysql2
   paperclip (~> 3.4.0)
+  papercrop (~> 0.1.0)
   rails (~> 3.2.11)
   rake
   sass-rails (~> 3.2.6)

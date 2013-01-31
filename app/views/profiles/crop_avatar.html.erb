@@ -1,0 +1,24 @@
+<h2>Crop your avatar</h2>
+
+<%= form_for(@profile, :url => {:action => 'update', :controller => 'profiles'},
+                       :html => { :class => "form-horizontal profile-avatar-crop" }) do |f| %>
+
+  <div class="control-group">
+    <%= f.label :crop_preview, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.crop_preview :avatar, :width => 150 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :cropbox, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.cropbox :avatar, :width => 500 %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit(:class => "btn btn-primary") %>
+    <%= link_to 'Back', @profile, :class => "btn" %>
+  </div>
+<% end %>

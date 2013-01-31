@@ -39,6 +39,16 @@ class ProfilesController < ApplicationController
     authorize! :edit, @profile
   end
 
+  # GET /profile/crop_avatar
+  def crop_avatar
+    @profile = current_user.profile
+    authorize! :edit, @profile
+
+    unless @profile.avatar.exists?
+      redirect_to(@profile, :flash => {:error => 'Please upload an avatar first.'})
+    end
+  end
+
   # PUT /profile/update (custom, non-resourceful)
   # PUT /profile/update.xml
   def update

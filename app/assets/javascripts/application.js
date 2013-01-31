@@ -8,5 +8,7 @@
 //= require jquery_ujs
 //= require select2
 //= require fancybox
+//= require jquery.jcrop
+//= require papercrop
 //= require_tree ./vendor
 //= require_tree .

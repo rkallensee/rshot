@@ -302,6 +302,12 @@ div.mini-image,
     float: left;
 }
 
+/* profile image crop */
+
+form.profile-avatar-crop img#avatar_crop_preview {
+    max-width: none;
+}
+
 /* profile, popovers */
 
 .profile-popover-content img.profile-popover-avatar {

@@ -9,7 +9,7 @@
       <% unless picture.metadata.gps_latitude.nil? %>
         <i class="icon-map-marker"></i>
       <% end %>
-      <span class="label notice">
+      <span class="label notice" title="<%= picture.created_at %>">
         <i class="icon-time icon-white"></i> <%= time_ago_in_words(picture.created_at) %> ago
       </span>
       <!--

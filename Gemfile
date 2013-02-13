@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.11'
+gem 'rails', '~> 3.2.12'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Rails - misc
 gem 'json'
-gem 'jquery-rails', '~> 2.2.0'
+gem 'jquery-rails', '~> 2.2.1'
 
 # Assets and asset pipeline
 group :assets do
@@ -24,7 +24,7 @@ gem 'fancybox-rails', :git => 'https://github.com/rkallensee/fancybox-rails.git'
 # application-specific gems
 gem 'devise', '~> 2.2.3'
 gem 'devise-encryptable', '~> 0.1.1'
-gem 'cancan', '~> 1.6.8'
+gem 'cancan', '~> 1.6.9'
 gem 'paperclip', '~> 3.4.0'
 gem 'papercrop', '~> 0.1.0'
 gem 'exifr', '~> 1.1.3'
@@ -44,6 +44,7 @@ group :development do
   gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'quiet_assets'
 end
 
 group :production do

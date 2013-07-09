@@ -31,9 +31,18 @@ class User < ActiveRecord::Base
   # automatically create (empty) profile
   after_create :create_empty_profile
 
+  private
+  
   def create_empty_profile
     profile = Profile.new
     profile.user_id = self.id
+    profile.nick = get_unique_username
     profile.save({:validate => false})
+  end
+  
+  def get_unique_username
+    login_part = self.email.split("@").first
+    random_letters = (0...3).map{ ('a'..'z').to_a[rand(26)] }.join
+    login_part + id.to_s + random_letters
   end
 end

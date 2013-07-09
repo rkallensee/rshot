@@ -19,7 +19,7 @@
 class HomeController < ApplicationController
   def index
     @picture = Picture.random
-    authorize! :show, @picture
+    authorize! :show, @picture unless @picture.nil?
   end
 
 end

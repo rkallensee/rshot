@@ -87,6 +87,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.1)
     mime-types (1.23)
     multi_json (1.7.8)
     mysql2 (0.3.13)
@@ -102,6 +103,10 @@ GEM
       paperclip (>= 3.4)
       rails (>= 3.1)
     polyglot (0.3.3)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -143,6 +148,7 @@ GEM
     shoulda-context (1.1.4)
     shoulda-matchers (2.2.0)
       activesupport (>= 3.0.0)
+    slop (3.4.5)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -189,6 +195,7 @@ DEPENDENCIES
   mysql2
   paperclip (~> 3.4.0)
   papercrop (~> 0.1.0)
+  pry
   quiet_assets
   rails (~> 3.2.14)
   rake

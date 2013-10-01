@@ -2,7 +2,7 @@
 <ul class="nav nav-list">
     <li class="nav-header">
       <b>From:</b>
-      <%= link_to image_tag(profile.avatar.url(:micro), :class => 'profile-image img-rounded') + profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'tooltip'} %>
+      <%= link_to image_tag(profile.avatar.url(:micro), :class => 'profile-image img-circle') + profile.nick, profile, {:title => "#{profile.forename} #{profile.surname}", :rel => 'tooltip'} %>
     </li>
 
     <li class="active">

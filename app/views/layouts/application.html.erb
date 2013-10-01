@@ -74,7 +74,7 @@
               <div class="btn-group pull-right rshot-user-menu">
                 <% if user_signed_in? %>
                   <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image img-rounded') %>
+                    <%= image_tag(current_user.profile.avatar.url(:micro), :class => 'profile-image img-circle') %>
                     <span class="nick"><%= current_user.profile.nick %></span>
                     <span class="caret"></span>
                   </a>

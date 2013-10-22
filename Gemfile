@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.14'
+gem 'rails', '~> 3.2.15'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ gem 'select2-rails', '~> 3.2.1'
 gem 'fancybox-rails', :git => 'https://github.com/rkallensee/fancybox-rails.git'
 
 # application-specific gems
-gem 'devise', '~> 2.2.3'
+gem 'devise', '~> 2.2.7'
 gem 'devise-encryptable', '~> 0.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'paperclip', '~> 3.4.0'
@@ -37,6 +37,7 @@ group :test do
   gem 'sqlite3'
   gem 'test-unit', :require => "test/unit" # this fixes a bug causing trouble in TravisCI: https://github.com/thoughtbot/shoulda-context/pull/4
   gem 'shoulda'
+  gem 'coveralls', require: false
 end
 
 group :development do

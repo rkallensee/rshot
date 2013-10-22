@@ -1,7 +1,7 @@
 rshot
 =====
 
-[![Build Status](https://secure.travis-ci.org/rkallensee/rshot.png?branch=master)](http://travis-ci.org/rkallensee/rshot) [![Dependency Status](https://gemnasium.com/rkallensee/rshot.png?travis)](https://gemnasium.com/rkallensee/rshot) [![Coverage Status](https://coveralls.io/repos/rkallensee/rshot/badge.png)](https://coveralls.io/r/rkallensee/rshot)
+[![Build Status](https://secure.travis-ci.org/rkallensee/rshot.png?branch=master)](http://travis-ci.org/rkallensee/rshot) [![Dependency Status](https://gemnasium.com/rkallensee/rshot.png?travis)](https://gemnasium.com/rkallensee/rshot) [![Coverage Status](https://coveralls.io/repos/rkallensee/rshot/badge.png)](https://coveralls.io/r/rkallensee/rshot) [![Code Climate](https://codeclimate.com/github/rkallensee/rshot.png)](https://codeclimate.com/github/rkallensee/rshot)
 
 rshot is a social digital photo gallery software written in Ruby. It should make
 it easy to publish your digital photos and make them easily browseable by anyone.

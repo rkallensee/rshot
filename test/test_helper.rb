@@ -16,13 +16,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# coveralls.io
+require 'coveralls'
+Coveralls.wear!('rails')
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-
-# coveralls.io
-require 'coveralls'
-Coveralls.wear!
 
 # Require paperclip matchers for Shoulda
 require 'paperclip/matchers'

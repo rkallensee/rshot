@@ -1,0 +1,34 @@
+#inherit_from: .rubocop_todo.yml
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    # generated files
+    - 'bin/guard'
+    - 'bin/rspec'
+    - 'bin/rubocop'
+    - 'bin/setup'
+    - config.ru
+    - db/schema.rb
+#  TargetRubyVersion: 2.5
+
+#Metrics/BlockLength:
+#  Exclude:
+#    - spec/**/*
+Metrics/LineLength:
+  Exclude:
+    - db/migrate/**/*
+#    - spec/**/*
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/Documentation:
+  Enabled: false
+#Style/Semicolon:
+#  Exclude:
+#    - spec/controllers/**/*
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma

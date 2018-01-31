@@ -20,7 +20,7 @@ class Picture < ActiveRecord::Base
   # relationships
   belongs_to :album
   belongs_to :profile
-  has_one :picture_metadata, :dependent => :destroy
+    has_one :picture_metadata, :dependent => :destroy
 
   # acts as ...
   acts_as_taggable_on :tags
